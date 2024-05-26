@@ -4,6 +4,7 @@ import {SidebarComponent} from "../sidebar/sidebar.component";
 import {ContentService} from "../../services/content.service";
 import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-home',
@@ -25,12 +26,14 @@ export class HomeComponent implements OnInit{
   contents: any[] = [];
   imageUrls: { [key: number]: string } = {};
 
-  constructor(private contentService: ContentService, private router: Router) {}
+  constructor(
+    private contentService: ContentService,
+    private router: Router,
+    private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
     this.contentService.getAllContent().subscribe(data => {
       this.contents = data;
-      console.log(data);
       this.loadImages();
     });
   }
@@ -40,16 +43,16 @@ export class HomeComponent implements OnInit{
   }
 
   loadImages(): void {
-    this.contents.forEach(music => {
-      this.getImage(music.id);
+    this.contents.forEach(content => {
+      this.displayCover(content.id);
     });
   }
 
-
-  getImage(id: number): void {
-    this.contentService.getImage(id).subscribe({
+  displayCover(id: number): void {
+    this.contentService.displayCover(id).subscribe({
       next: (response) => {
-        this.imageUrls[id] = window.URL.createObjectURL(response);
+        const url = window.URL.createObjectURL(response);
+        this.imageUrls[id] = <string>this.sanitizer.bypassSecurityTrustUrl(url);
       },
       error: (error) => {
         console.error('Error loading image', error);

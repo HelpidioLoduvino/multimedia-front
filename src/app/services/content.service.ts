@@ -43,21 +43,20 @@ export class ContentService {
     return this.http.get<any>(`${this.baseContentUrl}/${id}`, {headers});
   }
 
-  playContent(id: number): Observable<Blob>{
-
+  playContent(id: number): Observable<Blob> {
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + this.token
     });
 
-    return this.http.get(`${this.baseContentUrl}/play/${id}`, { headers, responseType: 'blob' })
+    return this.http.get(`${this.baseContentUrl}/play/${id}`, { headers, responseType: 'blob' });
   }
 
-  getImage(id: number): Observable<Blob> {
+  displayCover(id: number): Observable<Blob> {
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + this.token
     });
 
-    return this.http.get(`${this.baseMusicUrl}/display/${id}`, { headers, responseType: 'blob' });
+    return this.http.get(`${this.baseMusicUrl}/cover/${id}`, { headers, responseType: 'blob' });
   }
 
   uploadVideo(video: any, videoFile: File){

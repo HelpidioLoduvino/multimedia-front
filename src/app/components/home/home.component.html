@@ -21,9 +21,7 @@
             <div class="card card-body" style="width: 60vh; background: #1D1C1C">
               <div class="object-fit-cover d-flex justify-content-center mb-2">
                 <img class="music-image" *ngIf="isMusic(content.path)" [src]="imageUrls[content.id]" alt="{{ content.title }} cover">
-                <video *ngIf="isVideo(content.path)" width="400" controls>
-
-                </video>
+                <video *ngIf="isVideo(content.path)" width="400" controls></video>
               </div>
               <hr>
               <h5>{{content.author.artistName}} - {{content.title}}</h5>

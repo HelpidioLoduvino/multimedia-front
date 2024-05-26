@@ -2,40 +2,45 @@ import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/
 import {ContentService} from "../../services/content.service";
 import {ActivatedRoute, RouterLink} from "@angular/router";
 import {HttpClientModule} from "@angular/common/http";
-import {NgForOf, NgIf} from "@angular/common";
+import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {NavbarComponent} from "../navbar/navbar.component";
 import {SidebarComponent} from "../sidebar/sidebar.component";
 import {FormsModule} from "@angular/forms";
+import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-play-content',
   standalone: true,
   providers: [ContentService],
-  imports: [HttpClientModule, NgIf, NavbarComponent, NgForOf, RouterLink, SidebarComponent, FormsModule],
+  imports: [HttpClientModule, NgIf, NavbarComponent, NgForOf, RouterLink, SidebarComponent, FormsModule, NgClass],
   templateUrl: './play-content.component.html',
   styleUrl: './play-content.component.css'
 })
 export class PlayContentComponent implements OnInit, AfterViewInit{
 
-  @ViewChild('audioPlayer') audioPlayer!: ElementRef;
+  @ViewChild('audioPlayer', { static: false }) audioPlayer!: ElementRef;
+  @ViewChild('videoPlayer', { static: false }) videoPlayer!: ElementRef;
   contendId: number | undefined;
-  audioUrl: string | undefined;
-  content: any;
+  contentUrl: SafeUrl | undefined;
+  content: any = {};
   imageUrl: { [key: number]: string } = {};
   currentTime: string = '0:00';
   seekValue: number = 0;
-  audioDuration: number = 0;
+  mediaDuration: number = 0;
   isPlaying: boolean = false;
 
-  constructor(private contentService: ContentService, private route: ActivatedRoute) {}
+  constructor(
+    private contentService: ContentService,
+    private route: ActivatedRoute,
+    private sanitize: DomSanitizer) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.contendId = +params['id'];
       if (this.contendId) {
         this.playContent(this.contendId);
+        this.displayCover(this.contendId);
         this.getContent(this.contendId);
-        this.getImage(this.contendId);
       }
     });
   }
@@ -43,16 +48,26 @@ export class PlayContentComponent implements OnInit, AfterViewInit{
 
   ngAfterViewInit(): void {
     if (this.audioPlayer) {
-      this.audioPlayer.nativeElement.addEventListener('timeupdate', () => {
-        this.updateTime();
-      });
+      this.addEventListeners(this.audioPlayer);
+    }
 
-      this.audioPlayer.nativeElement.addEventListener('loadedmetadata', () => {
-        this.onLoad();
-      });
-
+    if (this.videoPlayer) {
+      this.addEventListeners(this.videoPlayer);
     }
   }
+
+  private addEventListeners(player: ElementRef): void {
+    if (player) {
+      player.nativeElement.addEventListener('timeupdate', () => {
+        this.updateTime(player);
+      });
+
+      player.nativeElement.addEventListener('loadedmetadata', () => {
+        this.onLoad(player);
+      });
+    }
+  }
+
 
   getContent(id: number){
     this.contentService.getContentById(id).subscribe({
@@ -64,25 +79,26 @@ export class PlayContentComponent implements OnInit, AfterViewInit{
     })
   }
 
-  playContent(id: number) {
+  playContent(id: number): void {
     this.contentService.playContent(id).subscribe({
       next: (response) => {
-        this.audioUrl = window.URL.createObjectURL(response);
-        this.onLoad();
+        const url = window.URL.createObjectURL(response);
+        this.contentUrl = <string>this.sanitize.bypassSecurityTrustResourceUrl(url);
       },
       error: (error) => {
-        console.error('Error playing music', error);
+        console.error('Error loading content', error);
       }
     });
   }
 
-  getImage(id: number): void {
-    this.contentService.getImage(id).subscribe({
+  displayCover(id: number): void {
+    this.contentService.displayCover(id).subscribe({
       next: (response) => {
-        this.imageUrl[id] = window.URL.createObjectURL(response);
+        const url = window.URL.createObjectURL(response);
+        this.imageUrl[id] = <string>this.sanitize.bypassSecurityTrustResourceUrl(url);
       },
       error: (error) => {
-        console.error('Error loading image', error);
+        console.error('Error loading cover', error);
       }
     });
   }
@@ -93,43 +109,60 @@ export class PlayContentComponent implements OnInit, AfterViewInit{
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   }
 
-  updateTime() {
-    this.currentTime = this.formatTime(this.audioPlayer.nativeElement.currentTime);
-    this.seekValue = this.audioPlayer.nativeElement.currentTime / this.audioDuration * 100;
+  updateTime(player: ElementRef): void {
+    this.currentTime = this.formatTime(player.nativeElement.currentTime);
+    this.seekValue = player.nativeElement.currentTime / this.mediaDuration * 100;
   }
 
-  playAudio() {
-    if (this.isPlaying) {
-      this.pauseAudio();
-      this.isPlaying = false;
-    } else {
-      this.audioPlayer.nativeElement.play();
-      this.isPlaying = true;
+  playMedia(): void {
+    const player = this.getActivePlayer();
+    if (player) {
+      if (this.isPlaying) {
+        this.pauseMedia();
+        this.isPlaying = false;
+      } else {
+        player.nativeElement.play();
+        this.isPlaying = true;
+      }
     }
   }
 
-  pauseAudio() {
-    this.audioPlayer.nativeElement.pause();
+  pauseMedia(): void {
+    const player = this.getActivePlayer();
+    if (player) {
+      player.nativeElement.pause();
+    }
   }
 
-  seekAudio() {
-    this.audioPlayer.nativeElement.currentTime = this.audioDuration * (this.seekValue / 100);
+  seekMedia(): void {
+    const player = this.getActivePlayer();
+    if (player) {
+      player.nativeElement.currentTime = this.mediaDuration * (this.seekValue / 100);
+    }
   }
 
-  onLoad() {
-    const duration = this.audioPlayer.nativeElement.duration;
+  onLoad(player: ElementRef): void {
+    const duration = player.nativeElement.duration;
     if (!isNaN(duration) && isFinite(duration)) {
-      this.audioDuration = duration;
+      this.mediaDuration = duration;
     }
-    console.log(this.audioDuration);
+  }
+
+  private getActivePlayer(): ElementRef | undefined {
+    if (this.audioPlayer && this.audioPlayer.nativeElement.readyState > 0) {
+      return this.audioPlayer;
+    } else if (this.videoPlayer && this.videoPlayer.nativeElement.readyState > 0) {
+      return this.videoPlayer;
+    }
+    return undefined;
   }
 
   isMusic(path: string): boolean {
-    return path.includes('/music/') && path.endsWith('.mp3');
+    return path.endsWith('.mp3');
   }
 
   isVideo(path: string): boolean {
-    return path.includes('/video/') && path.endsWith('.mp4');
+    return path.endsWith('.mp4');
   }
 
 }
