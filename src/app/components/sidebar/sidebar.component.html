@@ -1,0 +1,31 @@
+<div class="sidebar col-md-2"  [ngClass]="{'open': isSidebarClosed}">
+  <div class="container mt-2">
+    <button class="btn btn-light" (click)="toggleSidebar()"><i class="fa fa-bars"></i></button>
+    <ul class="navbar-nav mt-5">
+      <li class="nav-item ">
+        <a class="nav-link" routerLink="/">
+          <span class="btn btn-light" style="width: 42px;"><i class="fa fa-home me-2"></i></span>
+          <span class="sidebar-link" *ngIf="!isSidebarClosed">Home</span>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" routerLink="/groups">
+          <span class="btn btn-light" style="width: 42px;"><i class="fa fa-users me-2"></i></span>
+          <span class="sidebar-link" *ngIf="!isSidebarClosed">Grupo</span>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" routerLink="/playlists">
+          <span class="btn btn-light" style="width: 42px;"><i class="fa fa-indent me-2"></i></span>
+          <span class="sidebar-link" *ngIf="!isSidebarClosed">Playlist</span>
+        </a>
+      </li>
+      <li class="nav-item ">
+        <a class="nav-link" routerLink="/friends">
+          <span class="btn btn-light" style="width: 42px;"><i class="fa fa-user-plus me-2"></i></span>
+          <span class="sidebar-link" *ngIf="!isSidebarClosed">Amigos</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

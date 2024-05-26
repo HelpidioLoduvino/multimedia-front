@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+@import '@fortawesome/fontawesome-free/css/all.css';
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../src/assets/fonts/Poppins-Regular.ttf') format('ttf'),
+  url('../src/assets/fonts/Poppins-Bold.ttf') format('ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #0F0D0D;
+  color: white;
+}
+
+html, body { height: 100%; }

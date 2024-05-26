@@ -1,0 +1,73 @@
+<div class="row g-0">
+  <div class="d-flex align-items-lg-stretch">
+    <app-sidebar></app-sidebar>
+
+    <div class="col">
+      <app-navbar></app-navbar>
+      <div class="container mt-5">
+        <div class="row g-2 mb-5">
+          <div class="col-md-8">
+            <div class="card card-body" style="height: 350px; background: black;">
+              <div class="col">
+                <div class="row">
+                  <div class="card-img-overlay d-flex justify-content-center">
+                    <img class="music-image" *ngIf="isMusic(content.path)" [src]="imageUrl[content.id]" alt="music cover">
+                  </div>
+                  <div class="">
+                    <video *ngIf="isVideo(content.path)" width="400" controls>
+                      <source [src]="content.path" type="video/mp4">
+                    </video>
+                  </div>
+                </div>
+              </div>
+              <div class="audio-control">
+                <audio #audioPlayer [src]="audioUrl"></audio>
+                <span>
+                  <button class="btn btn-light me-2"><i class="fa fa-backward-step"></i></button>
+                </span>
+                <span>
+                  <button class="btn btn-light me-2" (click)="playAudio()">
+                    <i class="{{ isPlaying ? 'fa fa-pause' : 'fa fa-play' }}"></i>
+                  </button>
+                </span>
+                <span>
+                  <button class="btn btn-light me-2"><i class="fa fa-forward-step"></i></button>
+                </span>
+                <span>
+                <span class="me-2">{{ currentTime }}</span>
+                  <input type="range" (input)="seekAudio()" [ngModel]="seekValue" [max]="audioDuration">
+                </span>
+              </div>
+            </div>
+            <div class="mt-2" *ngIf="content">
+              <h6>{{content.author.artistName}} - {{content.title}}</h6>
+              <a class="nav-link" routerLink="#">
+                <i class="fa fa-user-circle mt-2" style="font-size: 18px;"></i>
+                {{content.user.name}} {{content.user.surname}}
+              </a>
+              <div class="card card-body mt-2" style="background: #1D1C1C">
+                <label><u>Letra da Música</u></label>
+                {{content.lyric}}
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card card-body" style="height: 100%; background: black;">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--
+<div *ngIf="audioUrl">
+  <h1>Playing Music {{ musicId }}</h1>
+  <audio controls [src]="audioUrl"></audio>
+</div>
+
+-->
