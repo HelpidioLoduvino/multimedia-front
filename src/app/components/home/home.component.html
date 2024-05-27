@@ -6,7 +6,6 @@
       <app-navbar></app-navbar>
 
       <div class="container">
-
         <div class=" d-flex justify-content-center">
           <div class="search">
             <form class="d-flex">
@@ -30,7 +29,7 @@
                   <button class="btn btn-danger" (click)="play(content.id)"><i class="fa fa-play"></i></button>
                 </span>
                 <span class="">
-                    <a routerLink="#" class="btn btn-primary"><i class="fa fa-info"></i></a>
+                    <button (click)="contentInfo(content.id)" class="btn btn-primary"><i class="fa fa-info"></i></button>
                   </span>
               </div>
             </div>

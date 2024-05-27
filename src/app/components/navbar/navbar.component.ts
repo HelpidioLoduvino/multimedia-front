@@ -15,7 +15,6 @@ import {MatButton} from "@angular/material/button";
     NgClass,
     NgIf,
     RouterLink,
-    HttpClientModule,
     MatMenu,
     MatMenuTrigger,
     MatMenuItem,

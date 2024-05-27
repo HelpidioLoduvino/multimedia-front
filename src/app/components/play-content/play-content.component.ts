@@ -74,7 +74,7 @@ export class PlayContentComponent implements OnInit, AfterViewInit{
       next: (response) =>{
         this.content = response;
       }, error: (error) => {
-        console.error("Erro ao carregar música", error);
+        console.error("Erro ao carregar conteúdo", error);
       }
     })
   }

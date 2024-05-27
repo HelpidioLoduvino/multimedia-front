@@ -27,7 +27,6 @@ import {MatSnackBar} from "@angular/material/snack-bar";
     MatStepperPrevious,
     MatStepperNext,
     MatStepper,
-    HttpClientModule,
     FormsModule
   ],
   templateUrl: './upload-music.component.html',

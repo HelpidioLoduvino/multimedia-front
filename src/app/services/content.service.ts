@@ -11,7 +11,6 @@ export class ContentService {
   private baseMusicUrl = 'http://localhost:8080/api/music';
   private baseVideoUrl = 'http://localhost:8080/api/video';
   private baseContentUrl = 'http://localhost:8080/api/content';
-  private token = localStorage.getItem('token');
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -22,52 +21,33 @@ export class ContentService {
     formData.append('musicFile', musicFile);
     formData.append('imageFile', imageFile);
 
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + this.token
-    });
-
-    return this.http.post<any>(`${this.baseMusicUrl}/upload`, formData, {headers})
+    return this.http.post<any>(`${this.baseMusicUrl}/upload`, formData)
   }
 
   getAllContent(): Observable<any[]> {
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + this.token
-    });
-    return this.http.get<any[]>(`${this.baseContentUrl}/all`, { headers });
+    return this.http.get<any[]>(`${this.baseContentUrl}/all`);
   }
 
   getContentById(id: number) {
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + this.token
-    });
-    return this.http.get<any>(`${this.baseContentUrl}/${id}`, {headers});
+
+    return this.http.get<any>(`${this.baseContentUrl}/${id}`);
   }
 
   playContent(id: number): Observable<Blob> {
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + this.token
-    });
 
-    return this.http.get(`${this.baseContentUrl}/play/${id}`, { headers, responseType: 'blob' });
+    return this.http.get(`${this.baseContentUrl}/play/${id}`, { responseType: 'blob' });
   }
 
   displayCover(id: number): Observable<Blob> {
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + this.token
-    });
 
-    return this.http.get(`${this.baseMusicUrl}/cover/${id}`, { headers, responseType: 'blob' });
+    return this.http.get(`${this.baseMusicUrl}/cover/${id}`, { responseType: 'blob' });
   }
 
   uploadVideo(video: any, videoFile: File){
     const formData: FormData = new FormData();
     formData.append('video', new Blob([JSON.stringify(video)], { type: 'application/json'}));
     formData.append('videoFile', videoFile);
-
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + this.token
-    });
-    return this.http.post<any>(`${this.baseVideoUrl}/upload`, formData, {headers});
+    return this.http.post<any>(`${this.baseVideoUrl}/upload`, formData);
   }
 
 }

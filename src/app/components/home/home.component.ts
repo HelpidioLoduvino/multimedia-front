@@ -42,6 +42,10 @@ export class HomeComponent implements OnInit{
     this.router.navigate(['/play', id]);
   }
 
+  contentInfo(id:number){
+    this.router.navigate(['/content-info', id]);
+  }
+
   loadImages(): void {
     this.contents.forEach(content => {
       this.displayCover(content.id);

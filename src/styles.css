@@ -14,4 +14,15 @@ body {
   color: white;
 }
 
+
+.title-separator{
+  border: 1px solid white;
+}
+
+
+.step-label-color{
+  color: white;
+}
+
+
 html, body { height: 100%; }

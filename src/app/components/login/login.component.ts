@@ -11,7 +11,6 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   providers: [UserService],
   imports: [
     RouterLink,
-    HttpClientModule,
     ReactiveFormsModule
   ],
   templateUrl: './login.component.html',
@@ -70,9 +69,11 @@ export class LoginComponent implements OnInit{
     if(this.loginForm.valid){
       const credentials = this.loginForm.value;
       localStorage.removeItem('token');
+      localStorage.removeItem('refreshToken');
       this.userService.login(credentials).subscribe({
         next: (response) => {
           localStorage.setItem('token', response.token);
+          localStorage.setItem('refreshToken', response.refreshToken);
           localStorage.setItem('email', response.email);
           if(response.userRole === "ADMIN"){
 
