@@ -2,37 +2,48 @@
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
     <a class="navbar-brand" style="color: white;" href="#">ISPMedia</a>
-    <div class="collapse navbar-collapse">
 
-    </div>
-    <div class="d-flex align-items-end">
-      <ul class="navbar-nav">
-        <li class="nav-item" *ngIf="isLogged()">
-          <button class="btn btn-light me-2" [matMenuTriggerFor]="contentMenu">
-            <i class="fa fa-plus-square"></i>
-          </button>
-          <mat-menu #contentMenu="matMenu">
-            <a routerLink="/upload-music" mat-menu-item >Carregar Música</a>
-            <a routerLink="/upload-video" mat-menu-item >Carregar Vídeo</a>
-          </mat-menu>
-        </li>
-        <li class="nav-item" *ngIf="isLogged()">
-          <a class="btn btn-light me-2"><i class="fa fa-bell"></i></a>
-        </li>
-        <li class="nav-item" *ngIf="isLogged()">
-          <button class="btn btn-light me-2" [matMenuTriggerFor]="userMenu">
-            <i class="fa fa-user-circle"></i>
-          </button>
-          <mat-menu #userMenu="matMenu">
-            <button mat-menu-item >Meu Perfil</button>
-            <button mat-menu-item (click)="logout()">Sair</button>
-          </mat-menu>
-        </li>
-        <li class="nav-item" *ngIf="!isLogged()">
-          <a routerLink="/login" class="btn btn-light">Iniciar Sessão</a>
-        </li>
-      </ul>
-
-    </div>
+    <ul class="navbar-nav d-flex flex-row flex-nowrap">
+      <li class="nav-item" *ngIf="isLogged()">
+        <button class="btn btn-light me-2" [matMenuTriggerFor]="contentMenu">
+          <i class="fa fa-plus-square"></i>
+        </button>
+        <mat-menu #contentMenu="matMenu">
+          <a routerLink="/upload-music" mat-menu-item>Carregar Música</a>
+          <a routerLink="/upload-video" mat-menu-item>Carregar Vídeo</a>
+        </mat-menu>
+      </li>
+      <li class="nav-item" *ngIf="isLogged()">
+        <a class="btn btn-light me-2"><i class="fa fa-bell"></i></a>
+      </li>
+      <li class="nav-item" *ngIf="isLogged()">
+        <button class="btn btn-light me-2" [matMenuTriggerFor]="userMenu">
+          <i class="fa fa-user-circle"></i>
+        </button>
+        <mat-menu #userMenu="matMenu">
+          <button mat-menu-item>Meu Perfil</button>
+          <button mat-menu-item (click)="logout()">Sair</button>
+        </mat-menu>
+      </li>
+      <li class="nav-item" *ngIf="!isLogged()">
+        <a routerLink="/login" class="btn btn-light">Iniciar Sessão</a>
+      </li>
+    </ul>
   </div>
 </nav>
+<div class="d-flex justify-content-center">
+  <ul class="menu">
+    <li>
+      <a routerLink="/groups" class="menu-link"><i class="fa fa-users"></i> Grupos</a>
+    </li>
+    <li>
+      <a routerLink="/friends" class="menu-link"><i class="fa fa-user-plus"></i> Amigos</a>
+    </li>
+    <li>
+      <a routerLink="/playlists" class="menu-link"><i class="fa fa-indent"></i> Playlist</a>
+    </li>
+    <li>
+      <a routerLink="/radios" class="menu-link"><i class="fa fa-radio"></i> Rádios</a>
+    </li>
+  </ul>
+</div>

@@ -1,9 +1,27 @@
-.sidebar {
-  width: 200px;
-  overflow-x: hidden;
-  transition: width 0.3s ease;
+.navbar{
+  background-color: #482424;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  flex-wrap: nowrap !important;
 }
 
-.sidebar.open {
-  width: 60px;
+.menu{
+  display: flex;
+  list-style: none;
+  margin-right: 50px;
+  margin-top: 40px;
 }
+
+.menu li{
+  padding-left: 20px;
+}
+
+.menu-link{
+  font-size: 18px;
+  text-decoration: none;
+  color: white;
+}
+
+.menu-link:hover{
+  color: wheat;
+}
+

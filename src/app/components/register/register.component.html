@@ -1,0 +1,30 @@
+<div class="container mt-5">
+  <div class="custom-shadow">
+    <br>
+    <h2 class="d-flex justify-content-center" style="color: green">Criar Conta</h2>
+    <div class="d-flex justify-content-center">
+      <i class="fa fa-user-circle mt-4" style="font-size: 54px;"></i>
+    </div>
+    <div class="d-flex justify-content-center mt-3">
+      <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <input type="text" class="form-control mb-3" placeholder="Nome" formControlName="name">
+        <input type="text" class="form-control mb-3" placeholder="Sobrenome" formControlName="surname">
+        <input type="email" class="form-control mb-3" placeholder="Email" formControlName="email">
+        <input type="password" class="form-control mb-3" placeholder="Palavra-Passe" formControlName="password">
+        <input type="password" class="form-control mb-3" placeholder="Confirmar Palavra-Passe" formControlName="confirmPassword">
+        <input type="hidden" value="CLIENT" formControlName="userRole">
+        <span class="d-flex justify-content-center">
+            <input type="submit" class="btn btn-success mb-3" value="Registar">
+        </span>
+        <a routerLink="/login" class="nav-link d-flex justify-content-center">
+          <u>Já tenho uma conta</u>
+        </a>
+        <br>
+      </form>
+    </div>
+  </div>
+</div>
+
+<br><br>
+
+<app-footer></app-footer>

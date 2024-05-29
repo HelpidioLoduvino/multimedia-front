@@ -5,6 +5,7 @@ import {ContentService} from "../../services/content.service";
 import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
 import {DomSanitizer} from "@angular/platform-browser";
+import {FooterComponent} from "../footer/footer.component";
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,7 @@ import {DomSanitizer} from "@angular/platform-browser";
     NgOptimizedImage,
     NgIf,
     RouterLink,
+    FooterComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

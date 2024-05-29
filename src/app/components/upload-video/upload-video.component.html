@@ -1,93 +1,90 @@
-<div class="row g-0">
-  <div class="d-flex align-items-lg-stretch">
-    <app-sidebar></app-sidebar>
-    <div class="col">
-      <app-navbar></app-navbar>
-      <div class="container mt-5">
-        <h5>Carregar Vídeo</h5>
-        <div class="title-separator mb-3"></div>
-        <div style="overflow: auto; overflow-x: hidden; max-height: 350px;">
-          <form (ngSubmit)="onSubmit()" >
-            <mat-stepper headerPosition="bottom" #stepper style="background: #1D1C1C;">
-              <mat-step>
-                <ng-template matStepLabel><span class="step-label-color">Artista</span></ng-template>
-                <div class="container d-flex justify-content-center align-items-center">
-                  <div>
-                    <div class="row mb-3">
-                      <div class="col">
-                        <label>Autor Principal</label><br>
-                        <input type="text" class="form-control" [(ngModel)]="video.author.artistName" name="author">
-                      </div>
-                      <div class="col">
-                        <label>Participante(s)</label><br>
-                        <input type="text" class="form-control" [(ngModel)]="features" name="features">
-                      </div>
-                    </div>
 
-                    <div class="row">
-                      <div class="col">
-                        <label>Editora</label><br>
-                        <input type="text" class="form-control" [(ngModel)]="video.author.label.labelName" name="label"><br><br>
-                      </div>
-                    </div>
-                  </div>
+<app-navbar></app-navbar>
+<div class="container mt-3">
+  <h5>Carregar Vídeo</h5>
+  <div class="title-separator mb-3"></div>
+  <div style="overflow: auto; overflow-x: hidden; max-height: 350px;">
+    <form (ngSubmit)="onSubmit()" >
+      <mat-stepper headerPosition="bottom" #stepper style="background: #482424;  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        <mat-step>
+          <ng-template matStepLabel><span class="step-label-color">Artista</span></ng-template>
+          <div class="container d-flex justify-content-center align-items-center">
+            <div>
+              <div class="row mb-3">
+                <div class="col">
+                  <label>Autor Principal</label><br>
+                  <input type="text" class="form-control" [(ngModel)]="video.author.artistName" name="author">
                 </div>
-              </mat-step>
-              <mat-step>
-                <ng-template matStepLabel><span class="step-label-color">Grupo Musical</span></ng-template>
-                <div class="container d-flex justify-content-center align-items-center">
-                  <div>
-                    <div class="row">
-                      <div class="col">
-                        <label>Nome</label><br>
-                        <input type="text" class="form-control" [(ngModel)]="video.author.band.bandName" name="bandName">
-                      </div>
-                      <div class="col">
-                        <label>História</label><br>
-                        <input type="text" class="form-control" [(ngModel)]="video.author.band.history" name="history">
-                      </div>
-                    </div>
-                    <div class="row mt-3 mb-4">
-                      <label>Período</label><br>
-                      <div class="col">
-                        <label>Inicio (Ano): </label><input type="number" [(ngModel)]="video.author.band.start" class="form-control" name="start">
-                      </div>
-                      <div class="col">
-                        <label>Fim (Ano): </label><input type="number" [(ngModel)]="video.author.band.end" class="form-control" name="end">
-                      </div>
-                    </div>
-                  </div>
+                <div class="col">
+                  <label>Participante(s)</label><br>
+                  <input type="text" class="form-control" [(ngModel)]="features" name="features">
                 </div>
-              </mat-step>
-              <mat-step>
-                <ng-template matStepLabel><span class="step-label-color">Vídeo</span></ng-template>
-                <div class="container d-flex justify-content-center align-items-center">
-                  <div>
-                    <div class="row">
-                      <div class="col">
-                        <label>Título</label><br>
-                        <input type="text" class="form-control" [(ngModel)]="video.title"  name="title">
-                      </div>
-                      <div class="col">
-                        <label>Descrição</label><br>
-                        <input type="text" class="form-control" [(ngModel)]="video.description"  name="title">
-                      </div>
-                    </div>
+              </div>
 
-                    <div class="row mt-3 mb-3">
-                      <div class="col">
-                        <label>Vídeo</label><br>
-                        <input type="file" accept="video/mp4" (change)="onVideoFileChange($event)" class="form-control">
-                      </div>
-                    </div>
-                    <input type="submit" class="btn btn-success" value="Carregar">
-                  </div>
+              <div class="row">
+                <div class="col">
+                  <label>Editora</label><br>
+                  <input type="text" class="form-control" [(ngModel)]="video.author.label.labelName" name="label"><br><br>
                 </div>
-              </mat-step>
-            </mat-stepper>
-          </form>
-        </div>
-      </div>
-    </div>
+              </div>
+            </div>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel><span class="step-label-color">Grupo Musical</span></ng-template>
+          <div class="container d-flex justify-content-center align-items-center">
+            <div>
+              <div class="row">
+                <div class="col">
+                  <label>Nome</label><br>
+                  <input type="text" class="form-control" [(ngModel)]="video.author.band.bandName" name="bandName">
+                </div>
+                <div class="col">
+                  <label>História</label><br>
+                  <input type="text" class="form-control" [(ngModel)]="video.author.band.history" name="history">
+                </div>
+              </div>
+              <div class="row mt-3 mb-4">
+                <label>Período</label><br>
+                <div class="col">
+                  <label>Inicio (Ano): </label><input type="number" [(ngModel)]="video.author.band.start" class="form-control" name="start">
+                </div>
+                <div class="col">
+                  <label>Fim (Ano): </label><input type="number" [(ngModel)]="video.author.band.end" class="form-control" name="end">
+                </div>
+              </div>
+            </div>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel><span class="step-label-color">Vídeo</span></ng-template>
+          <div class="container d-flex justify-content-center align-items-center">
+            <div>
+              <div class="row">
+                <div class="col">
+                  <label>Título</label><br>
+                  <input type="text" class="form-control" [(ngModel)]="video.title"  name="title">
+                </div>
+                <div class="col">
+                  <label>Descrição</label><br>
+                  <input type="text" class="form-control" [(ngModel)]="video.description"  name="title">
+                </div>
+              </div>
+
+              <div class="row mt-3 mb-3">
+                <div class="col">
+                  <label>Vídeo</label><br>
+                  <input type="file" accept="video/mp4" (change)="onVideoFileChange($event)" class="form-control">
+                </div>
+              </div>
+              <input type="submit" class="btn btn-success" value="Carregar">
+            </div>
+          </div>
+        </mat-step>
+      </mat-stepper>
+    </form>
   </div>
 </div>
+<br><br>
+
+<app-footer></app-footer>

@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, RouterLink} from "@angular/router";
 import {UserService} from "../../services/user.service";
-import {HttpClientModule} from "@angular/common/http";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {FooterComponent} from "../footer/footer.component";
 
 @Component({
   selector: 'app-login',
@@ -11,15 +11,16 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   providers: [UserService],
   imports: [
     RouterLink,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FooterComponent
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit{
 
-  registerForm!: FormGroup;
   loginForm!: FormGroup;
+
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
@@ -27,42 +28,11 @@ export class LoginComponent implements OnInit{
     private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
-    this.registerForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      surname: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(5)]],
-      userRole: ['CLIENT', Validators.required],
-      confirmPassword: ['', Validators.required]
-    });
 
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
-  }
-
-  register() {
-    if(this.registerForm.valid){
-      const user = this.registerForm.value;
-      this.userService.register(user).subscribe({
-        next: (response) => {
-          this.snackBar.open('Registo Feito Com Sucesso', 'Fechar', {
-            duration: 3000, panelClass: ['snackbar-success']
-          });
-          this.router.navigate(['/login']).then(r => {})
-        }, error: (error) => {
-          this.snackBar.open('Erro ao Fazer Registo!', 'Fechar', {
-            duration: 3000, panelClass: ['snackbar-error']
-          });
-          console.error("Erro ao fazer registro", error);
-        }
-      })
-    }else{
-      this.snackBar.open('Formulário Inválido!', 'Fechar', {
-        duration: 3000, panelClass: ['snackbar-error']
-      });
-    }
   }
 
   login(){

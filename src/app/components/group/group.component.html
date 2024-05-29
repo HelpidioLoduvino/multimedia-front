@@ -1,57 +1,27 @@
-<div class="row g-0">
-  <div class="d-flex align-items-lg-stretch">
-    <app-sidebar></app-sidebar>
+<app-navbar></app-navbar>
 
-    <div class="col">
-      <app-navbar></app-navbar>
-
-      <div class="container d-block mt-5">
-
-        <h5><span class="me-2 font-white">Meus Grupos</span>
-          <button class="btn btn-light me-2" type="button" data-bs-toggle="modal" data-bs-target="#addFriend">
-            <i class="fa fa-plus"></i>
-          </button>
-          <button class="btn btn-light" type="button" data-bs-toggle="modal" data-bs-target="#addFriend">
-            <i class="fa fa-inbox"></i>
-          </button>
-        </h5>
-        <div class="friend-line mb-3"></div>
-        <div style="overflow: auto; overflow-x: hidden; max-height: 360px;">
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <tbody>
-              <tr>
-                <td>Helpidio Mateus</td>
-              </tr>
-              <tr>
-                <td>Helpidio Mateus</td>
-              </tr>
-              <tr>
-                <td>Helpidio Mateus</td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+<div class="container d-block mt-5">
+  <h5><span class="me-2 font-white">Meus Grupos</span>
+    <button class="btn btn-light me-2" type="button" data-bs-toggle="modal" data-bs-target="#addFriend">
+      <i class="fa fa-plus"></i>
+    </button>
+    <button class="btn btn-light" type="button" data-bs-toggle="modal" data-bs-target="#addFriend">
+      <i class="fa fa-inbox"></i>
+    </button>
+  </h5>
+  <div class="line mb-3"></div>
+  <div style="overflow: auto; overflow-x: hidden; max-height: 360px;">
+    <div class="table-responsive">
+      <table class="table">
+        <tbody>
+        <tr>
+          <td>Helpidio Mateus</td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
+<br><br>
 
-<div class="modal fade" id="addPlaylist" tabindex="-1" aria-labelledby="addPlaylist" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+<app-footer></app-footer>

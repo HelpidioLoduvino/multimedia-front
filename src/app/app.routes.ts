@@ -8,6 +8,7 @@ import {UploadMusicComponent} from "./components/upload-music/upload-music.compo
 import {PlayContentComponent} from "./components/play-content/play-content.component";
 import {UploadVideoComponent} from "./components/upload-video/upload-video.component";
 import {ContentInfoComponent} from "./components/content-info/content-info.component";
+import {RegisterComponent} from "./components/register/register.component";
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -15,6 +16,7 @@ export const routes: Routes = [
   {path: 'playlists', component: PlaylistComponent},
   {path: 'friends', component: FriendComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
   {path: 'upload-music', component: UploadMusicComponent},
   {path: 'upload-video', component: UploadVideoComponent},
   {path: 'play/:id', component: PlayContentComponent},

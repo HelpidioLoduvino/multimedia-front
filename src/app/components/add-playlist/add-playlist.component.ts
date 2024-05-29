@@ -2,18 +2,23 @@ import {Component, OnInit} from '@angular/core';
 import {MatStep, MatStepLabel, MatStepper} from "@angular/material/stepper";
 import {ContentService} from "../../services/content.service";
 import {NgForOf} from "@angular/common";
-import {HttpClientModule} from "@angular/common/http";
 import {DomSanitizer} from "@angular/platform-browser";
+import {PlaylistService} from "../../services/playlist.service";
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-add-playlist',
   standalone: true,
-  providers: [ContentService],
+  providers: [ContentService, PlaylistService],
   imports: [
     MatStepper,
     MatStep,
     MatStepLabel,
-    NgForOf
+    NgForOf,
+    FormsModule,
+    ReactiveFormsModule
   ],
   templateUrl: './add-playlist.component.html',
   styleUrl: './add-playlist.component.css'
@@ -21,13 +26,47 @@ import {DomSanitizer} from "@angular/platform-browser";
 export class AddPlaylistComponent implements OnInit{
 
   contents: any[] = [];
+  playlistForm!: FormGroup;
 
-  constructor(private contentService: ContentService, private sanitizer: DomSanitizer) {}
+  constructor(
+    private contentService: ContentService,
+    private sanitizer: DomSanitizer,
+    private playlistService: PlaylistService,
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private toast: MatSnackBar) {}
 
   ngOnInit(): void {
     this.contentService.getAllContent().subscribe(data => {
       this.contents = data;
     });
+
+    this.playlistForm = this.formBuilder.group({
+      playlistName: ['', Validators.required],
+      status: ['Público', Validators.required]
+    });
+  }
+
+  onSubmit(){
+    if(this.playlistForm.valid){
+      this.playlistService.addPlaylist(this.playlistForm.value).subscribe({
+        next: (response) => {
+          console.log("Playlist added successfully!", response);
+          this.playlistForm.reset();
+          window.location.reload();
+        }, error: (error) => {
+          this.toast.open("Erro ao criar Playlist!", "Fechar", {
+            duration: 3000, panelClass: ['error']
+          })
+          console.error("Error creating playlist!", error)
+        }
+      });
+    } else {
+      this.toast.open("Formulário Inválido!", "Fechar", {
+        duration: 3000, panelClass: ['error']
+      })
+      console.log("Invalid Form!");
+    }
   }
 
 }

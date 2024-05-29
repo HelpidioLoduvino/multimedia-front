@@ -1,34 +1,15 @@
 <div class="container">
-  <form>
-    <mat-stepper headerPosition="bottom" #stepper>
-      <mat-step>
-        <ng-template matStepLabel><span>Informações</span></ng-template>
-        <label>Nome</label>
-        <input type="text" class="form-control mb-3">
-        <label>Visibilidade</label>
-        <div class="row mt-1 mb-3">
-          <div class="col">
-            <input type="radio" class="me-1"> <label>Público</label>
-          </div>
-          <div class="col">
-            <input type="radio" class="me-1"> <label>Privado</label>
-          </div>
-        </div>
-      </mat-step>
-
-      <mat-step>
-        <ng-template matStepLabel><span>Conteúdo</span></ng-template>
-          <div class="col">
-            <div class="row g-0" *ngFor="let content of contents">
-              <div class="col-md-1">
-                  <input type="checkbox" value="{{content.id}}">
-              </div>
-              <div class="col">
-                <p>{{content.author.artistName}} - {{content.title}}</p>
-              </div>
-            </div>
-          </div>
-      </mat-step>
-    </mat-stepper>
+  <form [formGroup]="playlistForm" (ngSubmit)="onSubmit()">
+  <label>Nome</label>
+  <input type="text" class="form-control mb-3" formControlName="playlistName">
+  <label>Visibilidade</label>
+  <div class="row mt-1 mb-3">
+    <div class="col">
+      <input type="radio" class="me-1" value="Privado" formControlName="status"> <label>Privado</label>
+    </div>
+  </div>
+    <span class="d-flex justify-content-center">
+        <input type="submit" class="btn btn-success" value="Criar">
+    </span>
   </form>
 </div>

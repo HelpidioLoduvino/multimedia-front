@@ -9,6 +9,7 @@ import {MatButton} from "@angular/material/button";
 import {ContentService} from "../../services/content.service";
 import {HttpClientModule} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {FooterComponent} from "../footer/footer.component";
 
 
 @Component({
@@ -27,7 +28,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
     MatStepperPrevious,
     MatStepperNext,
     MatStepper,
-    FormsModule
+    FormsModule,
+    FooterComponent
   ],
   templateUrl: './upload-music.component.html',
   styleUrl: './upload-music.component.css'
@@ -95,7 +97,7 @@ export class UploadMusicComponent{
           console.log('Upload successful', response);
         },
         error: (error) => {
-          console.log("Upload failed");
+          console.log("Upload failed", error);
         }
       })
     } else {

@@ -1,157 +1,153 @@
-<div class="row g-0">
-  <div class="d-flex align-items-lg-stretch">
-    <app-sidebar></app-sidebar>
 
-    <div class="col">
-      <app-navbar></app-navbar>
-      <div class="container mt-5">
-        <h5>Carregar Música</h5>
-        <div class="title-separator mb-3"></div>
-        <div style="overflow: auto; overflow-x: hidden; max-height: 350px;">
-          <form (ngSubmit)="onSubmit()" >
-          <mat-stepper headerPosition="bottom" #stepper style="background: #1D1C1C;">
-            <mat-step>
-              <ng-template matStepLabel><span class="step-label-color">Lançamento</span></ng-template>
-              <div class="container d-flex justify-content-center align-items-center">
-              <div>
-                <div class="row">
-                  <div class="col">
-                    <input type="radio" class="me-1" value="Album" [(ngModel)]="music.musicRelease.releaseType" name="releaseType"><label>Álbum</label>
-                  </div>
-                  <div class="col">
-                    <input type="radio" class="me-1" value="Concerto"  [(ngModel)]="music.musicRelease.releaseType" name="releaseType"><label>Concerto</label>
-                  </div>
-                </div>
-                <div class="row mt-3">
-                  <div class="col">
-                    <label>Nome</label><br>
-                    <input type="text" class="form-control" [(ngModel)]="music.musicRelease.musicReleaseName" name="musicReleaseName">
-                  </div>
-                  <div class="col">
-                    <label>Descrição</label><br>
-                    <input type="text" class="form-control" [(ngModel)]="music.musicRelease.musicReleaseDescription"  name="musicReleaseDescription">
-                  </div>
-                </div>
-                <div class="row mt-3 mb-3">
-                  <div class="col">
-                    <label>Data do Lançamento</label><br>
-                    <input type="date" class="form-control" [(ngModel)]="music.musicRelease.releaseDate" name="releaseDate">
-                  </div>
-                  <div class="col">
-                    <label>Capa</label><br>
-                    <input type="file" accept="image/*" (change)="onImageFileChange($event)" class="form-control">
-                  </div>
-                </div>
-              </div>
+<app-navbar></app-navbar>
+<div class="container mt-3">
+  <h5>Carregar Música</h5>
+  <div class="title-separator mb-3"></div>
+  <div style="overflow: auto; overflow-x: hidden; max-height: 350px;">
+    <form (ngSubmit)="onSubmit()" >
+    <mat-stepper headerPosition="bottom" #stepper style="background: #482424;  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+      <mat-step>
+        <ng-template matStepLabel><span class="step-label-color">Lançamento</span></ng-template>
+        <div class="container d-flex justify-content-center align-items-center">
+        <div>
+          <div class="row">
+            <div class="col">
+              <input type="radio" class="me-1" value="Album" [(ngModel)]="music.musicRelease.releaseType" name="releaseType"><label>Álbum</label>
             </div>
-            </mat-step>
-            <mat-step>
-              <ng-template matStepLabel><span class="step-label-color">Artista</span></ng-template>
-              <div class="container d-flex justify-content-center align-items-center">
-                <div>
-                  <div class="row mb-3">
-                    <div class="col">
-                      <label>Autor Principal</label><br>
-                      <input type="text" class="form-control" [(ngModel)]="music.author.artistName" name="author">
-                    </div>
-                    <div class="col">
-                      <label>Participante(s)</label><br>
-                      <input type="text" class="form-control" [(ngModel)]="features" name="features">
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col">
-                      <label>Compositor(s)</label><br>
-                      <input type="text" class="form-control" [(ngModel)]="songwriters" name="songwriters"><br><br>
-                    </div>
-                    <div class="col">
-                      <label>Editora</label><br>
-                      <input type="text" class="form-control" [(ngModel)]="music.author.label.labelName" name="label"><br><br>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </mat-step>
-            <mat-step>
-              <ng-template matStepLabel><span class="step-label-color">Grupo Musical</span></ng-template>
-              <div class="container d-flex justify-content-center align-items-center">
-                <div>
-                  <div class="row">
-                    <div class="col">
-                      <label>Nome</label><br>
-                      <input type="text" class="form-control" [(ngModel)]="music.author.band.bandName" name="bandName">
-                    </div>
-                    <div class="col">
-                      <label>História</label><br>
-                      <input type="text" class="form-control" [(ngModel)]="music.author.band.history" name="history">
-                    </div>
-                  </div>
-                  <div class="row mt-3 mb-4">
-                    <label>Período</label><br>
-                    <div class="col">
-                      <label>Inicio (Ano): </label><input type="number" [(ngModel)]="music.author.band.start" class="form-control" name="start">
-                    </div>
-                    <div class="col">
-                      <label>Fim (Ano): </label><input type="number" [(ngModel)]="music.author.band.end" class="form-control" name="end">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </mat-step>
-            <mat-step>
-              <ng-template matStepLabel><span class="step-label-color">Música</span></ng-template>
-              <div class="container d-flex justify-content-center align-items-center">
-                <div>
-                  <div class="row">
-                    <div class="col">
-                      <label>Título</label><br>
-                      <input type="text" class="form-control" [(ngModel)]="music.title"  name="title">
-                    </div>
-                    <div class="col">
-                      <label>Categoria</label><br>
-                      <select class="form-control" [(ngModel)]="music.genre.name" name="genre" >
-                        <option value="Pop">Pop</option>
-                        <option value="Rock">Rock</option>
-                        <option value="Alternative Rock">Alternative Rock</option>
-                        <option value="Hip Hop/Rap">Hip Hop/Rap</option>
-                        <option value="R&B">R&B</option>
-                        <option value="Country">Country</option>
-                        <option value="Jazz">Jazz</option>
-                        <option value="Classical">Classical</option>
-                        <option value="Electronic/Dance">Electronic/Dance</option>
-                        <option value="Reggae">Reggae</option>
-                        <option value="Gospel">Gospel</option>
-                        <option value="Funk">Funk</option>
-                        <option value="House">House</option>
-                        <option value="Afrobeat">Afrobeat</option>
-                        <option value="Kizomba">Kizomba</option>
-                        <option value="Kuduro">Kuduro</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="row mt-3">
-                    <div class="col">
-                      <label>Letra</label><br>
-                      <input type="text" class="form-control" [(ngModel)]="music.lyric" name="lyric">
-                    </div>
-                  </div>
-
-                  <div class="row mt-3 mb-3">
-                    <div class="col">
-                      <label>Música</label><br>
-                      <input type="file" accept="audio/*" (change)="onMusicFileChange($event)" class="form-control">
-                    </div>
-                  </div>
-                  <input type="submit" class="btn btn-success" value="Carregar">
-                </div>
-              </div>
-            </mat-step>
-          </mat-stepper>
-          </form>
+            <div class="col">
+              <input type="radio" class="me-1" value="Concerto"  [(ngModel)]="music.musicRelease.releaseType" name="releaseType"><label>Concerto</label>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col">
+              <label>Nome</label><br>
+              <input type="text" class="form-control" [(ngModel)]="music.musicRelease.musicReleaseName" name="musicReleaseName">
+            </div>
+            <div class="col">
+              <label>Descrição</label><br>
+              <input type="text" class="form-control" [(ngModel)]="music.musicRelease.musicReleaseDescription"  name="musicReleaseDescription">
+            </div>
+          </div>
+          <div class="row mt-3 mb-3">
+            <div class="col">
+              <label>Data do Lançamento</label><br>
+              <input type="date" class="form-control" [(ngModel)]="music.musicRelease.releaseDate" name="releaseDate">
+            </div>
+            <div class="col">
+              <label>Capa</label><br>
+              <input type="file" accept="image/*" (change)="onImageFileChange($event)" class="form-control">
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel><span class="step-label-color">Artista</span></ng-template>
+        <div class="container d-flex justify-content-center align-items-center">
+          <div>
+            <div class="row mb-3">
+              <div class="col">
+                <label>Autor Principal</label><br>
+                <input type="text" class="form-control" [(ngModel)]="music.author.artistName" name="author">
+              </div>
+              <div class="col">
+                <label>Participante(s)</label><br>
+                <input type="text" class="form-control" [(ngModel)]="features" name="features">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <label>Compositor(s)</label><br>
+                <input type="text" class="form-control" [(ngModel)]="songwriters" name="songwriters"><br><br>
+              </div>
+              <div class="col">
+                <label>Editora</label><br>
+                <input type="text" class="form-control" [(ngModel)]="music.author.label.labelName" name="label"><br><br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel><span class="step-label-color">Grupo Musical</span></ng-template>
+        <div class="container d-flex justify-content-center align-items-center">
+          <div>
+            <div class="row">
+              <div class="col">
+                <label>Nome</label><br>
+                <input type="text" class="form-control" [(ngModel)]="music.author.band.bandName" name="bandName">
+              </div>
+              <div class="col">
+                <label>História</label><br>
+                <input type="text" class="form-control" [(ngModel)]="music.author.band.history" name="history">
+              </div>
+            </div>
+            <div class="row mt-3 mb-4">
+              <label>Período</label><br>
+              <div class="col">
+                <label>Inicio (Ano): </label><input type="number" [(ngModel)]="music.author.band.start" class="form-control" name="start">
+              </div>
+              <div class="col">
+                <label>Fim (Ano): </label><input type="number" [(ngModel)]="music.author.band.end" class="form-control" name="end">
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel><span class="step-label-color">Música</span></ng-template>
+        <div class="container d-flex justify-content-center align-items-center">
+          <div>
+            <div class="row">
+              <div class="col">
+                <label>Título</label><br>
+                <input type="text" class="form-control" [(ngModel)]="music.title"  name="title">
+              </div>
+              <div class="col">
+                <label>Categoria</label><br>
+                <select class="form-control" [(ngModel)]="music.genre.name" name="genre" >
+                  <option value="Pop">Pop</option>
+                  <option value="Rock">Rock</option>
+                  <option value="Alternative Rock">Alternative Rock</option>
+                  <option value="Hip Hop/Rap">Hip Hop/Rap</option>
+                  <option value="R&B">R&B</option>
+                  <option value="Country">Country</option>
+                  <option value="Jazz">Jazz</option>
+                  <option value="Classical">Classical</option>
+                  <option value="Electronic/Dance">Electronic/Dance</option>
+                  <option value="Reggae">Reggae</option>
+                  <option value="Gospel">Gospel</option>
+                  <option value="Funk">Funk</option>
+                  <option value="House">House</option>
+                  <option value="Afrobeat">Afrobeat</option>
+                  <option value="Kizomba">Kizomba</option>
+                  <option value="Kuduro">Kuduro</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col">
+                <label>Letra</label><br>
+                <input type="text" class="form-control" [(ngModel)]="music.lyric" name="lyric">
+              </div>
+            </div>
+
+            <div class="row mt-3 mb-3">
+              <div class="col">
+                <label>Música</label><br>
+                <input type="file" accept="audio/*" (change)="onMusicFileChange($event)" class="form-control">
+              </div>
+            </div>
+            <input type="submit" class="btn btn-success" value="Carregar">
+          </div>
+        </div>
+      </mat-step>
+    </mat-stepper>
+    </form>
   </div>
+  <br><br>
 </div>
+
+<app-footer></app-footer>

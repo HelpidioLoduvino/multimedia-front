@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {NavbarComponent} from "../navbar/navbar.component";
 import {SidebarComponent} from "../sidebar/sidebar.component";
 import {RouterLink} from "@angular/router";
+import {FooterComponent} from "../footer/footer.component";
 
 @Component({
   selector: 'app-friend',
@@ -9,7 +10,8 @@ import {RouterLink} from "@angular/router";
   imports: [
     NavbarComponent,
     SidebarComponent,
-    RouterLink
+    RouterLink,
+    FooterComponent
   ],
   templateUrl: './friend.component.html',
   styleUrl: './friend.component.css'

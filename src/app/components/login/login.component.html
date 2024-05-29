@@ -1,6 +1,8 @@
-<div class="row g-0">
-  <div class="col login-background">
-    <div class="container mt-5">
+
+<div class="container mt-5">
+  <div class="d-flex justify-content-center">
+    <div class="custom-shadow">
+      <br>
       <h2 class="d-flex justify-content-center" style="color: green">JÁ TEM UMA CONTA?</h2>
       <p class="d-flex justify-content-center">Iniciar Sessão</p>
       <div class="d-flex justify-content-center">
@@ -11,38 +13,20 @@
           <input type="email" class="form-control mb-3" placeholder="Email" formControlName="email">
           <input type="password" class="form-control mb-3" placeholder="Palavra-Passe" formControlName="password">
           <span class="d-flex justify-content-center">
-            <input type="submit" class="btn login-btn" value="Login">
+            <input type="submit" class="btn btn-success" value="Login">
           </span>
-          <a routerLink="#" class="nav-link mt-2"><u>Esqueci a minha Palavra-Passe</u></a>
+          <a routerLink="/register" class="nav-link mt-3 d-flex justify-content-center">
+            <u>Criar Conta</u>
+          </a>
         </form>
       </div>
-      <div class="d-flex justify-content-center  mt-5">
+      <div class="d-flex justify-content-center  mt-3">
         <a routerLink="/" class="nav-link" style="color: orange;">ENTRAR COMO CONVIDADO</a>
       </div>
-    </div>
-  </div>
-
-  <div class="col register-background">
-    <div class="container mt-5">
-      <h2 class="d-flex justify-content-center">FAÇA PARTE DA NOSSA PLATAFORMA!</h2>
-      <p class="d-flex justify-content-center">Fazer Registo</p>
-      <div class="d-flex justify-content-center">
-        <i class="fa fa-user-plus mt-3" style="font-size: 48px;"></i>
-      </div>
-      <div class="d-flex justify-content-center mt-3">
-        <form [formGroup]="registerForm" (ngSubmit)="register()">
-          <input type="text" class="form-control mb-3" placeholder="Nome" formControlName="name">
-          <input type="text" class="form-control mb-3" placeholder="Sobrenome" formControlName="surname">
-          <input type="email" class="form-control mb-3" placeholder="Email" formControlName="email">
-          <input type="password" class="form-control mb-3" placeholder="Palavra-Passe" formControlName="password">
-          <input type="password" class="form-control mb-3" placeholder="Confirmar Palavra-Passe" formControlName="confirmPassword">
-          <input type="hidden" value="CLIENT" formControlName="userRole">
-          <span class="d-flex justify-content-center">
-            <input type="submit" class="btn btn-dark mb-2" value="Registar">
-          </span>
-          <br>
-        </form>
-      </div>
+      <br>
     </div>
   </div>
 </div>
+<br><br>
+<app-footer></app-footer>
+

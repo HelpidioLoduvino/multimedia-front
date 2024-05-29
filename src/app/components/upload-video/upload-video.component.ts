@@ -4,19 +4,21 @@ import {MatStep, MatStepLabel, MatStepper} from "@angular/material/stepper";
 import {NavbarComponent} from "../navbar/navbar.component";
 import {SidebarComponent} from "../sidebar/sidebar.component";
 import {ContentService} from "../../services/content.service";
+import {FooterComponent} from "../footer/footer.component";
 
 @Component({
   selector: 'app-upload-video',
   standalone: true,
     providers: [ContentService],
-    imports: [
-        FormsModule,
-        MatStep,
-        MatStepLabel,
-        MatStepper,
-        NavbarComponent,
-        SidebarComponent
-    ],
+  imports: [
+    FormsModule,
+    MatStep,
+    MatStepLabel,
+    MatStepper,
+    NavbarComponent,
+    SidebarComponent,
+    FooterComponent
+  ],
   templateUrl: './upload-video.component.html',
   styleUrl: './upload-video.component.css'
 })
