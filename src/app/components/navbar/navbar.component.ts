@@ -24,7 +24,7 @@ import {MatButton} from "@angular/material/button";
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  isSidebarClosed: boolean = true;
+  isSidebarOpened: boolean = false;
 
   constructor(private userService: UserService) {
   }
@@ -37,8 +37,7 @@ export class NavbarComponent {
     this.userService.logout();
   }
 
-
   toggleSidebar() {
-    this.isSidebarClosed = !this.isSidebarClosed;
+    this.isSidebarOpened = !this.isSidebarOpened;
   }
 }

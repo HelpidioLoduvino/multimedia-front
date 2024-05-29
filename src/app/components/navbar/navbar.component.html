@@ -1,8 +1,16 @@
 
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
-    <a class="navbar-brand" style="color: white;" href="#">ISPMedia</a>
-
+    <u class="custom-nav-items">
+      <li class="nav-item">
+        <button class="btn btn-light" (click)="toggleSidebar()">
+          <i class="fa fa-bars"></i>
+        </button>
+      </li>
+      <li class="nav-item">
+        <a class="navbar-brand" style="color: white; text-decoration: none;" href="/">ISPMedia</a>
+      </li>
+    </u>
     <ul class="navbar-nav d-flex flex-row flex-nowrap">
       <li class="nav-item" *ngIf="isLogged()">
         <button class="btn btn-light me-2" [matMenuTriggerFor]="contentMenu">
@@ -31,19 +39,45 @@
     </ul>
   </div>
 </nav>
-<div class="d-flex justify-content-center">
-  <ul class="menu">
-    <li>
-      <a routerLink="/groups" class="menu-link"><i class="fa fa-users"></i> Grupos</a>
+
+<div class="sidebar" [ngClass]="{'open': isSidebarOpened}">
+  <ul class="menu-sidebar">
+    <u class="custom-nav-items mt-2">
+      <li class="nav-item">
+        <button class="btn btn-light" (click)="toggleSidebar()">
+          <i class="fa fa-bars"></i>
+        </button>
+      </li>
+      <li class="nav-item">
+        <a class="navbar-brand" style="color: white; text-decoration: none;" href="/">ISPMedia</a>
+      </li>
+    </u>
+    <li class="sidebar-item mt-4" style="padding-top: 30px;">
+      <a routerLink="/groups">
+        <span class="btn btn-light"><i class="fa fa-users" style="font-size: 12px;"></i> </span>
+        Grupos
+      </a>
     </li>
-    <li>
-      <a routerLink="/friends" class="menu-link"><i class="fa fa-user-plus"></i> Amigos</a>
+    <hr>
+    <li class="sidebar-item">
+      <a routerLink="/friends">
+        <span class="btn btn-light"><i class="fa fa-user-plus" style="font-size: 12px;"></i> </span>
+        Amigos
+      </a>
     </li>
-    <li>
-      <a routerLink="/playlists" class="menu-link"><i class="fa fa-indent"></i> Playlist</a>
+    <hr>
+    <li class="sidebar-item">
+      <a routerLink="/playlists" >
+        <span class="btn btn-light"><i class="fa fa-indent" style="font-size: 18px;"></i> </span>
+        Playlist
+      </a>
     </li>
-    <li>
-      <a routerLink="/radios" class="menu-link"><i class="fa fa-radio"></i> Rádios</a>
+    <hr>
+    <li class="sidebar-item">
+      <a routerLink="/radios">
+        <span class="btn btn-light"><i class="fa fa-radio" style="font-size: 16px;"></i> </span>
+        Rádios
+      </a>
     </li>
   </ul>
 </div>

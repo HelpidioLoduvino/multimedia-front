@@ -1,27 +1,27 @@
 
-<div class="container mt-5">
+<div class="container mt-4">
   <div class="d-flex justify-content-center">
     <div class="custom-shadow">
       <br>
-      <h2 class="d-flex justify-content-center" style="color: green">JÁ TEM UMA CONTA?</h2>
-      <p class="d-flex justify-content-center">Iniciar Sessão</p>
+      <h5 class="d-flex justify-content-center" style="color: #482424;font-weight: bold">JÁ TEM UMA CONTA?</h5>
+      <p class="d-flex justify-content-center" style="color: #482424" >Iniciar Sessão</p>
       <div class="d-flex justify-content-center">
-        <i class="fa fa-user-circle mt-4" style="font-size: 54px;"></i>
+        <i class="fa fa-user-circle m-2" style="font-size: 54px; color: #1D1C1C"></i>
       </div>
       <div class="d-flex justify-content-center mt-3">
         <form [formGroup]="loginForm" (ngSubmit)="login()">
-          <input type="email" class="form-control mb-3" placeholder="Email" formControlName="email">
-          <input type="password" class="form-control mb-3" placeholder="Palavra-Passe" formControlName="password">
+          <input type="email" class="form-control mb-3 border-black" placeholder="Email" formControlName="email">
+          <input type="password" class="form-control mb-3 border-black" placeholder="Palavra-Passe" formControlName="password">
           <span class="d-flex justify-content-center">
-            <input type="submit" class="btn btn-success" value="Login">
+            <input type="submit" class="login-btn btn btn-success" value="Iniciar Sessão"  style="width: 100%; background-color: #482424">
           </span>
-          <a routerLink="/register" class="nav-link mt-3 d-flex justify-content-center">
-            <u>Criar Conta</u>
+          <a routerLink="/register" class="register-btn btn mt-3 d-flex justify-content-center" >
+            Criar Conta
           </a>
         </form>
       </div>
       <div class="d-flex justify-content-center  mt-3">
-        <a routerLink="/" class="nav-link" style="color: orange;">ENTRAR COMO CONVIDADO</a>
+        <a routerLink="/" class="nav-link Link-convidado" style="color:#924444">ENTRAR COMO CONVIDADO</a>
       </div>
       <br>
     </div>

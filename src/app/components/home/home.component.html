@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div class="container">
 
-  <div class="d-flex justify-content-center mt-2">
+  <div class="d-flex justify-content-center" style="padding-top: 45px;">
     <div class="search">
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Procurar..." aria-label="Search">
@@ -9,12 +9,14 @@
       </form>
     </div>
   </div>
-  <select class="mt-4">
-    <option>Filtro</option>
-    <option>Categoria</option>
-    <option>Músicas</option>
-    <option>Vídeos</option>
-  </select>
+  <div class="d-flex justify-content-end mt-3">
+    <select class="">
+      <option>Filtro</option>
+      <option>Categoria</option>
+      <option>Músicas</option>
+      <option>Vídeos</option>
+    </select>
+  </div>
   <hr>
   <div class="row row-cols-md-3 g-2">
     <div class="col" *ngFor="let content of contents">
