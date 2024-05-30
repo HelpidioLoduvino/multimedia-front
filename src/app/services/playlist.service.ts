@@ -14,8 +14,16 @@ export class PlaylistService {
     return this.http.post<any>(`${this.basePlaylistUrl}/add`, playlist);
   }
 
-  getAllPlaylist(){
-    return this.http.get<any[]>(`${this.basePlaylistUrl}/all`);
+  getAllPlaylistsByUserId(){
+    return this.http.get<any>(`${this.basePlaylistUrl}/user-playlists`);
+  }
+
+  getAllPublicPlaylists(){
+    return this.http.get<any>(`${this.basePlaylistUrl}/public-playlists`)
+  }
+
+  getPlaylistById(id: number){
+    return this.http.get<any>(`${this.basePlaylistUrl}/${id}`);
   }
 
   deletePlaylist(id: number){

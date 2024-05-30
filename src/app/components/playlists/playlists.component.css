@@ -1,0 +1,21 @@
+
+
+.scroll-container {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 10px;
+  height: 120px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.scroll-content {
+  display: inline-block;
+}
+
+.item {
+  display: inline-block;
+  width: 200px;
+}

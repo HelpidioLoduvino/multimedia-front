@@ -1,43 +1,54 @@
 import {Component, OnInit} from '@angular/core';
+import {FooterComponent} from "../footer/footer.component";
 import {NavbarComponent} from "../navbar/navbar.component";
-import {SidebarComponent} from "../sidebar/sidebar.component";
-import {RouterLink} from "@angular/router";
-import {MatButton} from "@angular/material/button";
+import {NgForOf, NgIf} from "@angular/common";
+import {ActivatedRoute, RouterLink} from "@angular/router";
+import {PlaylistService} from "../../services/playlist.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ModalComponent} from "../modal/modal.component";
 import {AddPlaylistComponent} from "../add-playlist/add-playlist.component";
-import {PlaylistService} from "../../services/playlist.service";
-import {NgForOf} from "@angular/common";
-import {FooterComponent} from "../footer/footer.component";
+import {AddContentToPlaylistComponent} from "../add-content-to-playlist/add-content-to-playlist.component";
 
 @Component({
   selector: 'app-playlist',
   standalone: true,
   providers: [PlaylistService],
   imports: [
+    FooterComponent,
     NavbarComponent,
-    SidebarComponent,
-    RouterLink,
-    MatButton,
     NgForOf,
-    FooterComponent
+    RouterLink,
+    NgIf
   ],
   templateUrl: './playlist.component.html',
   styleUrl: './playlist.component.css'
 })
 export class PlaylistComponent implements OnInit{
 
-  playlists: any[] = [];
+  playlist: any = {};
+  playlistId!: number
 
-  constructor(public dialog: MatDialog, private playlistService: PlaylistService) {}
+  constructor(private playlistService: PlaylistService,
+              private route: ActivatedRoute,
+              private modal: MatDialog
+  ) {}
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(ModalComponent, {
+
+
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.playlistId = params['id'];
+      this.getPlaylistBydId(this.playlistId);
+    });
+  }
+
+  openAddContentModal(): void {
+    const dialogRef = this.modal.open(ModalComponent, {
       width: '500px',
       height: '350px',
       data: {
-        title: 'Adicionar Playlist',
-        component: AddPlaylistComponent,
+        title: 'Adicionar Conteúdo',
+        component: AddContentToPlaylistComponent,
         componentData: {  }
       }
     });
@@ -46,13 +57,17 @@ export class PlaylistComponent implements OnInit{
     });
   }
 
-  ngOnInit(): void {
-    this.playlistService.getAllPlaylist().subscribe({
+  getPlaylistBydId(id: number){
+    this.playlistService.getPlaylistById(id).subscribe({
       next: (response) => {
-        this.playlists = response;
+        this.playlist = response;
+        console.log("Sucesso");
       }, error: (error) => {
-        console.error("Erro ao recuperar playlists");
+        console.log("Playlist nao encontrada");
       }
-    })
+    });
+
   }
+
+
 }

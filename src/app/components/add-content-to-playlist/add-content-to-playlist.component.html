@@ -1,0 +1,7 @@
+<div class="container">
+  <ul style="list-style: none;">
+    <li *ngFor="let content of contents">
+      <input type="checkbox" value="{{content}}" > {{content.author.artistName}} - {{content.title}}
+    </li>
+  </ul>
+</div>

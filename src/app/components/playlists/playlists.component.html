@@ -1,0 +1,38 @@
+
+<app-navbar></app-navbar>
+
+<div class="container d-block mt-5">
+
+  <h5><span>Playlist</span><button class="btn btn-light ms-2" (click)="openDialog()"><i class="fa fa-plus"></i></button>
+  </h5>
+  <div class="line mb-3"></div>
+  <h6 *ngIf="myPlaylists && myPlaylists.length > 0">Minhas Playlists</h6>
+  <div class="scroll-container" *ngIf="myPlaylists && myPlaylists.length > 0">
+    <div class="scroll-content">
+      <div class="item" *ngFor="let playlist of myPlaylists">
+        <button (click)="getPlaylistById(playlist.id)" class="nav-link">
+          <div class="card card-body" style="background: #482424; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+            <h5>{{playlist.playlistName}}</h5>
+            <p>Visibilidade: {{playlist.status}}</p>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+  <h6 *ngIf="publicPlaylists && publicPlaylists.length > 0">Playlists Públicas</h6>
+  <div class="scroll-container" *ngIf="publicPlaylists && publicPlaylists.length > 0">
+    <div class="scroll-content">
+      <div class="item" *ngFor="let publicPlaylist of publicPlaylists">
+        <button (click)="getPlaylistById(publicPlaylist.id)" class="nav-link">
+          <div class="card card-body" style="background: #482424; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+            <h5>{{publicPlaylist.playlistName}}</h5>
+            <p>Visibilidade: {{publicPlaylist.status}}</p>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<br><br>
+
+<app-footer></app-footer>
