@@ -6,6 +6,11 @@ import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
 import {DomSanitizer} from "@angular/platform-browser";
 import {FooterComponent} from "../footer/footer.component";
+import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
+import {MatDialog} from "@angular/material/dialog";
+import {ModalComponent} from "../modal/modal.component";
+import {AddPlaylistComponent} from "../add-playlist/add-playlist.component";
+import {AddContentToPlaylistComponent} from "../add-content-to-playlist/add-content-to-playlist.component";
 
 @Component({
   selector: 'app-home',
@@ -19,6 +24,9 @@ import {FooterComponent} from "../footer/footer.component";
     NgIf,
     RouterLink,
     FooterComponent,
+    MatMenuTrigger,
+    MatMenu,
+    MatMenuItem,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
@@ -31,12 +39,28 @@ export class HomeComponent implements OnInit{
   constructor(
     private contentService: ContentService,
     private router: Router,
-    private sanitizer: DomSanitizer) {}
+    private sanitizer: DomSanitizer,
+    private modal: MatDialog) {}
 
   ngOnInit(): void {
     this.contentService.getAllContent().subscribe(data => {
       this.contents = data;
       this.loadImages();
+    });
+  }
+
+  openDialog(contentId: number): void {
+    const dialogRef = this.modal.open(ModalComponent, {
+      width: '350px',
+      height: '300px',
+      data: {
+        title: 'Guardar Vídeo Em...',
+        component: AddContentToPlaylistComponent,
+        componentData: { contentId: contentId}
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
     });
   }
 

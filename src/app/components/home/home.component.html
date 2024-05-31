@@ -21,16 +21,21 @@
   <div class="row row-cols-md-3 g-2">
     <div class="col" *ngFor="let content of contents">
       <div class="d-flex justify-content-center">
-        <button (click)="play(content.id)" class="btn bg-transparent border-0 content-title">
           <div class="card mx-auto card-body" style="width: 60vh; background: #482424; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-            <div class="object-fit-cover d-flex justify-content-center mb-2">
+            <div class="object-fit-cover d-flex justify-content-center mb-2" (click)="play(content.id)">
               <img class="music-image" *ngIf="isMusic(content.path)" [src]="imageUrls[content.id]" alt="{{ content.title }} cover">
               <video *ngIf="isVideo(content.path)" width="400" controls></video>
             </div>
             <hr>
-            <h5>{{content.author.artistName}} - {{content.title}}</h5>
+            <a class="content-title nav-link" (click)="play(content.id)" style="font-size: 18px; cursor: pointer">{{content.author.artistName}} - {{content.title}}</a>
+            <div class="d-flex justify-content-end" [matMenuTriggerFor]="infoMenu">
+              <button class="btn btn-light border-0"><i class="fa fa-ellipsis-h"></i></button>
+            </div>
+            <mat-menu #infoMenu="matMenu" [overlapTrigger]="false" yPosition="below" xPosition="before">
+              <a routerLink="" (click)="contentInfo(content.id)" mat-menu-item>Info</a>
+              <a routerLink="" (click)="openDialog(content.id)" mat-menu-item>Guardar na Playlist</a>
+            </mat-menu>
           </div>
-        </button>
       </div>
     </div>
   </div>

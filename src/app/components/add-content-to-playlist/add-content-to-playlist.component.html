@@ -1,7 +1,10 @@
 <div class="container">
-  <ul style="list-style: none;">
-    <li *ngFor="let content of contents">
-      <input type="checkbox" value="{{content}}" > {{content.author.artistName}} - {{content.title}}
-    </li>
-  </ul>
+  <form (ngSubmit)="onSubmit()">
+    <ul style="list-style: none;">
+      <li *ngFor="let playlist of playlists">
+        <input type="radio" [value]="playlist.id" (change)="onCheckboxChange($event)"> {{playlist.playlistName}} ({{playlist.status}})
+      </li>
+    </ul>
+    <input type="submit" value="Adicionar" class="btn btn-success">
+  </form>
 </div>

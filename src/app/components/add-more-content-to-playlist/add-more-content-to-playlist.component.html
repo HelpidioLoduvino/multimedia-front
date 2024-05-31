@@ -1,0 +1,10 @@
+<div class="container">
+  <form (ngSubmit)="onSubmit()">
+  <ul style="list-style: none">
+    <li *ngFor="let content of contents">
+      <input type="radio" value="{{content.id}}" (change)="onCheckboxChange($event)"> {{content.author.artistName}} - {{content.title}}
+    </li>
+  </ul>
+    <input type="submit" value="Adicionar" class="btn btn-dark">
+  </form>
+</div>

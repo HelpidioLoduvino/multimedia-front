@@ -25,6 +25,8 @@ import {NgComponentOutlet} from "@angular/common";
 })
 export class ModalComponent{
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+    console.log(this.data.componentData.id);
+  }
 
 }
