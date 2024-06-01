@@ -5,7 +5,7 @@ import {Router, RouterLink} from "@angular/router";
 import {MatButton} from "@angular/material/button";
 import {MatDialog} from "@angular/material/dialog";
 import {ModalComponent} from "../modal/modal.component";
-import {AddPlaylistComponent} from "../add-playlist/add-playlist.component";
+import {AddPlaylistComponent} from "../modal/add-playlist/add-playlist.component";
 import {PlaylistService} from "../../services/playlist.service";
 import {NgForOf, NgIf} from "@angular/common";
 import {FooterComponent} from "../footer/footer.component";

@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {PlaylistService} from "../../services/playlist.service";
-import {ContentService} from "../../services/content.service";
+import {PlaylistService} from "../../../services/playlist.service";
+import {ContentService} from "../../../services/content.service";
 import {NgForOf} from "@angular/common";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {FormsModule} from "@angular/forms";

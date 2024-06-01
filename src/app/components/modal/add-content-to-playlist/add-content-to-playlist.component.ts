@@ -1,8 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import { ContentService } from "../../services/content.service";
+import { ContentService } from "../../../services/content.service";
 import { NgForOf } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
-import { PlaylistService } from "../../services/playlist.service";
+import { PlaylistService } from "../../../services/playlist.service";
 import {FormBuilder, FormGroup, FormArray, ReactiveFormsModule, Validators, FormsModule} from "@angular/forms";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 

@@ -9,8 +9,8 @@ import {FooterComponent} from "../footer/footer.component";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {MatDialog} from "@angular/material/dialog";
 import {ModalComponent} from "../modal/modal.component";
-import {AddPlaylistComponent} from "../add-playlist/add-playlist.component";
-import {AddContentToPlaylistComponent} from "../add-content-to-playlist/add-content-to-playlist.component";
+import {AddPlaylistComponent} from "../modal/add-playlist/add-playlist.component";
+import {AddContentToPlaylistComponent} from "../modal/add-content-to-playlist/add-content-to-playlist.component";
 
 @Component({
   selector: 'app-home',

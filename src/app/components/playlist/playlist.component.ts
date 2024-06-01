@@ -6,13 +6,13 @@ import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {PlaylistService} from "../../services/playlist.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ModalComponent} from "../modal/modal.component";
-import {AddContentToPlaylistComponent} from "../add-content-to-playlist/add-content-to-playlist.component";
+import {AddContentToPlaylistComponent} from "../modal/add-content-to-playlist/add-content-to-playlist.component";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {ContentService} from "../../services/content.service";
 import {DomSanitizer} from "@angular/platform-browser";
 import {
   AddMoreContentToPlaylistComponent
-} from "../add-more-content-to-playlist/add-more-content-to-playlist.component";
+} from "../modal/add-more-content-to-playlist/add-more-content-to-playlist.component";
 
 @Component({
   selector: 'app-playlist',

@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {MatStep, MatStepLabel, MatStepper} from "@angular/material/stepper";
-import {ContentService} from "../../services/content.service";
+import {ContentService} from "../../../services/content.service";
 import {NgForOf} from "@angular/common";
 import {DomSanitizer} from "@angular/platform-browser";
-import {PlaylistService} from "../../services/playlist.service";
+import {PlaylistService} from "../../../services/playlist.service";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";

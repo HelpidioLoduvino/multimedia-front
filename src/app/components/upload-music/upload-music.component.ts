@@ -1,15 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {NavbarComponent} from "../navbar/navbar.component";
 import {SidebarComponent} from "../sidebar/sidebar.component";
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatStep, MatStepLabel, MatStepper, MatStepperNext, MatStepperPrevious} from "@angular/material/stepper";
 import {MatFormField} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
 import {ContentService} from "../../services/content.service";
-import {HttpClientModule} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {FooterComponent} from "../footer/footer.component";
+import {MatDialog} from "@angular/material/dialog";
+import {ModalComponent} from "../modal/modal.component";
+import {ContentShareGroupComponent} from "../modal/content-share-group/content-share-group.component";
 
 
 @Component({
@@ -39,6 +41,7 @@ export class UploadMusicComponent{
   music: any = {
     title: '',
     lyric: '',
+    contentStatus: '',
     musicRelease: {
       musicReleaseName: '',
       musicReleaseDescription: '',
@@ -67,11 +70,13 @@ export class UploadMusicComponent{
   features: string = '';
   songwriters: string = '';
   currentYear: number;
+  groups: any[] = [];
 
   constructor(
-    private formBuilder: FormBuilder,
     private contentService: ContentService,
-    private snackBar: MatSnackBar ) {
+    private snackBar: MatSnackBar,
+    private modal: MatDialog
+  ) {
     this.currentYear = new Date().getFullYear();
   }
 
@@ -94,6 +99,19 @@ export class UploadMusicComponent{
     if( this.cover && this.path){
       this.contentService.uploadMusic(this.music, this.path, this.cover).subscribe({
         next: (response) => {
+          console.log(response.id);
+          const dialogRef = this.modal.open(ModalComponent, {
+            width: '350px',
+            height: '310px',
+            data: {
+              title: 'Partilhar Com:',
+              component: ContentShareGroupComponent,
+              componentData: {id: response.id}
+            }
+          });
+
+          dialogRef.afterClosed().subscribe(result => {
+          });
           console.log('Upload successful', response);
         },
         error: (error) => {
