@@ -10,17 +10,10 @@
   <div class="table-responsive">
     <table class="table table-hover">
       <tbody>
-      <tr *ngIf="publicGroup">
-        <td>
-          <a routerLink="#" class="nav-link">
-            {{publicGroup.groupName}} (<i class="fa fa-earth"></i>)
-          </a>
-        </td>
-      </tr>
       <tr *ngFor="let myGroup of allMyGroups">
         <td>
-          <a routerLink="#" class="nav-link">
-            {{myGroup.groupName}}
+          <a routerLink="#" class="nav-link" (click)="openGroup(myGroup.shareGroup.id)">
+            {{myGroup.shareGroup.groupName}}
           </a>
         </td>
       </tr>

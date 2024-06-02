@@ -8,7 +8,7 @@ import {AddContentToPlaylistComponent} from "../modal/add-content-to-playlist/ad
 import {CreateGroupComponent} from "../modal/create-group/create-group.component";
 import {GroupService} from "../../services/group.service";
 import {NgForOf, NgIf} from "@angular/common";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
@@ -28,12 +28,12 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 })
 export class GroupComponent implements OnInit{
 
-  publicGroup: any = {};
   allMyGroups: any[] = [];
 
   constructor(
     private groupService: GroupService,
     private modal: MatDialog,
+    private router: Router
     ) {}
 
   openDialog(): void {
@@ -52,14 +52,6 @@ export class GroupComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.groupService.getPublicGroup().subscribe({
-      next: (response) => {
-        this.publicGroup = response.body;
-      }, error: (error) => {
-        console.log("Erro ao recuperar Grupo", error);
-      }
-    });
-
     this.groupService.getAllMyGroups().subscribe({
       next: (response) => {
         this.allMyGroups = response.body;
@@ -67,6 +59,10 @@ export class GroupComponent implements OnInit{
         console.error("Erro ao recuperar meus grupos", error);
       }
     })
+  }
+
+  openGroup(id: number){
+    this.router.navigate(['/group', id]);
   }
 
 }

@@ -99,20 +99,20 @@ export class UploadMusicComponent{
     if( this.cover && this.path){
       this.contentService.uploadMusic(this.music, this.path, this.cover).subscribe({
         next: (response) => {
-          console.log(response.id);
+          console.log("Id do Conteudo:" + response.body.id);
+          const contentId:number = response.body.id;
           const dialogRef = this.modal.open(ModalComponent, {
             width: '350px',
             height: '310px',
             data: {
               title: 'Partilhar Com:',
               component: ContentShareGroupComponent,
-              componentData: {id: response.id}
+              componentData: {contentId: contentId}
             }
           });
 
           dialogRef.afterClosed().subscribe(result => {
           });
-          console.log('Upload successful', response);
         },
         error: (error) => {
           console.log("Upload failed", error);

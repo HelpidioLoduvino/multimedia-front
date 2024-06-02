@@ -26,17 +26,16 @@ export class ContentShareGroupComponent implements OnInit{
     @Inject(MAT_DIALOG_DATA) public data: any,
     private toast: MatSnackBar
     ) {
-      this.contentId = data.componentData.id;
+      this.contentId = data.componentData.contentId;
   }
 
   ngOnInit(): void {
-    console.log("Id Do Conteudo" + this.contentId);
+    console.log("Id Conteudo" + this.contentId);
     this.groupService.getAllMyGroups().subscribe({
       next: (response) => {
         this.allMyGroups = response.body;
-        console.log(this.allMyGroups);
       }, error: (error) =>{
-        console.error("Error finding groups");
+        console.error("Error finding groups", error);
       }
     })
   }
@@ -44,6 +43,7 @@ export class ContentShareGroupComponent implements OnInit{
   onSubmit(groupId: number){
     this.groupService.addContentToGroup(this.contentId, groupId).subscribe({
       next: (response) => {
+        console.log("ID CONTEUDOOOO: " + this.contentId);
         this.toast.open("Conteúdo Adicionado Com Sucesso", 'Fechar', {
           duration: 3000, panelClass: ['success']
         });

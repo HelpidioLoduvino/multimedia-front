@@ -1,0 +1,34 @@
+<app-navbar></app-navbar>
+<div class="container mt-5">
+  <div class="d-flex justify-content-end">
+    <button class="btn btn-light me-2" [matMenuTriggerFor]="userMenu"><i class="fa fa-user"></i></button>
+    <mat-menu #userMenu="matMenu" [overlapTrigger]="false" yPosition="below" xPosition="before">
+      <a routerLink=""  mat-menu-item>Adicionar Owner</a>
+      <a routerLink=""  mat-menu-item>Adicionar Editor</a>
+      <a routerLink=""  mat-menu-item>Adicionar Membro</a>
+      <a routerLink="" mat-menu-item>Listar Membros</a>
+    </mat-menu>
+    <button class="btn btn-danger" [matMenuTriggerFor]="deleteMenu"><i class="fa fa-trash"></i> </button>
+    <mat-menu #deleteMenu="matMenu" [overlapTrigger]="false" yPosition="below" xPosition="before">
+      <a routerLink=""  mat-menu-item>Apagar Grupo</a>
+      <a routerLink=""  mat-menu-item>Remover Membro</a>
+    </mat-menu>
+  </div>
+  <hr>
+  <div class="row row-cols-md-3 g-2">
+    <div class="col" *ngFor="let content of contents">
+      <div class="d-flex justify-content-center">
+        <div class="card mx-auto card-body" style="width: 60vh; background: #482424; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+          <div class="object-fit-cover d-flex justify-content-center mb-2" (click)="play(content.content.id)">
+            <img class="music-image" *ngIf="isMusic(content.content.path)" [src]="imageUrls[content.content.id]" alt="{{ content.content.title }} cover">
+            <video *ngIf="isVideo(content.content.path)" width="400" controls></video>
+          </div>
+          <hr>
+          <a class="content-title nav-link" (click)="play(content.content.id)" style="font-size: 18px; cursor: pointer">{{content.content.author.artistName}} - {{content.content.title}}</a>
+        </div>
+    </div>
+  </div>
+</div>
+  <br><br>
+</div>
+<app-footer></app-footer>

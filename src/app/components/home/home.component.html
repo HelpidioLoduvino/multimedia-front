@@ -1,6 +1,5 @@
 <app-navbar></app-navbar>
 <div class="container">
-
   <div class="d-flex justify-content-center" style="padding-top: 45px;">
     <div class="search">
       <form class="d-flex">
@@ -32,8 +31,9 @@
               <button class="btn btn-light border-0"><i class="fa fa-ellipsis-h"></i></button>
             </div>
             <mat-menu #infoMenu="matMenu" [overlapTrigger]="false" yPosition="below" xPosition="before">
-              <a routerLink="" (click)="contentInfo(content.id)" mat-menu-item>Info</a>
+              <a routerLink="" (click)="contentInfo(content.id)" mat-menu-item>Informação</a>
               <a routerLink="" (click)="openDialog(content.id)" mat-menu-item>Guardar na Playlist</a>
+              <a routerLink="" mat-menu-item>Partilhar com Grupo</a>
             </mat-menu>
           </div>
       </div>

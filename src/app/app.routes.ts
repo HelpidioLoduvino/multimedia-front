@@ -10,10 +10,12 @@ import {UploadVideoComponent} from "./components/upload-video/upload-video.compo
 import {ContentInfoComponent} from "./components/content-info/content-info.component";
 import {RegisterComponent} from "./components/register/register.component";
 import {PlaylistComponent} from "./components/playlist/playlist.component";
+import {GetGroupComponent} from "./components/get-group/get-group.component";
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'groups', component: GroupComponent},
+  {path: 'group/:id', component: GetGroupComponent},
   {path: 'playlists', component: PlaylistsComponent},
   {path: 'playlist/:id', component: PlaylistComponent},
   {path: 'friends', component: FriendComponent},
