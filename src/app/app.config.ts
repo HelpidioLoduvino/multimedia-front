@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule, provideHttpClient, withFetch} from "@angular/common/http";
 import {authInterceptorProvider} from "./auth";
 
 export const appConfig: ApplicationConfig = {
@@ -11,6 +11,9 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimationsAsync(),
     importProvidersFrom(HttpClientModule),
+    provideHttpClient(
+      withFetch(),
+    ),
     authInterceptorProvider
   ]
 };

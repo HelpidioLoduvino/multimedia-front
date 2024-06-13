@@ -30,7 +30,6 @@ export class ContentShareGroupComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    console.log("Id Conteudo" + this.contentId);
     this.groupService.getAllMyGroups().subscribe({
       next: (response) => {
         this.allMyGroups = response.body;
@@ -43,7 +42,7 @@ export class ContentShareGroupComponent implements OnInit{
   onSubmit(groupId: number){
     this.groupService.addContentToGroup(this.contentId, groupId).subscribe({
       next: (response) => {
-        console.log("ID CONTEUDOOOO: " + this.contentId);
+        window.location.reload();
         this.toast.open("Conteúdo Adicionado Com Sucesso", 'Fechar', {
           duration: 3000, panelClass: ['success']
         });

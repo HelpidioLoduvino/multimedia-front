@@ -11,11 +11,12 @@ import {MatDialog} from "@angular/material/dialog";
 import {ModalComponent} from "../modal/modal.component";
 import {AddPlaylistComponent} from "../modal/add-playlist/add-playlist.component";
 import {AddContentToPlaylistComponent} from "../modal/add-content-to-playlist/add-content-to-playlist.component";
+import {GroupService} from "../../services/group.service";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  providers: [ContentService],
+  providers: [ContentService, GroupService],
   imports: [
     NavbarComponent,
     SidebarComponent,
@@ -38,17 +39,17 @@ export class HomeComponent implements OnInit{
 
   constructor(
     private contentService: ContentService,
+    private groupService: GroupService,
     private router: Router,
     private sanitizer: DomSanitizer,
     private modal: MatDialog) {}
 
   ngOnInit(): void {
-    this.contentService.getAllContent().subscribe(data => {
-      this.contents = data;
+    this.groupService.getContentsFromPublicGroup().subscribe(response=>{
+      this.contents = response;
       this.loadImages();
     });
   }
-
   openDialog(contentId: number): void {
     const dialogRef = this.modal.open(ModalComponent, {
       width: '350px',
@@ -74,7 +75,7 @@ export class HomeComponent implements OnInit{
 
   loadImages(): void {
     this.contents.forEach(content => {
-      this.displayCover(content.id);
+      this.displayCover(content.content.musicRelease.id);
     });
   }
 

@@ -21,8 +21,8 @@ export class GroupService {
     return this.http.post(`${this.baseGroupUrl}/add-content-to-group`, null, {params});
   }
 
-  getAllGroupsExceptPublic(){
-    return this.http.get<any>(`${this.baseGroupUrl}/all-except-public`);
+  getAllExceptMyAndPublicGroups(){
+    return this.http.get<any>(`${this.baseGroupUrl}/all-except-my-and-public-groups`);
   }
 
   getAllMyGroups(){
@@ -35,6 +35,17 @@ export class GroupService {
 
   getAllUsersByGroupId(groupId: number){
     return this.http.get<any>(`${this.baseGroupUrl}/all-users-by-group-id/${groupId}`);
+  }
+
+  getContentsFromPublicGroup(){
+    return this.http.get<any>(`${this.baseGroupUrl}/all-contents-from-public-group`);
+  }
+
+  requestToJoinGroup(groupId: number){
+    const params = new HttpParams()
+      .set('groupId', groupId.toString());
+
+    return this.http.post(`${this.baseGroupUrl}/request-to-join-group`, null, {params});
   }
 
 }

@@ -8,9 +8,19 @@
         </button>
       </li>
       <li class="nav-item">
-        <a class="navbar-brand" style="color: white; text-decoration: none;" href="/">ISPMedia</a>
+        <a class="nav-link" style="color: white; text-decoration: none;" href="/home">ISPMedia</a>
       </li>
     </u>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/albums" style="color: white">Álbuns</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/artists" style="color: white">Artistas</a>
+        </li>
+      </ul>
+    </div>
     <ul class="navbar-nav d-flex flex-row flex-nowrap">
       <li class="nav-item" *ngIf="isLogged()">
         <button class="btn btn-light me-2" [matMenuTriggerFor]="contentMenu">
@@ -22,7 +32,14 @@
         </mat-menu>
       </li>
       <li class="nav-item" *ngIf="isLogged()">
-        <a class="btn btn-light me-2"><i class="fa fa-bell"></i></a>
+        <button class="btn btn-light me-2" [matMenuTriggerFor]="notificationMenu"><i class="fa fa-bell"></i></button>
+        <mat-menu #notificationMenu="matMenu">
+          <label mat-menu-item>
+            Helpidio quer entrar no teu grupo
+            <button class="btn btn-success me-2">Aceitar</button>
+            <button class="btn btn-danger">Negar</button>
+          </label>
+        </mat-menu>
       </li>
       <li class="nav-item" *ngIf="isLogged()">
         <button class="btn btn-light me-2" [matMenuTriggerFor]="userMenu">
@@ -72,6 +89,21 @@
         Rádios
       </a>
     </li>
+    <hr>
+    <li class="sidebar-item">
+      <a routerLink="/albums">
+        <span class="btn btn-light"><i class="fa fa-compact-disc" style="font-size: 16px;"></i> </span>
+        Álbuns
+      </a>
+    </li>
+    <hr>
+    <li class="sidebar-item">
+      <a routerLink="/artists">
+        <span class="btn btn-light"><i class="fa fa-user-friends" style="font-size: 14px;"></i> </span>
+        Artístas
+      </a>
+    </li>
+
   </ul>
 </div>
 

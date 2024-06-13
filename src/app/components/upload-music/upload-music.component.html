@@ -73,6 +73,7 @@
         <ng-template matStepLabel><span class="step-label-color">Grupo Musical</span></ng-template>
         <div class="container d-flex justify-content-center align-items-center">
           <div>
+            <small class="d-flex justify-content-center align-items-center mb-3">Campos opcionais.</small>
             <div class="row">
               <div class="col">
                 <label>Nome</label><br>
@@ -140,8 +141,32 @@
                 <input type="file" accept="audio/*" (change)="onMusicFileChange($event)" class="form-control">
               </div>
             </div>
-            <input type="submit" class="btn btn-success" value="Carregar">
           </div>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel><span class="step-label-color">Partilhar Com</span></ng-template>
+        <div class="container ">
+          <h5 class="d-flex justify-content-center align-items-center">Meus Grupos</h5>
+          <div class="d-flex justify-content-center align-items-center mt-3">
+            <ul class="navbar-nav">
+              <li *ngFor="let group of groups">
+                <input
+                  type="radio"
+                  [value]="group.shareGroup.groupName"
+                  class="me-2"
+                  [(ngModel)]="selectedGroupName"
+                  name="groupName"
+                >
+                {{ group.shareGroup.groupName }}
+              </li>
+            </ul>
+          </div>
+          <div class="d-flex justify-content-center align-items-center mt-3">
+            <input type="submit" class="btn btn-success me-2" value="Carregar Conteúdo">
+            <input type="submit" class="btn btn-light" value="Criar Grupo">
+          </div>
+          <small class="d-flex justify-content-center align-items-center mt-3">O conteúdo é partilhado no grupo Público caso não escolha nenhum grupo.</small>
         </div>
       </mat-step>
     </mat-stepper>

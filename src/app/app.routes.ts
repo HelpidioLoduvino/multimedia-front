@@ -11,18 +11,22 @@ import {ContentInfoComponent} from "./components/content-info/content-info.compo
 import {RegisterComponent} from "./components/register/register.component";
 import {PlaylistComponent} from "./components/playlist/playlist.component";
 import {GetGroupComponent} from "./components/get-group/get-group.component";
+import {ArtistComponent} from "./components/artist/artist.component";
+import {AlbumComponent} from "./components/album/album.component";
 
 export const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', component: LoginComponent},
+  {path: 'home', component: HomeComponent},
   {path: 'groups', component: GroupComponent},
   {path: 'group/:id', component: GetGroupComponent},
   {path: 'playlists', component: PlaylistsComponent},
   {path: 'playlist/:id', component: PlaylistComponent},
   {path: 'friends', component: FriendComponent},
-  {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'upload-music', component: UploadMusicComponent},
   {path: 'upload-video', component: UploadVideoComponent},
   {path: 'play/:id', component: PlayContentComponent},
-  {path: 'content-info/:id', component: ContentInfoComponent}
+  {path: 'content-info/:id', component: ContentInfoComponent},
+  {path: 'artists', component: ArtistComponent},
+  {path: 'albums', component:  AlbumComponent}
 ];

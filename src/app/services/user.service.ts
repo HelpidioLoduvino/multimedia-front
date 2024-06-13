@@ -43,7 +43,7 @@ export class UserService {
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('email');
     localStorage.removeItem('id');
-    this.router.navigate(['/login']);
+    this.router.navigate(['']);
   }
 
 }

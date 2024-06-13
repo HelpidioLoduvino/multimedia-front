@@ -1,52 +1,32 @@
-
 <app-navbar></app-navbar>
 <div class="container mt-2">
-  <div class="row g-2 mb-5">
-    <div class="col-md-8">
-      <div class="card card-body" style="height: 350px; background: black;">
-        <div class="col">
-          <div class="row">
-            <div class="card-img-overlay d-flex justify-content-center">
-              <img class="music-image" *ngIf="isMusic(content.path)" [src]= "imageUrl[content.id]" alt="music cover">
-            </div>
-            <div class="card-img-overlay">
-              <video *ngIf="isVideo(content.path)" class="video-content">
-              </video>
-            </div>
-          </div>
-        </div>
-        <div class="audio-control">
-          <audio *ngIf="isMusic(content.path)" #audioPlayer [src]="contentUrl" ></audio>
-          <div class="card-img-overlay">
-            <video *ngIf="isVideo(content.path)" #videoPlayer [src]="contentUrl" class="video-content"></video>
-          </div>
-          <div *ngIf="isMusic(content.path) || isVideo(content.path)">
-            <button class="btn bg-transparent" (click)="playMedia()"><i [ngClass]="isPlaying ? 'fa fa-pause' : 'fa fa-play'" style="color: white;"></i></button>
-            <input type="range" min="0" max="100" [(ngModel)]="seekValue" (change)="seekMedia()">
-            <span>{{ currentTime }} / {{ formatTime(mediaDuration) }}</span>
-          </div>
-        </div>
-      </div>
-      <div class="mt-2" *ngIf="content">
-        <h6>{{content.author.artistName}} - {{content.title}}</h6>
-        <a class="nav-link" routerLink="#">
-          <i class="fa fa-user-circle mt-2" style="font-size: 18px;"></i>
-          {{content.user.name}} {{content.user.surname}}
-        </a>
-        <div class="card card-body mt-2" style="background: #1D1C1C">
-          <label><u>Letra da Música</u></label>
-          {{content.lyric}}
-        </div>
-      </div>
+  <div class="card card-body" style="height: 350px; background: black; position: relative;">
+    <div class="d-flex justify-content-center">
+      <img class="music-image" *ngIf="isMusic(content.mimetype)" [src]= "imageUrl[content.id]" alt="music cover" style="object-fit: cover; height: 320px; overflow: hidden;">
+      <video *ngIf="isVideo(content.mimetype)" class="video-content" style="width: 100%; height: 100%; object-fit: cover;">
+      </video>
     </div>
-    <div class="col">
-      <div class="card card-body" style="height: 100%; background: black;">
-
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+      <audio *ngIf="isMusic(content.mimetype)" #audioPlayer [src]="contentUrl" autoplay></audio>
+      <video *ngIf="isVideo(content.mimetype)" #videoPlayer [src]="contentUrl" class="video-content" autoplay></video>
+      <div *ngIf="isMusic(content.mimetype) || isVideo(content.mimetype)" style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 10px; background-color: rgba(0, 0, 0, 0.5);">
+        <input type="range" min="0" max="100" [(ngModel)]="seekValue" (change)="seekMedia()" class="custom-progress w-100">
+        <button class="btn bg-transparent border-0" (click)="playMedia()" style="color: white;"><i [ngClass]="isPlaying ? 'fa fa-pause' : 'fa fa-play'"></i></button>
+        <span style="color: white;">{{ currentTime }} / {{ formatTime(mediaDuration) }}</span>
       </div>
     </div>
   </div>
+
+  <div class="mt-2" *ngIf="content">
+    <h6>{{content.author.artistName}} - {{content.title}}</h6>
+    <a class="nav-link" routerLink="#">
+      <i class="fa fa-user-circle mt-2" style="font-size: 18px;"></i>
+      {{content.user.name}} {{content.user.surname}}
+    </a>
+    <div class="card card-body mt-2" style="background: #1D1C1C">
+      <label><u>Letra da Música</u></label>
+      {{content.lyric}}
+    </div>
+  </div>
 </div>
-
-
-
 

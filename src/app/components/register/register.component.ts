@@ -47,7 +47,7 @@ export class RegisterComponent implements OnInit{
           this.snackBar.open('Registo Feito Com Sucesso', 'Fechar', {
             duration: 3000, panelClass: ['snackbar-success']
           });
-          this.router.navigate(['/login']).then(r => {})
+          this.router.navigate(['']).then(r => {})
         }, error: (error) => {
           this.snackBar.open('Erro ao Fazer Registo!', 'Fechar', {
             duration: 3000, panelClass: ['snackbar-error']

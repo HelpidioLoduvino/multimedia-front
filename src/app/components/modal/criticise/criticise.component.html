@@ -1,0 +1,15 @@
+<div class="container">
+  <form [formGroup]="criticiseForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="rating">Pontuação({{ rating?.value }}-5)</label>
+      <input type="range" id="rating"  min="0" max="5" step="1" formControlName="rating" class="form-control">
+    </div>
+    <div class="form-group mt-2 mb-3">
+      <label for="overview">Corpo ({{ charactersRemaining }} caracteres):</label>
+      <textarea class="form-control" id="overview" formControlName="overview" maxlength="300" (input)="onTextChange()"></textarea>
+    </div>
+    <span class="d-flex justify-content-center">
+      <input type="submit" class="btn btn-outline-success" value="Enviar">
+    </span>
+  </form>
+</div>

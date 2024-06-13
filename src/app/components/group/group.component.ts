@@ -9,7 +9,6 @@ import {CreateGroupComponent} from "../modal/create-group/create-group.component
 import {GroupService} from "../../services/group.service";
 import {NgForOf, NgIf} from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
-import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-group',

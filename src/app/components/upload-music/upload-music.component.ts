@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NavbarComponent} from "../navbar/navbar.component";
 import {SidebarComponent} from "../sidebar/sidebar.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -12,6 +12,9 @@ import {FooterComponent} from "../footer/footer.component";
 import {MatDialog} from "@angular/material/dialog";
 import {ModalComponent} from "../modal/modal.component";
 import {ContentShareGroupComponent} from "../modal/content-share-group/content-share-group.component";
+import {NgForOf} from "@angular/common";
+import {GroupService} from "../../services/group.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -31,12 +34,13 @@ import {ContentShareGroupComponent} from "../modal/content-share-group/content-s
     MatStepperNext,
     MatStepper,
     FormsModule,
-    FooterComponent
+    FooterComponent,
+    NgForOf
   ],
   templateUrl: './upload-music.component.html',
   styleUrl: './upload-music.component.css'
 })
-export class UploadMusicComponent{
+export class UploadMusicComponent implements OnInit{
 
   music: any = {
     title: '',
@@ -65,6 +69,7 @@ export class UploadMusicComponent{
     features: [],
     songwriters: []
   };
+  selectedGroupName: string = '';
   path!: File;
   cover!: File;
   features: string = '';
@@ -75,9 +80,17 @@ export class UploadMusicComponent{
   constructor(
     private contentService: ContentService,
     private snackBar: MatSnackBar,
-    private modal: MatDialog
+    private modal: MatDialog,
+    private router: Router,
+    private groupService: GroupService
   ) {
     this.currentYear = new Date().getFullYear();
+  }
+
+  ngOnInit(): void {
+    this.groupService.getAllMyGroups().subscribe(response=>{
+      this.groups = response.body;
+    });
   }
 
 
@@ -97,31 +110,28 @@ export class UploadMusicComponent{
     this.music.features = this.features.split(',').map(feature => ({ artistName: feature.trim() }));
     this.music.songwriters = this.songwriters.split(',').map(writer => ({ artistName: writer.trim() }));
     if( this.cover && this.path){
-      this.contentService.uploadMusic(this.music, this.path, this.cover).subscribe({
-        next: (response) => {
-          console.log("Id do Conteudo:" + response.body.id);
-          const contentId:number = response.body.id;
-          const dialogRef = this.modal.open(ModalComponent, {
-            width: '350px',
-            height: '310px',
-            data: {
-              title: 'Partilhar Com:',
-              component: ContentShareGroupComponent,
-              componentData: {contentId: contentId}
-            }
+      this.contentService.uploadMusic(this.music, this.selectedGroupName, this.path, this.cover).subscribe( {
+        next: (response) =>{
+          this.router.navigate(["/home"]).then(r => {
+            this.snackBar.open("Música Carregada com Sucesso", 'Fechar', {
+              duration: 3000,
+              panelClass: ['snackbar-success']
+            });
           });
-
-          dialogRef.afterClosed().subscribe(result => {
+        }, error: (error) => {
+          this.snackBar.open("Erro ao carregar a música", 'Fechar', {
+            duration: 1000,
+            panelClass: ['snackbar-error']
           });
-        },
-        error: (error) => {
-          console.log("Upload failed", error);
         }
-      })
+      });
     } else {
+      this.snackBar.open("Campos Nulos!!", 'Fechar', {
+        duration: 1000,
+        panelClass: ['snackbar-error']
+      });
       console.error('music and cover are required');
     }
   }
-
 
 }

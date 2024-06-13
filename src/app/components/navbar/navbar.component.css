@@ -1,5 +1,5 @@
 .navbar{
-  background-color: #482424;
+  background-color: #1A1F16;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   flex-wrap: nowrap !important;
 }
@@ -36,7 +36,7 @@
   left: 0;
   width: 250px;
   height: 100%;
-  background-color: #482424;
+  background-color: #1A1F16;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   color: white;
   transform: translateX(-100%);

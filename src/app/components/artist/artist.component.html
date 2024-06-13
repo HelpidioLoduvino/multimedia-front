@@ -1,0 +1,23 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="d-flex justify-content-center" style="padding-top: 20px;">
+    <div class="search">
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Procurar artista" aria-label="Search">
+        <button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
+  </div>
+  <hr>
+  <div class="row g-2">
+    <div class="col-md-4 mb-2" *ngFor="let artist of artists">
+      <div class="d-flex justify-content-center">
+        <div class="card card-body" style="width: 20rem; background-color: black">
+          <ul class="navbar-nav">
+            <li><i class="fa fa-user-circle me-2" style="font-size: 64px;"></i> <span style="position: relative; top: -20px;">{{artist.artistName}}</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

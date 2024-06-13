@@ -1,30 +1,44 @@
 import {Component, OnInit} from '@angular/core';
 import {GroupService} from "../../../services/group.service";
 import {NgForOf} from "@angular/common";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-request-to-enter',
   standalone: true,
   providers: [GroupService],
   imports: [
-    NgForOf
+    NgForOf,
+    FormsModule
   ],
   templateUrl: './request-to-enter.component.html',
   styleUrl: './request-to-enter.component.css'
 })
 export class RequestToEnterComponent implements OnInit{
 
-  allGroupsExceptPublic: any[] = [];
+  allGroupsExceptMyAndPublic: any[] = [];
 
-  constructor(private groupService: GroupService) {
+  constructor(
+    private groupService: GroupService,
+  ) {
   }
 
   ngOnInit(): void {
-    this.groupService.getAllGroupsExceptPublic().subscribe({
+    this.groupService.getAllExceptMyAndPublicGroups().subscribe({
       next: (response) => {
-        this.allGroupsExceptPublic = response.body;
+        this.allGroupsExceptMyAndPublic = response.body;
       }, error: (error) => {
-        console.error("Erro ao recuperar Grupos");
+        console.error("Erro ao recuperar Grupos", error);
+      }
+    });
+  }
+
+  onSubmit(groupId: number){
+    this.groupService.requestToJoinGroup(groupId).subscribe({
+      next: (response) =>{
+        console.log("Sucesso", response);
+      }, error: (error) => {
+        console.error("Erro ao fazer pedido", error);
       }
     })
   }

@@ -27,7 +27,7 @@ export class PlayContentComponent implements OnInit, AfterViewInit{
   currentTime: string = '0:00';
   seekValue: number = 0;
   mediaDuration: number = 0;
-  isPlaying: boolean = false;
+  isPlaying: boolean = true;
 
   constructor(
     private contentService: ContentService,
@@ -38,8 +38,8 @@ export class PlayContentComponent implements OnInit, AfterViewInit{
     this.route.params.subscribe(params => {
       this.contendId = +params['id'];
       if (this.contendId) {
-        this.playContent(this.contendId);
         this.displayCover(this.contendId);
+        this.playContent(this.contendId);
         this.getContent(this.contendId);
       }
     });
@@ -65,6 +65,10 @@ export class PlayContentComponent implements OnInit, AfterViewInit{
       player.nativeElement.addEventListener('loadedmetadata', () => {
         this.onLoad(player);
       });
+
+      player.nativeElement.addEventListener('progress', () => {
+        this.updateBuffer(player);
+      });
     }
   }
 
@@ -79,17 +83,12 @@ export class PlayContentComponent implements OnInit, AfterViewInit{
     })
   }
 
-  playContent(id: number): void {
-    this.contentService.playContent(id).subscribe({
-      next: (response) => {
-        const url = window.URL.createObjectURL(response);
-        this.contentUrl = <string>this.sanitize.bypassSecurityTrustResourceUrl(url);
-      },
-      error: (error) => {
-        console.error('Error loading content', error);
-      }
-    });
+  playContent(id: number){
+    this.contentService.playContent(id).subscribe((url) =>{
+      this.contentUrl = url;
+    })
   }
+
 
   displayCover(id: number): void {
     this.contentService.displayCover(id).subscribe({
@@ -148,6 +147,14 @@ export class PlayContentComponent implements OnInit, AfterViewInit{
     }
   }
 
+  updateBuffer(player: ElementRef): void {
+    const buffered = player.nativeElement.buffered;
+    if (buffered.length > 0) {
+      const bufferedEnd = buffered.end(buffered.length - 1);
+      this.seekValue = (bufferedEnd / this.mediaDuration) * 100;
+    }
+  }
+
   private getActivePlayer(): ElementRef | undefined {
     if (this.audioPlayer && this.audioPlayer.nativeElement.readyState > 0) {
       return this.audioPlayer;
@@ -157,12 +164,13 @@ export class PlayContentComponent implements OnInit, AfterViewInit{
     return undefined;
   }
 
-  isMusic(path: string): boolean {
-    return path.endsWith('.mp3');
+
+  isMusic(mimetype: string): boolean {
+    return mimetype.startsWith('audio/');
   }
 
-  isVideo(path: string): boolean {
-    return path.endsWith('.mp4');
+  isVideo(mimetype: string): boolean {
+    return mimetype.startsWith('video/');
   }
 
 }

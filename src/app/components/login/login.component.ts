@@ -48,9 +48,7 @@ export class LoginComponent implements OnInit{
           if(response.userRole === "ADMIN"){
 
           } else if (response.userRole === "CLIENT"){
-            this.router.navigate(['']);
-          } else if (response.userRole === "MANAGER"){
-
+            this.router.navigate(['/home']);
           }
         },
         error: (error) => {
