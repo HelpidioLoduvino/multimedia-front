@@ -37,8 +37,12 @@ export class GroupService {
     return this.http.get<any>(`${this.baseGroupUrl}/all-users-by-group-id/${groupId}`);
   }
 
-  getContentsFromPublicGroup(){
-    return this.http.get<any>(`${this.baseGroupUrl}/all-contents-from-public-group`);
+  getMusicsFromPublicGroup(){
+    return this.http.get<any>(`${this.baseGroupUrl}/all-musics-from-public-group`);
+  }
+
+  getVideosFromPublicGroup(){
+    return this.http.get<any>(`${this.baseGroupUrl}/all-videos-from-public-group`);
   }
 
   requestToJoinGroup(groupId: number){

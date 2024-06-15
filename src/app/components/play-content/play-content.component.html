@@ -1,31 +1,50 @@
 <app-navbar></app-navbar>
 <div class="container mt-2">
-  <div class="card card-body" style="height: 350px; background: black; position: relative;">
-    <div class="d-flex justify-content-center">
-      <img class="music-image" *ngIf="isMusic(content.mimetype)" [src]= "imageUrl[content.id]" alt="music cover" style="object-fit: cover; height: 320px; overflow: hidden;">
-      <video *ngIf="isVideo(content.mimetype)" class="video-content" style="width: 100%; height: 100%; object-fit: cover;">
-      </video>
-    </div>
-    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
-      <audio *ngIf="isMusic(content.mimetype)" #audioPlayer [src]="contentUrl" autoplay></audio>
-      <video *ngIf="isVideo(content.mimetype)" #videoPlayer [src]="contentUrl" class="video-content" autoplay></video>
-      <div *ngIf="isMusic(content.mimetype) || isVideo(content.mimetype)" style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 10px; background-color: rgba(0, 0, 0, 0.5);">
-        <input type="range" min="0" max="100" [(ngModel)]="seekValue" (change)="seekMedia()" class="custom-progress w-100">
-        <button class="btn bg-transparent border-0" (click)="playMedia()" style="color: white;"><i [ngClass]="isPlaying ? 'fa fa-pause' : 'fa fa-play'"></i></button>
-        <span style="color: white;">{{ currentTime }} / {{ formatTime(mediaDuration) }}</span>
+  <div class="row g-2">
+    <div class="col-md-6">
+      <div class="card card-body" style="height: 350px; background: black; position: relative;">
+        <div class="d-flex justify-content-center">
+          <img class="music-image" *ngIf="isMusic(content.mimetype)" [src]= "imageUrl[content.id]" alt="music cover" style="object-fit: cover; height: 320px; overflow: hidden;">
+          <video *ngIf="isVideo(content.mimetype)" class="video-content" style="width: 100%; height: 100%; object-fit: cover;">
+          </video>
+        </div>
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+          <audio *ngIf="isMusic(content.mimetype)" #audioPlayer [src]="contentSrc" autoplay></audio>
+          <video *ngIf="isVideo(content.mimetype)" #videoPlayer [src]="contentSrc" class="video-content" autoplay></video>
+          <div *ngIf="isMusic(content.mimetype) || isVideo(content.mimetype)" style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 10px; background-color: rgba(0, 0, 0, 0.5);">
+            <div style="position: relative; width: 100%;">
+              <input type="range" min="0" max="100" [(ngModel)]="bufferValue" class="buffer-progress w-100" disabled>
+              <input type="range" min="0" max="100" [(ngModel)]="seekValue" (change)="seekMedia()" class="custom-progress w-100" style="position: absolute; top: 0; left: 0;">
+            </div>
+            <button class="btn bg-transparent border-0" (click)="playMedia()" style="color: white;"><i [ngClass]="isPlaying ? 'fa fa-pause' : 'fa fa-play'"></i></button>
+            <span style="color: white;">{{ currentTime }} / {{ formatTime(mediaDuration) }}</span>
+            <button *ngIf="isVideo(content.mimetype)" class="btn bg-transparent border-0" (click)="toggleFullScreen()" style="color: white;">
+              <i class="fa fa-arrows-alt"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-2" *ngIf="content">
+        <h5>{{content.author.artistName}} - {{content.title}}</h5>
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <i class="fa fa-user-circle me-2" style="font-size: 44px;"></i>
+            <span style="position: relative; top: -10px;">{{content.user.name}} {{content.user.surname}}</span>
+            <span style="position: relative; top: -10px; margin-left: 10px;"><button class="btn btn-dark"><i class="fa fa-share"></i> partilhar</button></span>
+            <span style="position: relative; top: -10px; margin-left: 10px;"><button class="btn btn-dark"><i class="fa fa-download"></i> baixar</button></span>
+          </li>
+        </ul>
+        <div class="card card-body mt-2" style="background: #1D1C1C">
+          <label><u>Letra da Música</u></label>
+          {{content.lyric}}
+        </div>
       </div>
     </div>
-  </div>
+    <div class="col">
+      <div class="card card-body" style="background-color: black;">
 
-  <div class="mt-2" *ngIf="content">
-    <h6>{{content.author.artistName}} - {{content.title}}</h6>
-    <a class="nav-link" routerLink="#">
-      <i class="fa fa-user-circle mt-2" style="font-size: 18px;"></i>
-      {{content.user.name}} {{content.user.surname}}
-    </a>
-    <div class="card card-body mt-2" style="background: #1D1C1C">
-      <label><u>Letra da Música</u></label>
-      {{content.lyric}}
+      </div>
     </div>
   </div>
 </div>

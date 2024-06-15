@@ -21,11 +21,12 @@ export class PlayContentComponent implements OnInit, AfterViewInit{
   @ViewChild('audioPlayer', { static: false }) audioPlayer!: ElementRef;
   @ViewChild('videoPlayer', { static: false }) videoPlayer!: ElementRef;
   contendId: number | undefined;
-  contentUrl: SafeUrl | undefined;
+  contentSrc: string | undefined;
   content: any = {};
   imageUrl: { [key: number]: string } = {};
   currentTime: string = '0:00';
   seekValue: number = 0;
+  bufferValue: number = 0;
   mediaDuration: number = 0;
   isPlaying: boolean = true;
 
@@ -39,7 +40,7 @@ export class PlayContentComponent implements OnInit, AfterViewInit{
       this.contendId = +params['id'];
       if (this.contendId) {
         this.displayCover(this.contendId);
-        this.playContent(this.contendId);
+        this.streamContent(this.contendId);
         this.getContent(this.contendId);
       }
     });
@@ -83,10 +84,8 @@ export class PlayContentComponent implements OnInit, AfterViewInit{
     })
   }
 
-  playContent(id: number){
-    this.contentService.playContent(id).subscribe((url) =>{
-      this.contentUrl = url;
-    })
+  streamContent(id: number){
+    this.contentSrc = this.contentService.streamContent(id);
   }
 
 
@@ -151,7 +150,7 @@ export class PlayContentComponent implements OnInit, AfterViewInit{
     const buffered = player.nativeElement.buffered;
     if (buffered.length > 0) {
       const bufferedEnd = buffered.end(buffered.length - 1);
-      this.seekValue = (bufferedEnd / this.mediaDuration) * 100;
+      this.bufferValue = (bufferedEnd / this.mediaDuration) * 100;
     }
   }
 
@@ -164,13 +163,29 @@ export class PlayContentComponent implements OnInit, AfterViewInit{
     return undefined;
   }
 
+  toggleFullScreen(): void {
+    const player = this.getActivePlayer();
+    if (player) {
+      const playerContainer = player.nativeElement;
+      if (playerContainer.requestFullscreen) {
+        playerContainer.requestFullscreen();
+      } else if (playerContainer.mozRequestFullScreen) {
+        playerContainer.mozRequestFullScreen();
+      } else if (playerContainer.webkitRequestFullscreen) {
+        playerContainer.webkitRequestFullscreen();
+      } else if (playerContainer.msRequestFullscreen) {
+        playerContainer.msRequestFullscreen();
+      }
+    }
+  }
+
 
   isMusic(mimetype: string): boolean {
-    return mimetype.startsWith('audio/');
+    return mimetype.startsWith('audio');
   }
 
   isVideo(mimetype: string): boolean {
-    return mimetype.startsWith('video/');
+    return mimetype.startsWith('video');
   }
 
 }

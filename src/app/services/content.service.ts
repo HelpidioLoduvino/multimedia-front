@@ -25,6 +25,15 @@ export class ContentService {
     return this.http.post<any>(`${this.baseMusicUrl}/upload`, formData, {params})
   }
 
+  uploadVideo(video: any, group: string, videoFile: File): Observable<any>{
+    const formData: FormData = new FormData();
+    formData.append('video', new Blob([JSON.stringify(video)], { type: 'application/json'}));
+    formData.append('videoFile', videoFile);
+    const params = new HttpParams()
+      .set('group', group.toString());
+    return this.http.post<any>(`${this.baseVideoUrl}/upload`, formData, {params});
+  }
+
   getAllContent() {
     return this.http.get<any>(`${this.baseContentUrl}/all-contents-by-user-id`);
   }
@@ -33,27 +42,13 @@ export class ContentService {
     return this.http.get<any>(`${this.baseContentUrl}/${id}`);
   }
 
-
-  playContent(id: number): Observable<string>{
-    return this.http.get(`${this.baseContentUrl}/play/${id}`, {responseType: 'blob'})
-      .pipe(
-        map((blob) => {
-          const videoBlob = new Blob([blob], { type: 'video/mp4' });
-          return URL.createObjectURL(videoBlob);
-        })
-    )
+  streamContent(contentId: number): string{
+    return `${this.baseContentUrl}/stream-content/${contentId}`;
   }
 
   displayCover(id: number): Observable<Blob> {
 
     return this.http.get(`${this.baseMusicUrl}/cover/${id}`, { responseType: 'blob' });
-  }
-
-  uploadVideo(video: any, videoFile: File){
-    const formData: FormData = new FormData();
-    formData.append('video', new Blob([JSON.stringify(video)], { type: 'application/json'}));
-    formData.append('videoFile', videoFile);
-    return this.http.post<any>(`${this.baseVideoUrl}/upload`, formData);
   }
 
 }

@@ -14,6 +14,16 @@
   cursor: pointer;
 }
 
+.card-header {
+  position: relative; /* Garante que o conteúdo dentro da card-header se ajuste corretamente */
+  overflow: hidden; /* Garante que o vídeo não ultrapasse os limites da card-header */
+}
+
+.card-header video {
+  width: 100%; /* Garante que o vídeo ocupe toda a largura da card-header */
+  display: block; /* Evita espaços em branco extras causados por elementos inline */
+}
+
 .video-fit{
   width: 100%;
   height: 200px;

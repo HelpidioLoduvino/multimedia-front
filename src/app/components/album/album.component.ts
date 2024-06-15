@@ -5,7 +5,7 @@ import {NgForOf, NgOptimizedImage} from "@angular/common";
 import {DomSanitizer} from "@angular/platform-browser";
 import {FooterComponent} from "../footer/footer.component";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {ModalComponent} from "../modal/modal.component";
 import {AddContentToPlaylistComponent} from "../modal/add-content-to-playlist/add-content-to-playlist.component";
@@ -35,7 +35,8 @@ export class AlbumComponent implements OnInit{
 
   constructor(private albumService: AlbumService,
               private sanitizer: DomSanitizer,
-              private modal: MatDialog
+              private modal: MatDialog,
+              private router: Router
               ) {
   }
 
@@ -57,6 +58,10 @@ export class AlbumComponent implements OnInit{
       const url = window.URL.createObjectURL(response);
       this.imageUrls[id] = <string>this.sanitizer.bypassSecurityTrustUrl(url);
     });
+  }
+
+  albumInfo(id: number){
+    this.router.navigate(['/album', id]);
   }
 
   openDialog(albumId: number): void {

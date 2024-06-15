@@ -1,0 +1,47 @@
+<app-navbar></app-navbar>
+<div class="container mt-2">
+  <div class="row g-3">
+    <div class="col-md-8">
+      <div class="card mb-3" style="max-width: 850px;">
+        <div class="row g-0">
+          <div class="col-md-4" *ngIf="album">
+            <img [src]="imageUrl[album.id]" class="img-fluid rounded-start" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{album.musicReleaseName}}</h5>
+              <p class="card-text">{{album.musicReleaseDescription}}</p>
+              <p class="card-text"><small class="text-muted">{{album.releaseDate}}</small></p>
+              <p *ngIf="reviewOverall">Pontuação Média: {{reviewOverall}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ul class="navbar-nav mt-2">
+        <li *ngFor="let albumReview of albumReviews">
+          <hr>
+          <i class="fa fa-user-circle me-2" style="font-size: 24px;"></i>
+          <span style="position: relative; top: -4px;"><strong>{{albumReview.user.name}} {{albumReview.user.surname}}</strong></span>
+          <p class="ms-4 mb-1">&nbsp; {{albumReview.overview}}</p>
+          <p class="ms-4 mt-0">&nbsp; Pontuação: {{albumReview.rating}}</p>
+        </li>
+
+      </ul>
+    </div>
+    <div class="col">
+      <div class="card card-body" style="color: black">
+        <h5 class="d-flex justify-content-center">Músicas</h5>
+        <hr>
+        <div class="d-flex justify-content-center">
+          <ul class="navbar-nav">
+            <li class="nav-item" *ngFor="let album of albumMusic">
+              <a>{{album.title}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

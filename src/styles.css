@@ -10,11 +10,15 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: #10120E;
+  background: #8A7968;
   color: white;
 }
 
 .title-separator{
+  border: 1px solid white;
+}
+
+.white-line{
   border: 1px solid white;
 }
 

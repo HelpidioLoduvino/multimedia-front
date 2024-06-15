@@ -25,4 +25,20 @@ export class AlbumService {
       .set('albumId', albumId.toString());
     return this.http.post(`${this.baseAlbumUrl}/criticise-album`, criticiseForm, {params})
   }
+
+  getAlbum(id: number){
+    return this.http.get<any>(`${this.baseAlbumUrl}/album/${id}`);
+  }
+
+  getAlbumReviews(id:number){
+    return this.http.get<any>(`${this.baseAlbumUrl}/album-review/${id}`);
+  }
+
+  getAlbumReviewOverall(id: number){
+    return this.http.get<any>(`${this.baseAlbumUrl}/album-review-overall/${id}`);
+  }
+
+  getAlbumMusic(id: number){
+    return this.http.get<any>(`${this.baseAlbumUrl}/album-music/${id}`);
+  }
 }

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NavbarComponent} from "../navbar/navbar.component";
 import {GroupService} from "../../services/group.service";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
-import {NgForOf, NgIf} from "@angular/common";
+import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {ContentService} from "../../services/content.service";
 import {DomSanitizer} from "@angular/platform-browser";
@@ -20,7 +20,8 @@ import {FooterComponent} from "../footer/footer.component";
     NgIf,
     RouterLink,
     FooterComponent,
-    MatMenuTrigger
+    MatMenuTrigger,
+    NgOptimizedImage
   ],
   templateUrl: './get-group.component.html',
   styleUrl: './get-group.component.css'

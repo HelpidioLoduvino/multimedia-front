@@ -34,7 +34,8 @@ import {GroupService} from "../../services/group.service";
 })
 export class HomeComponent implements OnInit{
 
-  contents: any[] = [];
+  musics: any[] = [];
+  videos: any[] = [];
   imageUrls: { [key: number]: string } = {};
 
   constructor(
@@ -45,9 +46,13 @@ export class HomeComponent implements OnInit{
     private modal: MatDialog) {}
 
   ngOnInit(): void {
-    this.groupService.getContentsFromPublicGroup().subscribe(response=>{
-      this.contents = response;
+    this.groupService.getMusicsFromPublicGroup().subscribe(response=>{
+      this.musics = response;
       this.loadImages();
+    });
+
+    this.groupService.getVideosFromPublicGroup().subscribe(response=>{
+      this.videos = response;
     });
   }
   openDialog(contentId: number): void {
@@ -74,8 +79,8 @@ export class HomeComponent implements OnInit{
   }
 
   loadImages(): void {
-    this.contents.forEach(content => {
-      this.displayCover(content.content.musicRelease.id);
+    this.musics.forEach(music => {
+      this.displayCover(music.content.musicRelease.id);
     });
   }
 
@@ -89,14 +94,6 @@ export class HomeComponent implements OnInit{
         console.error('Error loading image', error);
       }
     });
-  }
-
-  isMusic(path: string): boolean {
-    return path.includes('/music/') && path.endsWith('.mp3');
-  }
-
-  isVideo(path: string): boolean {
-    return path.includes('/video/') && path.endsWith('.mp4');
   }
 
 }
