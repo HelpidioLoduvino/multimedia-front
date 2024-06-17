@@ -35,9 +35,9 @@
         <button class="btn btn-light me-2" [matMenuTriggerFor]="notificationMenu"><i class="fa fa-bell"></i></button>
         <mat-menu #notificationMenu="matMenu">
           <label mat-menu-item>
-            Helpidio quer entrar no teu grupo
-            <button class="btn btn-success me-2">Aceitar</button>
-            <button class="btn btn-danger">Negar</button>
+            <ul>
+              <li *ngFor="let message of messages">{{ message }}</li>
+            </ul>
           </label>
         </mat-menu>
       </li>

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {GroupService} from "../../../services/group.service";
 import {NgForOf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-request-to-enter',
@@ -18,8 +19,8 @@ export class RequestToEnterComponent implements OnInit{
 
   allGroupsExceptMyAndPublic: any[] = [];
 
-  constructor(
-    private groupService: GroupService,
+  constructor(private groupService: GroupService,
+              private toast: MatSnackBar
   ) {
   }
 
@@ -36,7 +37,9 @@ export class RequestToEnterComponent implements OnInit{
   onSubmit(groupId: number){
     this.groupService.requestToJoinGroup(groupId).subscribe({
       next: (response) =>{
-        console.log("Sucesso", response);
+        this.toast.open("Pedido Feito Com Sucesso", 'Fechar', {
+          duration: 3000, panelClass: ['success']
+        });
       }, error: (error) => {
         console.error("Erro ao fazer pedido", error);
       }

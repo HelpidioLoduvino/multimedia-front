@@ -46,4 +46,8 @@ export class UserService {
     this.router.navigate(['']);
   }
 
+  allClients(){
+    return this.http.get<any>(`${this.baseUrl}/clients`);
+  }
+
 }

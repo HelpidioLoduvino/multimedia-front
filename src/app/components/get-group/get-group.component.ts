@@ -7,6 +7,11 @@ import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {ContentService} from "../../services/content.service";
 import {DomSanitizer} from "@angular/platform-browser";
 import {FooterComponent} from "../footer/footer.component";
+import {MatDialog} from "@angular/material/dialog";
+import {ModalComponent} from "../modal/modal.component";
+import {CreateGroupComponent} from "../modal/create-group/create-group.component";
+import {RequestListComponent} from "../modal/request-list/request-list.component";
+import {ListGroupUserComponent} from "../modal/list-group-user/list-group-user.component";
 
 @Component({
   selector: 'app-get-group',
@@ -29,8 +34,10 @@ import {FooterComponent} from "../footer/footer.component";
 export class GetGroupComponent implements OnInit{
 
   contents: any[] = [];
+  groupDetails: any = {};
   groupId!: number;
   images: any[] = [];
+  isUserOwner!: boolean;
   imageUrls: { [key: number]: string } = {};
 
   constructor(
@@ -38,7 +45,8 @@ export class GetGroupComponent implements OnInit{
     private route: ActivatedRoute,
     private router: Router,
     private contentService: ContentService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private modal: MatDialog
     ) {
   }
 
@@ -48,9 +56,55 @@ export class GetGroupComponent implements OnInit{
       if(this.groupId){
         this.getAllContentsByGroupId(this.groupId);
         this.loadImages(this.groupId);
+        this.getGroup(this.groupId);
+        this.isOwner(this.groupId);
       }
     });
   }
+
+  getGroup(id: number){
+    this.groupService.getGroup(id).subscribe(response=>{
+      this.groupDetails = response;
+    });
+  }
+
+  isOwner(id: number){
+    return this.groupService.isOwner(id).subscribe(response=>{
+      this.isUserOwner = response;
+    });
+  }
+
+  addMember(groupId: number): void {
+    const dialogRef = this.modal.open(ModalComponent, {
+      width: '450px',
+      height: '400px',
+      data: {
+        title: 'Adicionar Membro',
+        component: RequestListComponent,
+        componentData: {groupId: groupId}
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+  listMembers(groupId: number){
+    const dialogRef = this.modal.open(ModalComponent, {
+      width: '450px',
+      height: '400px',
+      data: {
+        title: 'Listar Membros',
+        component: ListGroupUserComponent,
+        componentData: {groupId: groupId}
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+
 
   getAllContentsByGroupId(id: number){
     this.groupService.getAllContentsByGroupId(id).subscribe({
@@ -65,7 +119,6 @@ export class GetGroupComponent implements OnInit{
   play(id: number) {
     this.router.navigate(['/play', id]);
   }
-
 
   loadImages(id: number): void {
     this.groupService.getAllContentsByGroupId(id).subscribe({
