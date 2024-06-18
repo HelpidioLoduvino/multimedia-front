@@ -4,8 +4,8 @@
       <tbody>
         <tr *ngFor="let group of allGroupsExceptMyAndPublic">
           <td style="cursor: pointer;">
-            <a class="nav-link" (click)="onSubmit(group.shareGroup.id)">
-              {{group.shareGroup.groupName}} ({{group.user.name}})
+            <a class="nav-link" (click)="onSubmit(group.id)">
+              {{group.groupName}} <small class="text-muted">(Owner: {{group.firstOwner.name}} {{group.firstOwner.surname}})</small>
             </a>
           </td>
         </tr>

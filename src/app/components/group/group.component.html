@@ -12,8 +12,8 @@
       <tbody>
       <tr *ngFor="let myGroup of allMyGroups">
         <td>
-          <a routerLink="#" class="nav-link" (click)="openGroup(myGroup.shareGroup.id)">
-            {{myGroup.shareGroup.groupName}}
+          <a routerLink="#" class="nav-link" (click)="openGroup(myGroup.id)">
+            {{myGroup.groupName}}
           </a>
         </td>
       </tr>

@@ -25,12 +25,8 @@ export class RequestToEnterComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.groupService.getAllExceptMyAndPublicGroups().subscribe({
-      next: (response) => {
+    this.groupService.getAllExceptMyAndPublicGroups().subscribe((response) => {
         this.allGroupsExceptMyAndPublic = response.body;
-      }, error: (error) => {
-        console.error("Erro ao recuperar Grupos", error);
-      }
     });
   }
 

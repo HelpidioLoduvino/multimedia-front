@@ -1,19 +1,17 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NgClass, NgForOf, NgIf} from "@angular/common";
-import {RouterLink} from "@angular/router";
-import {HomeComponent} from "../home/home.component";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {UserService} from "../../services/user.service";
-import {HttpClientModule} from "@angular/common/http";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {MatButton} from "@angular/material/button";
+import {NotificationService} from "../../services/notification.service";
 import {Subscription} from "rxjs";
-import {WebSocketService} from "../../services/web-socket.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  providers: [UserService, WebSocketService],
+  providers: [UserService, NotificationService],
   imports: [
     NgClass,
     NgIf,
@@ -28,31 +26,45 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent implements OnInit, OnDestroy{
+
   isSidebarOpened: boolean = false;
-  messages: string[] = [];
-  private subscription!: Subscription;
+  notifications: any[] = [];
+  private pollingSubscription!: Subscription;
 
   constructor(private userService: UserService,
-              private websocketService: WebSocketService,
-              private snackBar: MatSnackBar
+              private notificationService: NotificationService,
+              private router: Router
               ) {
   }
 
-  ngOnInit() {
-    this.subscription = this.websocketService.connect('ws://localhost:8080/ws').subscribe((event: MessageEvent) => {
-      const message = event.data;
-      this.messages.push(message);
-      this.snackBar.open(message, 'Fechar', {
-        duration: 10000,
-      });
-    });
+  ngOnInit(): void {
+    this.startPolling();
   }
 
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+  startPolling() {
+    this.pollingSubscription = this.notificationService.pollNotifications().subscribe({
+      next: (response) =>{
+        if(response){
+          this.notifications.push(...response)
+          console.log(response);
+        }
+        this.startPolling()
+      }, error: (error) =>{
+        console.error('Polling failed', error);
+        setTimeout(() => this.startPolling(), 5000);
+      }
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    if (this.pollingSubscription) {
+      this.pollingSubscription.unsubscribe();
     }
-    this.websocketService.close();
+  }
+
+  openGroup(id: number){
+    this.router.navigate(['/group', id]);
   }
 
   isLogged(): boolean {

@@ -54,6 +54,7 @@ export class GroupComponent implements OnInit{
     this.groupService.getAllMyGroups().subscribe({
       next: (response) => {
         this.allMyGroups = response.body;
+        console.log(response.body)
       }, error: (error) => {
         console.error("Erro ao recuperar meus grupos", error);
       }
