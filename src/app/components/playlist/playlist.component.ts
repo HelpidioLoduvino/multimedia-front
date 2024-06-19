@@ -129,12 +129,12 @@ export class PlaylistComponent implements OnInit{
     });
   }
 
-  isMusic(path: string): boolean {
-    return path.includes('/music/') && path.endsWith('.mp3');
+  isMusic(mimetype: string): boolean {
+    return mimetype.startsWith('audio');
   }
 
-  isVideo(path: string): boolean {
-    return path.includes('/video/') && path.endsWith('.mp4');
+  isVideo(mimetype: string): boolean {
+    return mimetype.startsWith('video');
   }
 
 

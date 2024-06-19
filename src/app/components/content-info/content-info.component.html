@@ -10,27 +10,27 @@
     </div>
     <div class="col-md-4 mb-3">
       <h5>Author Principal</h5>
-      <p>{{content.author.artistName}}</p>
+      <p>{{content.author.name}}</p>
     </div>
     <div class="col-md-4 mb-3">
       <h5>Editora</h5>
-      <p>{{content.author.label.labelName}}</p>
+      <p>{{content.author.label.name}}</p>
     </div>
     <div class="col-md-4 mb-3">
       <h5>Participante(s)</h5>
       <p *ngFor="let feature of content.features">
-        {{feature.artistName}}
+        {{feature.name}}
       </p>
     </div>
     <div class="col-md-4 mb-3">
       <h5>Compositor(s)</h5>
       <p *ngFor="let songwriter of content.songwriters">
-        {{songwriter.artistName}}
+        {{songwriter.name}}
       </p>
     </div>
     <div class="col-md-4 mb-3">
       <h5>Banda</h5>
-      <a routerLink="#" (click)="bandInfo(content.id)" ><u>{{content.author.band.bandName}}</u></a>
+      <a (click)="bandInfo(content.id)" ><u>{{content.author.band.name}}</u></a>
     </div>
   </div>
 </div>

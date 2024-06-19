@@ -30,8 +30,8 @@ export class CreateGroupComponent implements OnInit{
 
   ngOnInit(): void {
     this.createGroup = this.fb.group({
-        groupName: ['', Validators.required],
-        groupStatus: ['Privado', Validators.required]
+        name: ['', Validators.required],
+        status: ['Privado', Validators.required]
     });
   }
 

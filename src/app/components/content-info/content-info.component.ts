@@ -53,7 +53,6 @@ export class ContentInfoComponent implements OnInit{
     this.contentService.getContentById(id).subscribe({
       next: (response) =>{
         this.content = response;
-        console.log(response);
       }, error: (error) => {
         console.error("Erro ao carregar música", error);
       }

@@ -10,11 +10,11 @@
       <div class="d-flex justify-content-center">
         <div class="card mx-auto card-body" style="width: 60vh; background: #482424; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
           <div class="object-fit-cover d-flex justify-content-center mb-2" (click)="play(playlist.content.id)">
-            <img class="music-image" *ngIf="isMusic(playlist.content.path)" [src]="imageUrls[playlist.content.id]" alt="{{ playlist.content.title }} cover">
-            <video *ngIf="isVideo(playlist.content.path)" width="400" controls></video>
+            <img class="music-image" *ngIf="isMusic(playlist.content.mimetype)" [src]="imageUrls[playlist.content.id]" alt="{{ playlist.content.title }} cover">
+            <video *ngIf="isVideo(playlist.content.mimetype)" width="400" controls></video>
           </div>
           <hr>
-          <a class="content-title nav-link" (click)="play(playlist.content.id)" style="font-size: 18px; cursor: pointer">{{playlist.content.author.artistName}} - {{playlist.content.title}}</a>
+          <a class="content-title nav-link" (click)="play(playlist.content.id)" style="font-size: 18px; cursor: pointer">{{playlist.content.author.name}} - {{playlist.content.title}}</a>
           <div class="d-flex justify-content-end" [matMenuTriggerFor]="infoMenu">
             <button class="btn btn-light border-0"><i class="fa fa-ellipsis-h"></i></button>
           </div>

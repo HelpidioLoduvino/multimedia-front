@@ -2,7 +2,7 @@
   <form (ngSubmit)="onSubmit()">
     <ul style="list-style: none;">
       <li *ngFor="let playlist of playlists">
-        <input type="radio" [value]="playlist.id" (change)="onCheckboxChange($event)"> {{playlist.playlistName}} ({{playlist.status}})
+        <input type="radio" [value]="playlist.id" (change)="onCheckboxChange($event)"> {{playlist.name}} ({{playlist.status}})
       </li>
     </ul>
     <input type="submit" value="Adicionar" class="btn btn-success">

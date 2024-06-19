@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div class="container mt-3">
   <div *ngIf="groupDetails" class="d-flex">
-    <h5 class="me-2" style="position: relative; top: 5px;">{{groupDetails.groupName}}</h5>
+    <h5 class="me-2" style="position: relative; top: 5px;">{{groupDetails.name}}</h5>
     <button class="btn btn-light me-2" [matMenuTriggerFor]="userMenu"><i class="fa fa-user"></i></button>
     <mat-menu #userMenu="matMenu" [overlapTrigger]="false" yPosition="below" xPosition="before">
       <a (click)="addMember(groupDetails.id)" mat-menu-item>Adicionar Membro</a>
@@ -24,7 +24,7 @@
             <video *ngIf="isVideo(content.content.path)" controls width="100%" height="200"></video>
           </div>
           <div class="card-body">
-            <a class="nav-link" (click)="play(content.content.id)" style="font-size: 18px; cursor: pointer">{{content.content.author.artistName}} - {{content.content.title}}</a>
+            <a class="nav-link" (click)="play(content.content.id)" style="font-size: 18px; cursor: pointer">{{content.content.author.name}} - {{content.content.title}}</a>
           </div>
         </div>
     </div>

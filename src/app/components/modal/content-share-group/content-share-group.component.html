@@ -4,8 +4,8 @@
       <tbody>
         <tr *ngFor="let group of allMyGroups">
           <td>
-            <a routerLink="#" class="nav-link" (click)="onSubmit(group.shareGroup.id)">
-              {{group.shareGroup.groupName}}
+            <a routerLink="#" class="nav-link" (click)="onSubmit(group.myGroup.id)">
+              {{group.myGroup.name}}
             </a>
           </td>
         </tr>

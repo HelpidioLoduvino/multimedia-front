@@ -53,14 +53,17 @@ export class UploadMusicComponent implements OnInit{
       releaseDate: '',
       cover: '',
     },
+
     genre: { name: '' },
+
     author: {
-      artistName: '',
+      name: '',
       label: {
-        labelName: ''
+        name: ''
       },
+
       band: {
-        bandName: '',
+        name: '',
         history: '',
         start: '',
         end: ''
@@ -107,8 +110,8 @@ export class UploadMusicComponent implements OnInit{
   }
 
   onSubmit() {
-    this.music.features = this.features.split(',').map(feature => ({ artistName: feature.trim() }));
-    this.music.songwriters = this.songwriters.split(',').map(writer => ({ artistName: writer.trim() }));
+    this.music.features = this.features.split(',').map(feature => ({ name: feature.trim() }));
+    this.music.songwriters = this.songwriters.split(',').map(writer => ({ name: writer.trim() }));
     if( this.cover && this.path){
       this.contentService.uploadMusic(this.music, this.selectedGroupName, this.path, this.cover).subscribe( {
         next: (response) =>{

@@ -34,12 +34,12 @@ export class UploadVideoComponent implements OnInit{
     title: '',
     description: '',
     author: {
-      artistName: '',
+      name: '',
       label: {
-        labelName: ''
+        name: ''
       },
       band: {
-        bandName: '',
+        name: '',
         history: '',
         start: '',
         end: ''

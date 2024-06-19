@@ -26,16 +26,16 @@
               <img [ngSrc]="imageUrls[music.content.id]" alt="{{ music.content.title }} cover" width="100%" height="200">
             </div>
             <div class="card-body">
-              <a class="nav-link" (click)="play(music.content.id)" style="font-size: 18px; cursor: pointer">{{music.content.author.artistName}} - {{music.content.title}}</a>
+              <a class="nav-link" (click)="play(music.content.id)" style="font-size: 18px; cursor: pointer">{{music.content.author.name}} - {{music.content.title}}</a>
             </div>
             <div class="card-footer">
               <div class="d-flex justify-content-end" [matMenuTriggerFor]="infoMenu">
                 <button class="btn btn-light border-0"><i class="fa fa-ellipsis-h"></i></button>
               </div>
               <mat-menu #infoMenu="matMenu" [overlapTrigger]="false" yPosition="below" xPosition="before">
-                <a routerLink="" (click)="contentInfo(music.id)" mat-menu-item>Informação</a>
-                <a routerLink="" (click)="openDialog(music.id)" mat-menu-item>Guardar na Playlist</a>
-                <a routerLink="" mat-menu-item>Partilhar com Grupo</a>
+                <a (click)="contentInfo(music.id)" mat-menu-item>Informação</a>
+                <a (click)="openDialog(music.id)" mat-menu-item>Guardar na Playlist</a>
+                <a mat-menu-item>Partilhar com Grupo</a>
               </mat-menu>
             </div>
           </div>
@@ -54,16 +54,16 @@
             </video>
           </div>
           <div class="card-body">
-            <a class="nav-link" (click)="play(video.content.id)" style="font-size: 18px; cursor: pointer">{{video.content.author.artistName}} - {{video.content.title}}</a>
+            <a class="nav-link" (click)="play(video.content.id)" style="font-size: 18px; cursor: pointer">{{video.content.author.name}} - {{video.content.title}}</a>
           </div>
           <div class="card-footer">
             <div class="d-flex justify-content-end" [matMenuTriggerFor]="infoMenu">
               <button class="btn btn-light border-0"><i class="fa fa-ellipsis-h"></i></button>
             </div>
             <mat-menu #infoMenu="matMenu" [overlapTrigger]="false" yPosition="below" xPosition="before">
-              <a routerLink="" (click)="contentInfo(video.id)" mat-menu-item>Informação</a>
-              <a routerLink="" (click)="openDialog(video.id)" mat-menu-item>Guardar na Playlist</a>
-              <a routerLink="" mat-menu-item>Partilhar com Grupo</a>
+              <a (click)="contentInfo(video.id)" mat-menu-item>Informação</a>
+              <a (click)="openDialog(video.id)" mat-menu-item>Guardar na Playlist</a>
+              <a mat-menu-item>Partilhar com Grupo</a>
             </mat-menu>
           </div>
         </div>

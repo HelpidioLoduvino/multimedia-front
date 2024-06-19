@@ -2,10 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {MatStep, MatStepLabel, MatStepper} from "@angular/material/stepper";
 import {ContentService} from "../../../services/content.service";
 import {NgForOf} from "@angular/common";
-import {DomSanitizer} from "@angular/platform-browser";
 import {PlaylistService} from "../../../services/playlist.service";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
@@ -30,9 +28,7 @@ export class AddPlaylistComponent implements OnInit{
 
   constructor(
     private contentService: ContentService,
-    private sanitizer: DomSanitizer,
     private playlistService: PlaylistService,
-    private router: Router,
     private formBuilder: FormBuilder,
     private toast: MatSnackBar) {}
 
@@ -42,7 +38,7 @@ export class AddPlaylistComponent implements OnInit{
     });
 
     this.playlistForm = this.formBuilder.group({
-      playlistName: ['', Validators.required],
+      name: ['', Validators.required],
       status: ['Público', Validators.required]
     });
   }

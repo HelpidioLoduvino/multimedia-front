@@ -48,7 +48,7 @@
             <div class="row mb-3">
               <div class="col">
                 <label>Autor Principal</label><br>
-                <input type="text" class="form-control" [(ngModel)]="music.author.artistName" name="author">
+                <input type="text" class="form-control" [(ngModel)]="music.author.name" name="author">
               </div>
               <div class="col">
                 <label>Participante(s)</label><br>
@@ -63,7 +63,7 @@
               </div>
               <div class="col">
                 <label>Editora</label><br>
-                <input type="text" class="form-control" [(ngModel)]="music.author.label.labelName" name="label"><br><br>
+                <input type="text" class="form-control" [(ngModel)]="music.author.label.name" name="label"><br><br>
               </div>
             </div>
           </div>
@@ -77,7 +77,7 @@
             <div class="row">
               <div class="col">
                 <label>Nome</label><br>
-                <input type="text" class="form-control" [(ngModel)]="music.author.band.bandName" name="bandName">
+                <input type="text" class="form-control" [(ngModel)]="music.author.band.name" name="name">
               </div>
               <div class="col">
                 <label>História</label><br>
@@ -153,12 +153,12 @@
               <li *ngFor="let group of groups">
                 <input
                   type="radio"
-                  [value]="group.shareGroup.groupName"
+                  [value]="group.name"
                   class="me-2"
                   [(ngModel)]="selectedGroupName"
-                  name="groupName"
+                  name="name"
                 >
-                {{ group.shareGroup.groupName }}
+                {{ group.name }}
               </li>
             </ul>
           </div>
