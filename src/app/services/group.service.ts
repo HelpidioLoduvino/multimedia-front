@@ -86,25 +86,4 @@ export class GroupService {
     return this.http.put<any>(`${this.baseGroupUrl}/update-user-to-editor`, null, {params});
   }
 
-  isOwner(id:number){
-    const params = new HttpParams().set('groupId', id.toString());
-    return this.http.get<any>(`${this.baseGroupUrl}/is-owner`, {params});
-  }
-
-  isGroupOwner(id:number){
-    const params = new HttpParams().set('groupId', id.toString());
-    return this.http.get<any>(`${this.baseGroupUrl}/is-group-owner`, {params});
-  }
-
-  isEditor(id:number){
-    const params = new HttpParams().set('groupId', id.toString());
-    return this.http.get<any>(`${this.baseGroupUrl}/is-editor`, {params});
-  }
-
-  isNormal(id:number){
-    const params = new HttpParams().set('groupId', id.toString());
-    return this.http.get<any>(`${this.baseGroupUrl}/is-normal`, {params});
-  }
-
-
 }

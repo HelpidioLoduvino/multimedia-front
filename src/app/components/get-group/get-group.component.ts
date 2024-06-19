@@ -37,7 +37,6 @@ export class GetGroupComponent implements OnInit{
   groupDetails: any = {};
   groupId!: number;
   images: any[] = [];
-  isUserOwner!: boolean;
   imageUrls: { [key: number]: string } = {};
 
   constructor(
@@ -57,7 +56,6 @@ export class GetGroupComponent implements OnInit{
         this.getAllContentsByGroupId(this.groupId);
         this.loadImages(this.groupId);
         this.getGroup(this.groupId);
-        this.isOwner(this.groupId);
       }
     });
   }
@@ -65,12 +63,6 @@ export class GetGroupComponent implements OnInit{
   getGroup(id: number){
     this.groupService.getGroup(id).subscribe(response=>{
       this.groupDetails = response;
-    });
-  }
-
-  isOwner(id: number){
-    return this.groupService.isOwner(id).subscribe(response=>{
-      this.isUserOwner = response;
     });
   }
 

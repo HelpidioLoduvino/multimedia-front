@@ -21,11 +21,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 })
 export class ListGroupUserComponent implements OnInit{
 
-  members: any[] = [];
+  members: any = {};
   groupId!: number;
-  isUserOwner!: boolean;
-  isGroupCreator!: boolean;
-  isNormal!: boolean;
 
   constructor(private groupService: GroupService,@Inject(MAT_DIALOG_DATA) public data: any, private toast: MatSnackBar) {
     this.groupId = data.componentData.groupId;
@@ -35,18 +32,6 @@ export class ListGroupUserComponent implements OnInit{
     this.groupService.getAllUsersByGroupId(this.groupId).subscribe(response=>{
       this.members = response;
       console.log(response)
-    });
-
-    this.groupService.isOwner(this.groupId).subscribe(response=>{
-      this.isUserOwner = response;
-    });
-
-    this.groupService.isGroupOwner(this.groupId).subscribe(response=>{
-      this.isGroupCreator = response;
-    });
-
-    this.groupService.isNormal(this.groupId).subscribe(response=>{
-      this.isNormal = response;
     });
   }
 

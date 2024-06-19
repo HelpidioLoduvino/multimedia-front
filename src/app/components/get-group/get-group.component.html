@@ -4,7 +4,7 @@
     <h5 class="me-2" style="position: relative; top: 5px;">{{groupDetails.groupName}}</h5>
     <button class="btn btn-light me-2" [matMenuTriggerFor]="userMenu"><i class="fa fa-user"></i></button>
     <mat-menu #userMenu="matMenu" [overlapTrigger]="false" yPosition="below" xPosition="before">
-      <a *ngIf="isUserOwner" (click)="addMember(groupDetails.id)" mat-menu-item>Adicionar Membro</a>
+      <a (click)="addMember(groupDetails.id)" mat-menu-item>Adicionar Membro</a>
       <a (click)="listMembers(groupDetails.id)" mat-menu-item>Listar Membros</a>
     </mat-menu>
     <button class="btn btn-danger" [matMenuTriggerFor]="deleteMenu"><i class="fa fa-trash"></i> </button>
