@@ -14,8 +14,8 @@
               <div>
                 <button class="btn btn-dark" [matMenuTriggerFor]="userMenu"><i class="fa fa-ellipsis-h"></i></button>
                 <mat-menu #userMenu="matMenu" [overlapTrigger]="false" yPosition="below" xPosition="before">
-                  <a (click)="setOwner(member.id, members.id)" mat-menu-item>Promover para Owner</a>
-                  <a (click)="setEditor(member.id, members.id)" mat-menu-item>Promover para Editor</a>
+                  <a (click)="setOwner(member.user.id, members.id)" mat-menu-item>Promover para Owner</a>
+                  <a (click)="setEditor(member.user.id, members.id)" mat-menu-item>Promover para Editor</a>
                   <a mat-menu-item>Remover do Grupo</a>
                 </mat-menu>
               </div>
