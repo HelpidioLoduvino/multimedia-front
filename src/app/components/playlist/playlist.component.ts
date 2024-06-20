@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FooterComponent} from "../footer/footer.component";
 import {NavbarComponent} from "../navbar/navbar.component";
-import {NgForOf, NgIf} from "@angular/common";
+import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {PlaylistService} from "../../services/playlist.service";
 import {MatDialog} from "@angular/material/dialog";
@@ -26,15 +26,16 @@ import {
     NgIf,
     MatMenu,
     MatMenuItem,
-    MatMenuTrigger
+    MatMenuTrigger,
+    NgOptimizedImage
   ],
   templateUrl: './playlist.component.html',
   styleUrl: './playlist.component.css'
 })
 export class PlaylistComponent implements OnInit{
 
-  playlists: any[] = [];
-  images: any[] = [];
+  playlist: any = {};
+  image: any = {};
   imageUrls: { [key: number]: string } = {};
   playlistId!: number
 
@@ -89,7 +90,7 @@ export class PlaylistComponent implements OnInit{
   getPlaylistBydId(id: number){
     this.playlistService.getPlaylistById(id).subscribe({
       next: (response) => {
-        this.playlists = response.body;
+        this.playlist = response;
       }, error: (error) => {
         console.log("Playlist nao encontrada");
       }
@@ -108,9 +109,11 @@ export class PlaylistComponent implements OnInit{
   loadImages(id: number): void {
     this.playlistService.getPlaylistById(id).subscribe({
       next: (response) => {
-        this.images = response.body;
-        this.images.forEach(image => {
-          this.displayCover(image.content.id);
+        this.image = response;
+        const contents = this.image.contents;
+        const contentIds = contents.map((content: { id: any; }) => content.id);
+        contentIds.forEach((id: number) => {
+          this.displayCover(id);
         });
       }
     });

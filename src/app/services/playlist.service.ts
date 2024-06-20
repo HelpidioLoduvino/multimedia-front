@@ -15,6 +15,7 @@ export class PlaylistService {
     return this.http.post(`${this.basePlaylistUrl}/add`, playlist, {params, observe: "response"});
   }
 
+
   getAllPlaylistsByUserId(){
     return this.http.get<any>(`${this.basePlaylistUrl}/user-playlists`);
   }
@@ -24,7 +25,7 @@ export class PlaylistService {
   }
 
   getPlaylistById(id: number){
-    return this.http.get<any>(`${this.basePlaylistUrl}/${id}`);
+    return this.http.get<any>(`${this.basePlaylistUrl}/playlist/${id}`);
   }
 
   deletePlaylist(id: number){
