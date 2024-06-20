@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +10,9 @@ export class PlaylistService {
 
   constructor(private http: HttpClient) { }
 
-  addPlaylist(playlist: any){
-    return this.http.post<any>(`${this.basePlaylistUrl}/add`, playlist);
+  addPlaylist(playlist: any, contentIds: number[]){
+    const params = new HttpParams().set('contentIds', contentIds.toString())
+    return this.http.post(`${this.basePlaylistUrl}/add`, playlist, {params, observe: "response"});
   }
 
   getAllPlaylistsByUserId(){

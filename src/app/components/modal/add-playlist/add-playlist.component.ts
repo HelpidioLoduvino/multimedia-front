@@ -24,45 +24,47 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class AddPlaylistComponent implements OnInit{
 
   contents: any[] = [];
-  playlistForm!: FormGroup;
+  selectedContents: number[] = [];
+  name: string = '';
+  status: string = '';
 
   constructor(
     private contentService: ContentService,
     private playlistService: PlaylistService,
-    private formBuilder: FormBuilder,
     private toast: MatSnackBar) {}
 
   ngOnInit(): void {
     this.contentService.getAllContent().subscribe(data => {
-      this.contents = data;
-    });
-
-    this.playlistForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      status: ['Público', Validators.required]
+      this.contents = data.body;
     });
   }
 
-  onSubmit(){
-    if(this.playlistForm.valid){
-      this.playlistService.addPlaylist(this.playlistForm.value).subscribe({
-        next: (response) => {
-          console.log("Playlist added successfully!", response);
-          this.playlistForm.reset();
-          window.location.reload();
-        }, error: (error) => {
-          this.toast.open("Erro ao criar Playlist!", "Fechar", {
-            duration: 3000, panelClass: ['error']
-          })
-          console.error("Error creating playlist!", error)
-        }
-      });
+  onCheckboxChange(contentId: number, event: any) {
+    if (event.target.checked) {
+      this.selectedContents.push(contentId);
     } else {
-      this.toast.open("Formulário Inválido!", "Fechar", {
-        duration: 3000, panelClass: ['error']
-      })
-      console.log("Invalid Form!");
+      this.selectedContents = this.selectedContents.filter(id => id !== contentId);
     }
   }
+
+  submitPlaylist(){
+    const  playlist = {
+      name: this.name,
+      status: this.status,
+    };
+
+    this.playlistService.addPlaylist(playlist, this.selectedContents).subscribe(response=>{
+      if(response.ok){
+        this.toast.open("Playlist adicionada com sucesso",'Fechar', {
+          duration: 2000, panelClass: ['success']
+        });
+      } else {
+        this.toast.open("Erro ao adicionar Playlist!",'Fechar', {
+          duration: 2000, panelClass: ['error']
+        });
+      }
+    });
+  }
+
 
 }

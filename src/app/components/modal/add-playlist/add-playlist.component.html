@@ -1,15 +1,30 @@
 <div class="container">
-  <form [formGroup]="playlistForm" (ngSubmit)="onSubmit()">
-  <label>Nome</label>
-  <input type="text" class="form-control mb-3" formControlName="name">
-  <label>Visibilidade</label>
-  <div class="row mt-1 mb-3">
-    <div class="col">
-      <input type="radio" class="me-1" value="Privado" formControlName="status"> <label>Privado</label>
-    </div>
-  </div>
-    <span class="d-flex justify-content-center">
-        <input type="submit" class="btn btn-success" value="Criar">
-    </span>
-  </form>
+    <mat-stepper headerPosition="bottom" #stepper style="background: #dddd; color: black;  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+      <mat-step>
+        <ng-template matStepLabel><span>Playlist</span></ng-template>
+        <div class="container">
+          <label>Nome</label>
+          <input type="text" class="form-control mb-3" [(ngModel)]="name">
+          <label>Visibilidade</label>
+          <div class="row mt-1 mb-3">
+            <div class="col">
+              <input type="radio" class="me-1" value="Privado" [(ngModel)]="status"> <label>Privado</label>
+            </div>
+          </div>
+        </div>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel><span>Conteúdo</span></ng-template>
+        <h6 class="d-flex justify-content-center">Meus conteúdos</h6>
+        <ul class="navbar-nav mb-3">
+          <li class="nav-item" *ngFor="let content of contents">
+            <input type="checkbox" [value]="content.id" class="me-2" (change)="onCheckboxChange(content.id, $event)">
+            <span>{{content.author.name}} - {{content.title}}</span>
+          </li>
+        </ul>
+        <span class="d-flex justify-content-center">
+          <input (click)="submitPlaylist()" class="btn btn-success" value="Criar">
+        </span>
+      </mat-step>
+    </mat-stepper>
 </div>
