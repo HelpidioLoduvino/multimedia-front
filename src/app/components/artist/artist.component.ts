@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NavbarComponent} from "../navbar/navbar.component";
 import {ArtistService} from "../../services/artist.service";
 import {NgForOf} from "@angular/common";
+import {FooterComponent} from "../footer/footer.component";
 
 @Component({
   selector: 'app-artist',
@@ -9,7 +10,8 @@ import {NgForOf} from "@angular/common";
   providers: [ArtistService],
   imports: [
     NavbarComponent,
-    NgForOf
+    NgForOf,
+    FooterComponent
   ],
   templateUrl: './artist.component.html',
   styleUrl: './artist.component.css'

@@ -1,9 +1,11 @@
 
 <app-navbar></app-navbar>
 
-<div class="container d-block mt-5">
+<div class="container d-block mt-3">
 
-  <h5><span>Playlist</span><button class="btn btn-light ms-2" (click)="openDialog()"><i class="fa fa-plus"></i></button>
+  <h5><span style="position: relative; top: 3px;">Playlist</span><button class="btn bg-transparent border-0" (click)="openDialog()">
+    <lucide-icon class="icon-color" name="circle-plus"></lucide-icon>
+  </button>
   </h5>
   <div class="line mb-3"></div>
   <h6 *ngIf="myPlaylists && myPlaylists.length > 0">Minhas Playlists</h6>
@@ -11,9 +13,9 @@
     <div class="scroll-content">
       <div class="item" *ngFor="let playlist of myPlaylists">
         <button (click)="getPlaylistById(playlist.id)" class="nav-link">
-          <div class="card card-body" style="background: #482424; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+          <div class="card card-body" style="background: #dee2e6; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
             <h5>{{playlist.name}}</h5>
-            <p>Visibilidade: {{playlist.status}}</p>
+            <small>{{playlist.status}}</small>
           </div>
         </button>
       </div>

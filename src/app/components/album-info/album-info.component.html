@@ -1,8 +1,8 @@
 <app-navbar></app-navbar>
-<div class="container mt-2">
+<div class="container mt-3">
   <div class="row g-3">
     <div class="col-md-8">
-      <div class="card mb-3" style="max-width: 850px;">
+      <div class="card mb-3" style="max-width: 850px; background-color: #dee2e6; color: black">
         <div class="row g-0">
           <div class="col-md-4" *ngIf="album">
             <img [src]="imageUrl[album.id]" class="img-fluid rounded-start" alt="...">
@@ -11,7 +11,7 @@
             <div class="card-body">
               <h5 class="card-title">{{album.musicReleaseName}}</h5>
               <p class="card-text">{{album.musicReleaseDescription}}</p>
-              <p class="card-text"><small class="text-muted">{{album.releaseDate}}</small></p>
+              <p class="card-text"><small>{{album.releaseDate}}</small></p>
               <p *ngIf="reviewOverall">Pontuação Média: {{reviewOverall}}</p>
             </div>
           </div>
@@ -29,7 +29,7 @@
       </ul>
     </div>
     <div class="col">
-      <div class="card card-body" style="color: black">
+      <div class="card card-body" style="color: black; background-color: #dee2e6;">
         <h5 class="d-flex justify-content-center">Músicas</h5>
         <hr>
         <div class="d-flex justify-content-center">

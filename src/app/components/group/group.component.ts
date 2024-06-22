@@ -9,19 +9,21 @@ import {CreateGroupComponent} from "../modal/create-group/create-group.component
 import {GroupService} from "../../services/group.service";
 import {NgForOf, NgIf} from "@angular/common";
 import {Router, RouterLink} from "@angular/router";
+import {LucideAngularModule} from "lucide-angular";
 
 @Component({
   selector: 'app-group',
   standalone: true,
   providers: [GroupService],
-  imports: [
-    SidebarComponent,
-    NavbarComponent,
-    FooterComponent,
-    NgIf,
-    RouterLink,
-    NgForOf
-  ],
+    imports: [
+        SidebarComponent,
+        NavbarComponent,
+        FooterComponent,
+        NgIf,
+        RouterLink,
+        NgForOf,
+        LucideAngularModule
+    ],
   templateUrl: './group.component.html',
   styleUrl: './group.component.css'
 })

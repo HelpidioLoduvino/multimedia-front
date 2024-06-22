@@ -12,6 +12,7 @@ import {ModalComponent} from "../modal/modal.component";
 import {CreateGroupComponent} from "../modal/create-group/create-group.component";
 import {RequestListComponent} from "../modal/request-list/request-list.component";
 import {ListGroupUserComponent} from "../modal/list-group-user/list-group-user.component";
+import {LucideAngularModule} from "lucide-angular";
 
 @Component({
   selector: 'app-get-group',
@@ -26,7 +27,8 @@ import {ListGroupUserComponent} from "../modal/list-group-user/list-group-user.c
     RouterLink,
     FooterComponent,
     MatMenuTrigger,
-    NgOptimizedImage
+    NgOptimizedImage,
+    LucideAngularModule
   ],
   templateUrl: './get-group.component.html',
   styleUrl: './get-group.component.css'

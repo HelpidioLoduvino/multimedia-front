@@ -1,5 +1,5 @@
 .navbar{
-  background-color: #003000;
+  background-color: #dee2e6;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   flex-wrap: nowrap !important;
 }
@@ -20,9 +20,8 @@
 }
 
 .menu-link{
-  font-size: 18px;
   text-decoration: none;
-  color: white;
+  color: #555555;
 }
 
 .menu-link:hover{
@@ -36,9 +35,8 @@
   left: 0;
   width: 250px;
   height: 100%;
-  background-color: #0E1116;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  color: white;
+  background-color: #dee2e6;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   transform: translateX(-100%);
   transition: transform 0.3s ease;
   z-index: 2;
@@ -88,14 +86,13 @@
 
 .menu-sidebar a{
   text-decoration: none;
-  color: white;
-  font-size: 18px;
+  color: #555555;
 }
 
 .menu-sidebar a:hover{
-  color: wheat;
+  color: black;
 }
 
 .sidebar-item{
-  padding-top: 25px;
+  padding-top: 10px;
 }

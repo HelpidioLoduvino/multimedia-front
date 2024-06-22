@@ -9,20 +9,22 @@ import {AddPlaylistComponent} from "../modal/add-playlist/add-playlist.component
 import {PlaylistService} from "../../services/playlist.service";
 import {NgForOf, NgIf} from "@angular/common";
 import {FooterComponent} from "../footer/footer.component";
+import {LucideAngularModule} from "lucide-angular";
 
 @Component({
   selector: 'app-playlist',
   standalone: true,
   providers: [PlaylistService],
-  imports: [
-    NavbarComponent,
-    SidebarComponent,
-    RouterLink,
-    MatButton,
-    NgForOf,
-    FooterComponent,
-    NgIf
-  ],
+    imports: [
+        NavbarComponent,
+        SidebarComponent,
+        RouterLink,
+        MatButton,
+        NgForOf,
+        FooterComponent,
+        NgIf,
+        LucideAngularModule
+    ],
   templateUrl: './playlists.component.html',
   styleUrl: './playlists.component.css'
 })

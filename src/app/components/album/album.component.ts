@@ -10,21 +10,23 @@ import {MatDialog} from "@angular/material/dialog";
 import {ModalComponent} from "../modal/modal.component";
 import {AddContentToPlaylistComponent} from "../modal/add-content-to-playlist/add-content-to-playlist.component";
 import {CriticiseComponent} from "../modal/criticise/criticise.component";
+import {LucideAngularModule} from "lucide-angular";
 
 @Component({
   selector: 'app-album',
   standalone: true,
   providers: [AlbumService],
-  imports: [
-    NavbarComponent,
-    NgForOf,
-    NgOptimizedImage,
-    FooterComponent,
-    MatMenu,
-    MatMenuItem,
-    RouterLink,
-    MatMenuTrigger
-  ],
+    imports: [
+        NavbarComponent,
+        NgForOf,
+        NgOptimizedImage,
+        FooterComponent,
+        MatMenu,
+        MatMenuItem,
+        RouterLink,
+        MatMenuTrigger,
+        LucideAngularModule
+    ],
   templateUrl: './album.component.html',
   styleUrl: './album.component.css'
 })

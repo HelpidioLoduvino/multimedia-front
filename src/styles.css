@@ -10,8 +10,27 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: rgb(21, 18, 18);
-  color: white;
+  background: #C9C9C9;
+  color: black;
+}
+
+.icon-color{
+  color: #555555;
+}
+
+.icon-color:hover{
+  color: black;
+}
+
+.card-color{
+  background-color: #dee2e6;
+  width: 18rem;
+  color: #555555;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.card-color:hover{
+  color: black;
 }
 
 .title-separator{
@@ -19,7 +38,7 @@ body {
 }
 
 .white-line{
-  border: 1px solid white;
+  border: 1px solid black;
 }
 
 .step-label-color{

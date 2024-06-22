@@ -10,9 +10,7 @@ import {AddContentToPlaylistComponent} from "../modal/add-content-to-playlist/ad
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {ContentService} from "../../services/content.service";
 import {DomSanitizer} from "@angular/platform-browser";
-import {
-  AddMoreContentToPlaylistComponent
-} from "../modal/add-more-content-to-playlist/add-more-content-to-playlist.component";
+import {LucideAngularModule} from "lucide-angular";
 
 @Component({
   selector: 'app-playlist',
@@ -27,7 +25,8 @@ import {
     MatMenu,
     MatMenuItem,
     MatMenuTrigger,
-    NgOptimizedImage
+    NgOptimizedImage,
+    LucideAngularModule
   ],
   templateUrl: './playlist.component.html',
   styleUrl: './playlist.component.css'
@@ -65,21 +64,6 @@ export class PlaylistComponent implements OnInit{
         title: 'Guardar Vídeo Em...',
         component: AddContentToPlaylistComponent,
         componentData: { contentId: contentId}
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-    });
-  }
-
-  openAddContentModal(id: number): void {
-    const dialogRef = this.modal.open(ModalComponent, {
-      width: '500px',
-      height: '350px',
-      data: {
-        title: 'Adicionar Conteúdo',
-        component: AddMoreContentToPlaylistComponent,
-        componentData: { id: id }
       }
     });
 

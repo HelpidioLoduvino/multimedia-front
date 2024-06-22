@@ -9,26 +9,27 @@ import {FooterComponent} from "../footer/footer.component";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {MatDialog} from "@angular/material/dialog";
 import {ModalComponent} from "../modal/modal.component";
-import {AddPlaylistComponent} from "../modal/add-playlist/add-playlist.component";
 import {AddContentToPlaylistComponent} from "../modal/add-content-to-playlist/add-content-to-playlist.component";
 import {GroupService} from "../../services/group.service";
+import {LucideAngularModule} from "lucide-angular";
 
 @Component({
   selector: 'app-home',
   standalone: true,
   providers: [ContentService, GroupService],
-  imports: [
-    NavbarComponent,
-    SidebarComponent,
-    NgForOf,
-    NgOptimizedImage,
-    NgIf,
-    RouterLink,
-    FooterComponent,
-    MatMenuTrigger,
-    MatMenu,
-    MatMenuItem,
-  ],
+    imports: [
+        NavbarComponent,
+        SidebarComponent,
+        NgForOf,
+        NgOptimizedImage,
+        NgIf,
+        RouterLink,
+        FooterComponent,
+        MatMenuTrigger,
+        MatMenu,
+        MatMenuItem,
+        LucideAngularModule,
+    ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

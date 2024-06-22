@@ -32,8 +32,11 @@ export class PlaylistService {
     return this.http.delete(`${this.basePlaylistUrl}/delete/${id}`);
   }
 
-  addContentToPlaylist(contentId: number, playlistId: number){
-    return this.http.post<any>(`${this.basePlaylistUrl}/add-content-to-playlist`, {contentId, playlistId});
+  addContentToPlaylist(contentId: number, playlistIds: number[]){
+    const params = new HttpParams()
+      .set('contentId', contentId.toString())
+      .set('playlistIds', playlistIds.toString());
+    return this.http.post<any>(`${this.basePlaylistUrl}/add-content-to-playlist`, null, {params, observe: 'response'});
   }
 
 }

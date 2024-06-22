@@ -1,12 +1,14 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NgClass, NgForOf, NgIf} from "@angular/common";
-import {ActivatedRoute, Router, RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {MatButton} from "@angular/material/button";
 import {NotificationService} from "../../services/notification.service";
 import {Subscription} from "rxjs";
-import {error} from "@angular/compiler-cli/src/transformers/util";
+import { IconsModule } from "../../icons/icons.module";
+import {LucideAngularModule} from "lucide-angular";
+
 
 @Component({
   selector: 'app-navbar',
@@ -20,7 +22,9 @@ import {error} from "@angular/compiler-cli/src/transformers/util";
     MatMenuTrigger,
     MatMenuItem,
     MatButton,
-    NgForOf
+    NgForOf,
+    IconsModule,
+    LucideAngularModule
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
