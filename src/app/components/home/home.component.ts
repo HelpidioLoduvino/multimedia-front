@@ -12,6 +12,7 @@ import {ModalComponent} from "../modal/modal.component";
 import {AddContentToPlaylistComponent} from "../modal/add-content-to-playlist/add-content-to-playlist.component";
 import {GroupService} from "../../services/group.service";
 import {LucideAngularModule} from "lucide-angular";
+import {AddContentToGroupComponent} from "../modal/add-content-to-group/add-content-to-group.component";
 
 @Component({
   selector: 'app-home',
@@ -34,9 +35,8 @@ import {LucideAngularModule} from "lucide-angular";
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit{
-
-  musics: any[] = [];
-  videos: any[] = [];
+  content: any = {};
+  image: any = {};
   imageUrls: { [key: number]: string } = {};
 
   constructor(
@@ -47,22 +47,35 @@ export class HomeComponent implements OnInit{
     private modal: MatDialog) {}
 
   ngOnInit(): void {
-    this.groupService.getMusicsFromPublicGroup().subscribe(response=>{
-      this.musics = response;
+    this.groupService.getPublicGroup().subscribe(response=>{
+      if(response.ok){
+        this.content = response.body;
+      }
       this.loadImages();
     });
-
-    this.groupService.getVideosFromPublicGroup().subscribe(response=>{
-      this.videos = response;
-    });
   }
-  openDialog(contentId: number): void {
+  saveToPlaylist(contentId: number): void {
     const dialogRef = this.modal.open(ModalComponent, {
       width: '350px',
       height: '300px',
       data: {
-        title: 'Guardar Vídeo Em...',
+        title: 'Guardar Conteúdo Em...',
         component: AddContentToPlaylistComponent,
+        componentData: { contentId: contentId}
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+  addToGroup(contentId: number){
+    const dialogRef = this.modal.open(ModalComponent, {
+      width: '350px',
+      height: '300px',
+      data: {
+        title: 'Meus Grupos',
+        component: AddContentToGroupComponent,
         componentData: { contentId: contentId}
       }
     });
@@ -80,10 +93,13 @@ export class HomeComponent implements OnInit{
   }
 
   loadImages(): void {
-    this.musics.forEach(music => {
-      this.displayCover(music.content.musicRelease.id);
-    });
+    const contents = this.content.contents
+    const contentIds = contents.map((content: { id: any; }) => content.id);
+    contentIds.forEach((id: number) =>{
+      this.displayCover(id);
+    })
   }
+
 
   displayCover(id: number): void {
     this.contentService.displayCover(id).subscribe({
@@ -95,6 +111,14 @@ export class HomeComponent implements OnInit{
         console.error('Error loading image', error);
       }
     });
+  }
+
+  isMusic(mimetype: string){
+    return mimetype.startsWith("audio");
+  }
+
+  isVideo(mimetype: string){
+    return mimetype.startsWith("video");
   }
 
 }

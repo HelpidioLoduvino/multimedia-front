@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr class="table-dark">
+          <th>Pedido de Amizade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="table-responsive mt-0">
+    <table class="table table-hover">
+      <thead>
+      <tr class="table-dark">
+        <th>Fazer Pedido</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let ask of askToBeFriend" style="cursor: pointer;">
+        <td>
+          <span style="position: relative; top: 15px;">{{ask.name}} {{ask.surname}}</span>
+          <div class="d-flex justify-content-end" style="position: relative; top: -15px;">
+            <button class="btn btn-primary">
+              +
+            </button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

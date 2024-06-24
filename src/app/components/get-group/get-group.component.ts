@@ -9,7 +9,6 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {FooterComponent} from "../footer/footer.component";
 import {MatDialog} from "@angular/material/dialog";
 import {ModalComponent} from "../modal/modal.component";
-import {CreateGroupComponent} from "../modal/create-group/create-group.component";
 import {RequestListComponent} from "../modal/request-list/request-list.component";
 import {ListGroupUserComponent} from "../modal/list-group-user/list-group-user.component";
 import {LucideAngularModule} from "lucide-angular";
@@ -35,8 +34,7 @@ import {LucideAngularModule} from "lucide-angular";
 })
 export class GetGroupComponent implements OnInit{
 
-  contents: any[] = [];
-  groupDetails: any = {};
+  group: any = {};
   groupId!: number;
   images: any[] = [];
   imageUrls: { [key: number]: string } = {};
@@ -55,8 +53,6 @@ export class GetGroupComponent implements OnInit{
     this.route.params.subscribe(params =>{
       this.groupId = params['id'];
       if(this.groupId){
-        this.getAllContentsByGroupId(this.groupId);
-        this.loadImages(this.groupId);
         this.getGroup(this.groupId);
       }
     });
@@ -64,7 +60,12 @@ export class GetGroupComponent implements OnInit{
 
   getGroup(id: number){
     this.groupService.getGroup(id).subscribe(response=>{
-      this.groupDetails = response;
+      this.group = response;
+      const contents = this.group.contents
+      const contentIds = contents.map((content: { id: any; }) => content.id);
+      contentIds.forEach((id: number) =>{
+        this.displayCover(id);
+      })
     });
   }
 
@@ -98,32 +99,10 @@ export class GetGroupComponent implements OnInit{
     });
   }
 
-
-
-  getAllContentsByGroupId(id: number){
-    this.groupService.getAllContentsByGroupId(id).subscribe({
-      next: (response) => {
-        this.contents = response.body;
-      }, error: (error) =>{
-        console.error("Erro ao recuperar conteúdos", error);
-      }
-    })
-  }
-
   play(id: number) {
     this.router.navigate(['/play', id]);
   }
 
-  loadImages(id: number): void {
-    this.groupService.getAllContentsByGroupId(id).subscribe({
-      next: (response) => {
-        this.images = response.body;
-        this.images.forEach(image => {
-          this.displayCover(image.content.id);
-        });
-      }
-    });
-  }
 
   displayCover(id: number): void {
     this.contentService.displayCover(id).subscribe({
@@ -137,12 +116,12 @@ export class GetGroupComponent implements OnInit{
     });
   }
 
-  isMusic(path: string): boolean {
-    return path.includes('/music/') && path.endsWith('.mp3');
+  isMusic(mimetype: string): boolean {
+    return mimetype.startsWith("audio");
   }
 
-  isVideo(path: string): boolean {
-    return path.includes('/video/') && path.endsWith('.mp4');
+  isVideo(mimetype: string): boolean {
+    return mimetype.startsWith("video")
   }
 
 }

@@ -7,12 +7,14 @@ import {NavbarComponent} from "../navbar/navbar.component";
 import {SidebarComponent} from "../sidebar/sidebar.component";
 import {FormsModule} from "@angular/forms";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
+import {LucideAngularModule} from "lucide-angular";
+import {FooterComponent} from "../footer/footer.component";
 
 @Component({
   selector: 'app-play-content',
   standalone: true,
   providers: [ContentService],
-  imports: [HttpClientModule, NgIf, NavbarComponent, NgForOf, RouterLink, SidebarComponent, FormsModule, NgClass],
+  imports: [HttpClientModule, NgIf, NavbarComponent, NgForOf, RouterLink, SidebarComponent, FormsModule, NgClass, LucideAngularModule, FooterComponent],
   templateUrl: './play-content.component.html',
   styleUrl: './play-content.component.css'
 })

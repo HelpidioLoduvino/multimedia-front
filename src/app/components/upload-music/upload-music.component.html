@@ -5,9 +5,9 @@
   <div class="title-separator mb-3"></div>
   <div style="overflow: auto; overflow-x: hidden; max-height: 350px;">
     <form (ngSubmit)="onSubmit()" >
-    <mat-stepper headerPosition="bottom" #stepper style="background: #482424;  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+    <mat-stepper headerPosition="bottom" #stepper style="background: #dee2e6;  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
       <mat-step>
-        <ng-template matStepLabel><span class="step-label-color">Lançamento</span></ng-template>
+        <ng-template matStepLabel><span>Lançamento</span></ng-template>
         <div class="container d-flex justify-content-center align-items-center">
         <div>
           <div class="row">
@@ -42,7 +42,7 @@
       </div>
       </mat-step>
       <mat-step>
-        <ng-template matStepLabel><span class="step-label-color">Artista</span></ng-template>
+        <ng-template matStepLabel><span>Artista</span></ng-template>
         <div class="container d-flex justify-content-center align-items-center">
           <div>
             <div class="row mb-3">
@@ -70,7 +70,7 @@
         </div>
       </mat-step>
       <mat-step>
-        <ng-template matStepLabel><span class="step-label-color">Grupo Musical</span></ng-template>
+        <ng-template matStepLabel><span>Grupo Musical</span></ng-template>
         <div class="container d-flex justify-content-center align-items-center">
           <div>
             <small class="d-flex justify-content-center align-items-center mb-3">Campos opcionais.</small>
@@ -85,7 +85,6 @@
               </div>
             </div>
             <div class="row mt-3 mb-4">
-              <label>Período</label><br>
               <div class="col">
                 <label>Inicio (Ano): </label><input type="number" [(ngModel)]="music.author.band.start" class="form-control" name="start">
               </div>
@@ -97,7 +96,7 @@
         </div>
       </mat-step>
       <mat-step>
-        <ng-template matStepLabel><span class="step-label-color">Música</span></ng-template>
+        <ng-template matStepLabel><span>Música</span></ng-template>
         <div class="container d-flex justify-content-center align-items-center">
           <div>
             <div class="row">
@@ -145,7 +144,7 @@
         </div>
       </mat-step>
       <mat-step>
-        <ng-template matStepLabel><span class="step-label-color">Partilhar Com</span></ng-template>
+        <ng-template matStepLabel><span>Partilhar Com</span></ng-template>
         <div class="container ">
           <h5 class="d-flex justify-content-center align-items-center">Meus Grupos</h5>
           <div class="d-flex justify-content-center align-items-center mt-3">
@@ -163,7 +162,7 @@
             </ul>
           </div>
           <div class="d-flex justify-content-center align-items-center mt-3">
-            <input type="submit" class="btn btn-success me-2" value="Carregar Conteúdo">
+            <input type="submit" class="btn btn-dark me-2" value="Carregar">
             <input type="submit" class="btn btn-light" value="Criar Grupo">
           </div>
           <small class="d-flex justify-content-center align-items-center mt-3">O conteúdo é partilhado no grupo Público caso não escolha nenhum grupo.</small>

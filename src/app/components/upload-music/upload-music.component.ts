@@ -10,8 +10,6 @@ import {ContentService} from "../../services/content.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {FooterComponent} from "../footer/footer.component";
 import {MatDialog} from "@angular/material/dialog";
-import {ModalComponent} from "../modal/modal.component";
-import {ContentShareGroupComponent} from "../modal/content-share-group/content-share-group.component";
 import {NgForOf} from "@angular/common";
 import {GroupService} from "../../services/group.service";
 import {Router} from "@angular/router";

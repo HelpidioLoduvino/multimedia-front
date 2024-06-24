@@ -28,14 +28,20 @@
       <div class="mt-2" *ngIf="content">
         <h5>{{content.author.name}} - {{content.title}}</h5>
         <ul class="navbar-nav">
-          <li class="nav-item">
+          <li class="nav-item m-0">
             <i class="fa fa-user-circle me-2" style="font-size: 44px;"></i>
             <span style="position: relative; top: -10px;">{{content.user.name}} {{content.user.surname}}</span>
-            <span style="position: relative; top: -10px; margin-left: 10px;"><button class="btn btn-dark"><i class="fa fa-share"></i> partilhar</button></span>
-            <span style="position: relative; top: -10px; margin-left: 10px;"><button class="btn btn-dark"><i class="fa fa-download"></i> baixar</button></span>
+            <span style="position: relative; top: -15px;" class="me-2 ms-2">
+              <button class="btn btn-dark">
+                <lucide-icon name="share"></lucide-icon>
+              </button>
+            </span>
+              <button class="btn btn-dark" style="position: relative; top: -15px;">
+               <lucide-icon name="download"></lucide-icon>
+              </button>
           </li>
         </ul>
-        <div class="card card-body mt-2" style="background: #1D1C1C">
+        <div class="card card-body mt-2" style="background: black; color: white">
           <label><u>Letra da Música</u></label>
           {{content.lyric}}
         </div>
@@ -48,4 +54,6 @@
     </div>
   </div>
 </div>
+<br><br>
+<app-footer></app-footer>
 

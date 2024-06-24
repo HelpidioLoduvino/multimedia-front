@@ -1,29 +1,27 @@
 <app-navbar></app-navbar>
-<div class="container mt-3">
-  <div *ngIf="groupDetails" class="d-flex">
-    <h5 style="position: relative; top: 8px;">{{groupDetails.name}}</h5>
+<div class="container mt-3" *ngIf="group">
+  <div class="d-flex">
+    <h5 style="position: relative; top: 8px;">{{group.name}}</h5>
     <button class="btn bg-transparent border-0" [matMenuTriggerFor]="userMenu">
       <lucide-icon class="icon-color" name="circle-plus"></lucide-icon>
     </button>
     <mat-menu #userMenu="matMenu" [overlapTrigger]="false" yPosition="below" xPosition="before">
-      <a (click)="addMember(groupDetails.id)" mat-menu-item>Adicionar Membro</a>
-      <a (click)="listMembers(groupDetails.id)" mat-menu-item>Listar Membros</a>
+      <a (click)="addMember(group.id)" mat-menu-item>Adicionar Membro</a>
+      <a (click)="listMembers(group.id)" mat-menu-item>Listar Membros</a>
       <a mat-menu-item>Apagar Grupo</a>
     </mat-menu>
   </div>
   <div class="white-line mt-2"></div>
   <div class="row g-3 mt-1">
-    <div class="col-md-3 mb-3" *ngFor="let content of contents">
+    <div class="col-md-3 mb-3" *ngFor="let content of group.contents">
       <div class="d-flex justify-content-center">
         <div class="card card-color">
-          <div class="card-header bg-transparent">
-            <div class="d-flex justify-content-center mb-2" (click)="play(content.content.id)" style="cursor: pointer;">
-              <img *ngIf="isMusic(content.content.path)" [ngSrc]="imageUrls[content.content.id]" alt="{{ content.content.title }} cover" width="100%" height="200">
-            </div>
-            <video *ngIf="isVideo(content.content.path)" controls width="100%" height="200"></video>
+          <div class="card-header bg-transparent" (click)="play(content.id)">
+            <img *ngIf="isMusic(content.mimetype)" [ngSrc]="imageUrls[content.id]" alt="{{ content.title }} cover" width="100%" height="200">
+            <video *ngIf="isVideo(content.mimetype)" controls width="100%" height="194"></video>
           </div>
-          <div class="card-body bg-transparent">
-            <a class="nav-link" (click)="play(content.content.id)" style="font-size: 18px; cursor: pointer">{{content.content.author.name}} - {{content.content.title}}</a>
+          <div class="card-body bg-transparent" (click)="play(content.id)" style="cursor: pointer">
+            <a class="nav-link">{{content.author.name}} - {{content.title}}</a>
           </div>
         </div>
     </div>

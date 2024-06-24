@@ -47,7 +47,7 @@ export class UserService {
   }
 
   allClients(){
-    return this.http.get<any>(`${this.baseUrl}/clients`);
+    return this.http.get<any>(`${this.baseUrl}/get-all-clients`);
   }
 
 }

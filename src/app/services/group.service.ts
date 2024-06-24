@@ -18,11 +18,15 @@ export class GroupService {
     return this.http.get<any>(`${this.baseGroupUrl}/get-group/${id}`);
   }
 
-  addContentToGroup(contentId: number, groupId: number){
+  getPublicGroup(){
+    return this.http.get<any>(`${this.baseGroupUrl}/get-public-group`, {observe: 'response'});
+  }
+
+  addContentToGroup(contentId: number, groupId: number[]){
     const params = new HttpParams()
       .set('contentId', contentId.toString())
       .set('groupId', groupId.toString());
-    return this.http.post(`${this.baseGroupUrl}/add-content-to-group`, null, {params});
+    return this.http.post(`${this.baseGroupUrl}/add-content-to-group`, null, {params, observe: "response"});
   }
 
   getAllExceptMyAndPublicGroups(){
@@ -31,6 +35,10 @@ export class GroupService {
 
   getAllMyGroups(){
     return this.http.get<any>(`${this.baseGroupUrl}/all-my-groups`);
+  }
+
+  getAllMyFriends(){
+    return this.http.get<any>(`${this.baseGroupUrl}/get-all-my-friends`);
   }
 
   getAllContentsByGroupId(groupId: number){

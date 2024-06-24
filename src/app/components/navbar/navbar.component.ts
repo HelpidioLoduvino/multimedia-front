@@ -50,7 +50,6 @@ export class NavbarComponent implements OnInit, OnDestroy{
       next: (response) =>{
         if(response){
           this.notifications.push(...response)
-          console.log(response);
         }
         this.startPolling()
       }, error: (error) =>{

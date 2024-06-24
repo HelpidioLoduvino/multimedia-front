@@ -1,0 +1,10 @@
+<div class="container">
+  <ul class="navbar-nav">
+    <li class="nav-item" *ngFor="let group of groups">
+        <input type="checkbox" [value]="group.id" (change)="onCheckboxChange(group.id, $event)"> {{group.name}}
+    </li>
+  </ul>
+  <div class="d-flex justify-content-center mt-3">
+    <input (click)="onSubmit()" value="Adicionar" class="btn btn-success">
+  </div>
+</div>
