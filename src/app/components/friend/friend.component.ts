@@ -35,7 +35,6 @@ export class FriendComponent implements OnInit{
   ngOnInit(): void {
     this.groupService.getAllMyFriends().subscribe(response =>{
       this.friends = response;
-      console.log(this.friends)
     })
 
   }
