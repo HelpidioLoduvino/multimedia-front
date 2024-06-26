@@ -2,15 +2,14 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {filter, map, Observable} from "rxjs";
+import {environment} from "../../environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContentService {
 
-  private baseMusicUrl = 'http://localhost:8080/api/music';
-  private baseVideoUrl = 'http://localhost:8080/api/video';
-  private baseContentUrl = 'http://localhost:8080/api/content';
+  private backendUrl = environment.backendUrl;
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -22,7 +21,7 @@ export class ContentService {
     const params = new HttpParams()
       .set('group', group.toString());
 
-    return this.http.post<any>(`${this.baseMusicUrl}/upload`, formData, {params})
+    return this.http.post<any>(`${this.backendUrl}/api/music/upload`, formData, {params})
   }
 
   uploadVideo(video: any, group: string, videoFile: File): Observable<any>{
@@ -31,24 +30,23 @@ export class ContentService {
     formData.append('videoFile', videoFile);
     const params = new HttpParams()
       .set('group', group.toString());
-    return this.http.post<any>(`${this.baseVideoUrl}/upload`, formData, {params});
+    return this.http.post<any>(`${this.backendUrl}/api/video/upload`, formData, {params});
   }
 
   getAllContent() {
-    return this.http.get<any>(`${this.baseContentUrl}/all-contents-by-user-id`);
+    return this.http.get<any>(`${this.backendUrl}/api/content/all-contents-by-user-id`);
   }
 
   getContentById(id: number) {
-    return this.http.get<any>(`${this.baseContentUrl}/${id}`);
+    return this.http.get<any>(`${this.backendUrl}/api/content/${id}`);
   }
 
   streamContent(contentId: number): string{
-    return `${this.baseContentUrl}/stream-content/${contentId}`;
+    return `${this.backendUrl}/api/content/stream-content/${contentId}`;
   }
 
   displayCover(id: number): Observable<Blob> {
-
-    return this.http.get(`${this.baseMusicUrl}/cover/${id}`, { responseType: 'blob' });
+    return this.http.get(`${this.backendUrl}/api/music/cover/${id}`, { responseType: 'blob' });
   }
 
 }
