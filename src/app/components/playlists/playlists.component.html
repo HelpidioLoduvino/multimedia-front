@@ -26,7 +26,7 @@
     <div class="scroll-content">
       <div class="item" *ngFor="let publicPlaylist of publicPlaylists">
         <button (click)="getPlaylistById(publicPlaylist.id)" class="nav-link">
-          <div class="card card-body" style="background: #482424; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+          <div class="card card-body" style="background: #dee2e6; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
             <h5>{{publicPlaylist.name}}</h5>
             <p>Visibilidade: {{publicPlaylist.status}}</p>
           </div>
