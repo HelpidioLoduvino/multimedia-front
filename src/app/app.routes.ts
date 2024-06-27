@@ -14,6 +14,7 @@ import {GetGroupComponent} from "./components/get-group/get-group.component";
 import {ArtistComponent} from "./components/artist/artist.component";
 import {AlbumComponent} from "./components/album/album.component";
 import {AlbumInfoComponent} from "./components/album-info/album-info.component";
+import {GenreComponent} from "./components/genre/genre.component";
 
 export const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -30,5 +31,6 @@ export const routes: Routes = [
   {path: 'content-info/:id', component: ContentInfoComponent},
   {path: 'artists', component: ArtistComponent},
   {path: 'albums', component:  AlbumComponent},
-  {path: 'album/:id', component: AlbumInfoComponent}
+  {path: 'album/:id', component: AlbumInfoComponent},
+  {path: 'genre', component: GenreComponent}
 ];

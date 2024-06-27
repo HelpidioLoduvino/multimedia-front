@@ -11,7 +11,7 @@ export class ContentService {
 
   private backendUrl = environment.backendUrl;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient) { }
 
   uploadMusic(music: any, group: string, musicFile: File, imageFile: File): Observable<any>{
     const formData: FormData = new FormData();
@@ -47,6 +47,15 @@ export class ContentService {
 
   displayCover(id: number): Observable<Blob> {
     return this.http.get(`${this.backendUrl}/api/music/cover/${id}`, { responseType: 'blob' });
+  }
+
+  search(query: string){
+    const params = new HttpParams().set('query', query.toString());
+    return this.http.get<any>(`${this.backendUrl}/api/content/search`, {params});
+  }
+
+  allContents(){
+    return this.http.get<any>(`${this.backendUrl}/api/music/all`);
   }
 
 }

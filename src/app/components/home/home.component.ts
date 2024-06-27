@@ -13,29 +13,33 @@ import {AddContentToPlaylistComponent} from "../modal/add-content-to-playlist/ad
 import {GroupService} from "../../services/group.service";
 import {LucideAngularModule} from "lucide-angular";
 import {AddContentToGroupComponent} from "../modal/add-content-to-group/add-content-to-group.component";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-home',
   standalone: true,
   providers: [ContentService, GroupService],
-    imports: [
-        NavbarComponent,
-        SidebarComponent,
-        NgForOf,
-        NgOptimizedImage,
-        NgIf,
-        RouterLink,
-        FooterComponent,
-        MatMenuTrigger,
-        MatMenu,
-        MatMenuItem,
-        LucideAngularModule,
-    ],
+  imports: [
+    NavbarComponent,
+    SidebarComponent,
+    NgForOf,
+    NgOptimizedImage,
+    NgIf,
+    RouterLink,
+    FooterComponent,
+    MatMenuTrigger,
+    MatMenu,
+    MatMenuItem,
+    LucideAngularModule,
+    FormsModule,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit{
   content: any = {};
+  searchContent!: string;
+  results: any[] = [];
   image: any = {};
   imageUrls: { [key: number]: string } = {};
 
@@ -110,6 +114,12 @@ export class HomeComponent implements OnInit{
       error: (error) => {
         console.error('Error loading image', error);
       }
+    });
+  }
+
+  search(){
+    this.contentService.search(this.searchContent).subscribe(response=>{
+      this.results = response;
     });
   }
 

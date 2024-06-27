@@ -10,7 +10,17 @@ import {
   Disc,
   MicVocal,
   Bell,
-  CircleUserRound, CirclePlus, CircleChevronDown, Plus, Eye, EyeOff, Download, Share, UserRound, UserRoundPlus
+  CircleUserRound,
+  CirclePlus,
+  CircleChevronDown,
+  Plus,
+  Eye,
+  EyeOff,
+  Download,
+  Share,
+  UserRound,
+  UserRoundPlus,
+  GalleryVerticalEnd
 } from 'lucide-angular';
 
 
@@ -32,7 +42,8 @@ const icons = {
   Download,
   Share,
   UserRound,
-  UserRoundPlus
+  UserRoundPlus,
+  GalleryVerticalEnd
 };
 
 @NgModule({
