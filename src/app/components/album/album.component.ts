@@ -8,7 +8,6 @@ import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {Router, RouterLink} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {ModalComponent} from "../modal/modal.component";
-import {AddContentToPlaylistComponent} from "../modal/add-content-to-playlist/add-content-to-playlist.component";
 import {CriticiseComponent} from "../modal/criticise/criticise.component";
 import {LucideAngularModule} from "lucide-angular";
 

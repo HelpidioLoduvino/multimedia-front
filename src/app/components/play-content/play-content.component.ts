@@ -2,19 +2,22 @@ import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/
 import {ContentService} from "../../services/content.service";
 import {ActivatedRoute, RouterLink} from "@angular/router";
 import {HttpClientModule} from "@angular/common/http";
-import {NgClass, NgForOf, NgIf} from "@angular/common";
+import {NgClass, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {NavbarComponent} from "../navbar/navbar.component";
 import {SidebarComponent} from "../sidebar/sidebar.component";
 import {FormsModule} from "@angular/forms";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 import {LucideAngularModule} from "lucide-angular";
 import {FooterComponent} from "../footer/footer.component";
+import {DownloadService} from "../../services/download.service";
+import {IpcRendererService} from "../../services/ipc-renderer.service";
+
 
 @Component({
   selector: 'app-play-content',
   standalone: true,
-  providers: [ContentService],
-  imports: [HttpClientModule, NgIf, NavbarComponent, NgForOf, RouterLink, SidebarComponent, FormsModule, NgClass, LucideAngularModule, FooterComponent],
+  providers: [ContentService, DownloadService, IpcRendererService],
+  imports: [HttpClientModule, NgIf, NavbarComponent, NgForOf, RouterLink, SidebarComponent, FormsModule, NgClass, LucideAngularModule, FooterComponent, NgOptimizedImage],
   templateUrl: './play-content.component.html',
   styleUrl: './play-content.component.css'
 })
@@ -23,18 +26,19 @@ export class PlayContentComponent implements OnInit, AfterViewInit{
   @ViewChild('audioPlayer', { static: false }) audioPlayer!: ElementRef;
   @ViewChild('videoPlayer', { static: false }) videoPlayer!: ElementRef;
   contendId: number | undefined;
-  contentSrc: string | undefined;
+  contentSrc!: string;
   content: any = {};
   imageUrl: { [key: number]: string } = {};
   currentTime: string = '0:00';
   seekValue: number = 0;
-  bufferValue: number = 0;
   mediaDuration: number = 0;
   isPlaying: boolean = true;
 
   constructor(
     private contentService: ContentService,
     private route: ActivatedRoute,
+    private downloadService: DownloadService,
+    private ipcRenderService: IpcRendererService,
     private sanitize: DomSanitizer) {}
 
   ngOnInit(): void {
@@ -69,9 +73,6 @@ export class PlayContentComponent implements OnInit, AfterViewInit{
         this.onLoad(player);
       });
 
-      player.nativeElement.addEventListener('progress', () => {
-        this.updateBuffer(player);
-      });
     }
   }
 
@@ -89,7 +90,6 @@ export class PlayContentComponent implements OnInit, AfterViewInit{
   streamContent(id: number){
     this.contentSrc = this.contentService.streamContent(id);
   }
-
 
   displayCover(id: number): void {
     this.contentService.displayCover(id).subscribe({
@@ -148,13 +148,6 @@ export class PlayContentComponent implements OnInit, AfterViewInit{
     }
   }
 
-  updateBuffer(player: ElementRef): void {
-    const buffered = player.nativeElement.buffered;
-    if (buffered.length > 0) {
-      const bufferedEnd = buffered.end(buffered.length - 1);
-      this.bufferValue = (bufferedEnd / this.mediaDuration) * 100;
-    }
-  }
 
   private getActivePlayer(): ElementRef | undefined {
     if (this.audioPlayer && this.audioPlayer.nativeElement.readyState > 0) {
@@ -180,6 +173,42 @@ export class PlayContentComponent implements OnInit, AfterViewInit{
       }
     }
   }
+
+  download(contentId: number) {
+    this.downloadService.downloadContent(contentId).subscribe(async (data: Blob) => {
+      const url = window.URL.createObjectURL(data);
+      console.log('Blob data:', data);
+      const arrayBuffer = await data.arrayBuffer();
+      console.log('ArrayBuffer:', arrayBuffer);
+      this.ipcRenderService.saveFile(arrayBuffer, this.content.path);
+
+      window.URL.revokeObjectURL(url);
+    });
+  }
+
+
+  /*
+  download(contentId: number){
+    this.downloadService.downloadContent(contentId).subscribe((data: Blob) =>{
+      const url = window.URL.createObjectURL(data);
+      //const arrayBuffer = data.arrayBuffer()
+      this.ipcRenderService.saveFile(data, this.content.path)
+      /*
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      a.download = this.content.path;
+      document.body.appendChild(a);
+      a.click();
+
+
+      window.URL.revokeObjectURL(url);
+    })
+  }
+
+   */
+
+
 
 
   isMusic(mimetype: string): boolean {

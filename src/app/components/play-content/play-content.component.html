@@ -2,18 +2,17 @@
 <div class="container mt-2">
   <div class="row g-2">
     <div class="col-md-6">
-      <div class="card card-body" style="height: 350px; background: black; position: relative;">
+      <div class="card card-body" style="height: 350px; background: black; position: relative; border-radius: 0">
         <div class="d-flex justify-content-center">
-          <img class="music-image" *ngIf="isMusic(content.mimetype)" [src]= "imageUrl[content.id]" alt="music cover" style="object-fit: cover; height: 320px; overflow: hidden;">
-          <video *ngIf="isVideo(content.mimetype)" class="video-content" style="width: 100%; height: 100%; object-fit: cover;">
+          <img class="music-image" [ngSrc]="imageUrl[content.id]" alt="music cover" fill>
+          <video class="video-content">
           </video>
         </div>
         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
           <audio *ngIf="isMusic(content.mimetype)" #audioPlayer [src]="contentSrc" autoplay></audio>
           <video *ngIf="isVideo(content.mimetype)" #videoPlayer [src]="contentSrc" class="video-content" autoplay></video>
           <div *ngIf="isMusic(content.mimetype) || isVideo(content.mimetype)" style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 10px; background-color: rgba(0, 0, 0, 0.5);">
-            <div style="position: relative; width: 100%;">
-              <input type="range" min="0" max="100" [(ngModel)]="bufferValue" class="buffer-progress w-100" disabled>
+            <div style="position: relative; width: 100%;" class="mb-2">
               <input type="range" min="0" max="100" [(ngModel)]="seekValue" (change)="seekMedia()" class="custom-progress w-100" style="position: absolute; top: 0; left: 0;">
             </div>
             <button class="btn bg-transparent border-0" (click)="playMedia()" style="color: white;"><i [ngClass]="isPlaying ? 'fa fa-pause' : 'fa fa-play'"></i></button>
@@ -36,7 +35,7 @@
                 <lucide-icon name="share"></lucide-icon>
               </button>
             </span>
-              <button class="btn btn-dark" style="position: relative; top: -15px;">
+              <button class="btn btn-dark" style="position: relative; top: -15px;" (click)="download(content.id)">
                <lucide-icon name="download"></lucide-icon>
               </button>
           </li>

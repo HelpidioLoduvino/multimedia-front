@@ -20,7 +20,7 @@ import {
   Share,
   UserRound,
   UserRoundPlus,
-  GalleryVerticalEnd
+  GalleryVerticalEnd, Play, Pause
 } from 'lucide-angular';
 
 
