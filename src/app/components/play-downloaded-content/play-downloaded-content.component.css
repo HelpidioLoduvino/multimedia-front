@@ -1,0 +1,11 @@
+.content{
+  color: white;
+  cursor: pointer;
+}
+.content:hover{
+  color: wheat;
+}
+
+.active {
+  color: goldenrod;
+}

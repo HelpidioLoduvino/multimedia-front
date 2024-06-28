@@ -28,8 +28,8 @@ app.whenReady().then(() =>{
 })
 
 
-ipcMain.on('save-file', (event, { arrayBuffer, filename }) => {
-  const userDocumentsPath = path.join(__dirname, 'src', 'assets', 'downloads'); // Obtém a pasta de downloads do usuário
+ipcMain.on('save-file', (event, { arrayBuffer, filename, userId }) => {
+  const userDocumentsPath = path.join(__dirname, 'src', 'assets', 'downloads', userId); // Obtém a pasta de downloads do usuário
   const baseFilename = path.basename(filename);
   const downloadPath = path.join(userDocumentsPath, baseFilename); // Caminho completo para o arquivo de download
 

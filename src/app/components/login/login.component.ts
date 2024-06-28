@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit{
           localStorage.setItem('token', response.token);
           localStorage.setItem('refreshToken', response.refreshToken);
           localStorage.setItem('email', response.email);
+          localStorage.setItem('id', response.id)
           if(response.userRole === "ADMIN"){
 
           } else if (response.userRole === "CLIENT"){

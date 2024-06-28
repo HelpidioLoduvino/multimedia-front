@@ -3,6 +3,7 @@ import {NavbarComponent} from "../navbar/navbar.component";
 import {FooterComponent} from "../footer/footer.component";
 import {DownloadService} from "../../services/download.service";
 import {NgForOf, NgIf} from "@angular/common";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-download',
@@ -20,26 +21,18 @@ import {NgForOf, NgIf} from "@angular/common";
 export class DownloadComponent implements OnInit{
 
   contentList: any[] = [];
-  currentMusic: any = null;
-  audio = new Audio();
 
-  constructor(private downloadService: DownloadService) { }
+  constructor(private downloadService: DownloadService, private router: Router) { }
 
   ngOnInit(): void {
-    this.downloadService.getDownloadedContents().subscribe(response=>{
+    const userId = localStorage.getItem('id')!;
+    this.downloadService.getDownloadedContents(userId).subscribe(response=>{
       this.contentList = response;
-      console.log(this.contentList)
     })
   }
 
-  playMusic(music: any): void {
-    if (this.currentMusic) {
-      this.audio.pause();
-    }
-    this.currentMusic = music;
-    this.audio.src = music.path;
-    this.audio.load();
-    this.audio.play();
+  playDownloaded(path: string){
+    this.router.navigate(['/play-downloaded', path]);
   }
 
 }

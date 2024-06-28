@@ -17,8 +17,8 @@ export class DownloadService {
     return this.http.get(`${this.backendUrl}/api/content/download/` + contentId, {responseType: 'blob'});
   }
 
-  getDownloadedContents(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.expressUrl}/api/contents`);
+  getDownloadedContents(userId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.expressUrl}/api/contents/${userId}`);
   }
 
 }

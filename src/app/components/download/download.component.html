@@ -5,19 +5,13 @@
     <div class="col-md-5 mb-3">
       <div class="d-flex justify-content-center">
         <div class="card-color card" *ngFor="let content of contentList">
-          <div class="card-body" (click)="playMusic(content)">
+          <div class="card-body" (click)="playDownloaded(content.path)">
             {{content.name}}
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <div *ngIf="currentMusic">
-    <h3>Now Playing: {{ currentMusic.name }}</h3>
-    <audio controls [src]="currentMusic.path" autoplay></audio>
-  </div>
-
 </div>
 
 <app-footer></app-footer>

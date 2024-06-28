@@ -19,9 +19,9 @@ export class IpcRendererService {
     }
   }
 
-  saveFile(arrayBuffer: ArrayBuffer, filename: string) {
+  saveFile(arrayBuffer: ArrayBuffer, filename: string, userId: string) {
     if (this.ipcRenderer) {
-      this.ipcRenderer.send('save-file', { arrayBuffer, filename });
+      this.ipcRenderer.send('save-file', { arrayBuffer, filename, userId });
     } else {
       console.error('Electron IPC Renderer is not available.');
     }

@@ -76,11 +76,11 @@ export class PlayContentComponent implements OnInit, AfterViewInit{
     }
   }
 
-
   getContent(id: number){
     this.contentService.getContentById(id).subscribe({
       next: (response) =>{
         this.content = response;
+        console.log(this.content)
       }, error: (error) => {
         console.error("Erro ao carregar conteúdo", error);
       }
@@ -177,11 +177,9 @@ export class PlayContentComponent implements OnInit, AfterViewInit{
   download(contentId: number) {
     this.downloadService.downloadContent(contentId).subscribe(async (data: Blob) => {
       const url = window.URL.createObjectURL(data);
-      console.log('Blob data:', data);
       const arrayBuffer = await data.arrayBuffer();
-      console.log('ArrayBuffer:', arrayBuffer);
-      this.ipcRenderService.saveFile(arrayBuffer, this.content.path);
-
+      const userId: string = localStorage.getItem('id')!;
+      this.ipcRenderService.saveFile(arrayBuffer, this.content.path, userId);
       window.URL.revokeObjectURL(url);
     });
   }

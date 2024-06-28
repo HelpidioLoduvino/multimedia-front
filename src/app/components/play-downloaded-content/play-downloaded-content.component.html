@@ -1,0 +1,26 @@
+<app-navbar></app-navbar>
+<div class="container mt-3">
+  <div class="row g-2">
+    <div class="col-md-6">
+      <div class="card card-body" style="height: 350px; background: black; position: relative; border-radius: 0">
+        <div *ngIf="isAudio; else videoTemplate">
+          <audio [src]="contentUrl" controls autoplay></audio>
+        </div>
+        <ng-template #videoTemplate>
+          <video [src]="contentUrl" controls autoplay width="100%" height="100%"></video>
+        </ng-template>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card card-body" style="height: 350px; background: black; position: relative; border-radius: 0">
+        <ul class="navbar-nav">
+          <li class="content nav-item" routerLinkActive="active" *ngFor="let content of contentList" (click)="playDownloaded(content.path)">
+            {{content.name}}
+            <hr style="color: white;">
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
