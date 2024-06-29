@@ -7,7 +7,9 @@
 .custom-nav-items{
   display: flex;
   list-style: none;
+  text-decoration: none;
 }
+
 .menu{
   display: flex;
   list-style: none;

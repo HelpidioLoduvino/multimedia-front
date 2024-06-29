@@ -5,6 +5,7 @@ import {AlbumService} from "../../services/album.service";
 import {ActivatedRoute} from "@angular/router";
 import {DomSanitizer} from "@angular/platform-browser";
 import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
+import {AdminNavbarComponent} from "../admin-navbar/admin-navbar.component";
 
 @Component({
   selector: 'app-album-info',
@@ -15,7 +16,8 @@ import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
     FooterComponent,
     NgIf,
     NgOptimizedImage,
-    NgForOf
+    NgForOf,
+    AdminNavbarComponent
   ],
   templateUrl: './album-info.component.html',
   styleUrl: './album-info.component.css'
@@ -28,6 +30,7 @@ export class AlbumInfoComponent implements OnInit{
   albumId!: number;
   reviewOverall: any = {};
   imageUrl: { [key: number]: string } = {};
+  isAdmin = localStorage.getItem('userRole');
 
   constructor(private albumService: AlbumService,
               private router: ActivatedRoute,

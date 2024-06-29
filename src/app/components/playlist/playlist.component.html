@@ -1,4 +1,5 @@
-<app-navbar></app-navbar>
+<app-navbar *ngIf="isAdmin !== 'ADMIN'"></app-navbar>
+<app-admin-navbar *ngIf="isAdmin === 'ADMIN'"></app-admin-navbar>
 <div class="container d-block" *ngIf="playlist">
   <h5 style="position: relative; top: 40px;">{{playlist.name}}</h5>
   <div class="d-flex justify-content-end" style="position: relative; top: -10px;">

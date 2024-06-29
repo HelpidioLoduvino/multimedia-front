@@ -11,6 +11,7 @@ import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {ContentService} from "../../services/content.service";
 import {DomSanitizer} from "@angular/platform-browser";
 import {LucideAngularModule} from "lucide-angular";
+import {AdminNavbarComponent} from "../admin-navbar/admin-navbar.component";
 
 @Component({
   selector: 'app-playlist',
@@ -26,7 +27,8 @@ import {LucideAngularModule} from "lucide-angular";
     MatMenuItem,
     MatMenuTrigger,
     NgOptimizedImage,
-    LucideAngularModule
+    LucideAngularModule,
+    AdminNavbarComponent
   ],
   templateUrl: './playlist.component.html',
   styleUrl: './playlist.component.css'
@@ -37,6 +39,8 @@ export class PlaylistComponent implements OnInit{
   image: any = {};
   imageUrls: { [key: number]: string } = {};
   playlistId!: number
+  isAdmin = localStorage.getItem('userRole');
+
 
   constructor(private playlistService: PlaylistService,
               private route: ActivatedRoute,

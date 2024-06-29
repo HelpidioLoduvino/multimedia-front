@@ -4,18 +4,20 @@ import {NgForOf, NgIf} from "@angular/common";
 import {NavbarComponent} from "../navbar/navbar.component";
 import {FooterComponent} from "../footer/footer.component";
 import {DownloadService} from "../../services/download.service";
+import {AdminNavbarComponent} from "../admin-navbar/admin-navbar.component";
 
 @Component({
   selector: 'app-play-downloaded-content',
   standalone: true,
   providers: [DownloadService],
-  imports: [
-    NgIf,
-    NavbarComponent,
-    FooterComponent,
-    NgForOf,
-    RouterLinkActive
-  ],
+    imports: [
+        NgIf,
+        NavbarComponent,
+        FooterComponent,
+        NgForOf,
+        RouterLinkActive,
+        AdminNavbarComponent
+    ],
   templateUrl: './play-downloaded-content.component.html',
   styleUrl: './play-downloaded-content.component.css'
 })
@@ -24,6 +26,7 @@ export class PlayDownloadedContentComponent implements OnInit{
   contentUrl!: string;
   contentList: any[] = [];
   isAudio!: boolean;
+  isAdmin = localStorage.getItem('userRole');
 
   constructor(private router: ActivatedRoute, private downloadService: DownloadService, private route: Router) {
   }

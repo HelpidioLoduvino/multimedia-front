@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NavbarComponent} from "../navbar/navbar.component";
 import {AlbumService} from "../../services/album.service";
-import {NgForOf, NgOptimizedImage} from "@angular/common";
+import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {DomSanitizer} from "@angular/platform-browser";
 import {FooterComponent} from "../footer/footer.component";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
@@ -10,22 +10,25 @@ import {MatDialog} from "@angular/material/dialog";
 import {ModalComponent} from "../modal/modal.component";
 import {CriticiseComponent} from "../modal/criticise/criticise.component";
 import {LucideAngularModule} from "lucide-angular";
+import {AdminNavbarComponent} from "../admin-navbar/admin-navbar.component";
 
 @Component({
   selector: 'app-album',
   standalone: true,
   providers: [AlbumService],
-    imports: [
-        NavbarComponent,
-        NgForOf,
-        NgOptimizedImage,
-        FooterComponent,
-        MatMenu,
-        MatMenuItem,
-        RouterLink,
-        MatMenuTrigger,
-        LucideAngularModule
-    ],
+  imports: [
+    NavbarComponent,
+    NgForOf,
+    NgOptimizedImage,
+    FooterComponent,
+    MatMenu,
+    MatMenuItem,
+    RouterLink,
+    MatMenuTrigger,
+    LucideAngularModule,
+    AdminNavbarComponent,
+    NgIf
+  ],
   templateUrl: './album.component.html',
   styleUrl: './album.component.css'
 })

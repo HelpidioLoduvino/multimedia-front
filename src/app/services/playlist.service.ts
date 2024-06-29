@@ -16,7 +16,6 @@ export class PlaylistService {
     return this.http.post(`${this.backendUrl}/api/playlist/add`, playlist, {params, observe: "response"});
   }
 
-
   getAllPlaylistsByUserId(){
     return this.http.get<any>(`${this.backendUrl}/api/playlist/user-playlists`);
   }
@@ -38,6 +37,10 @@ export class PlaylistService {
       .set('contentId', contentId.toString())
       .set('playlistIds', playlistIds.toString());
     return this.http.post<any>(`${this.backendUrl}/api/playlist/add-content-to-playlist`, null, {params, observe: 'response'});
+  }
+
+  allPlaylist(){
+    return this.http.get<any>(`${this.backendUrl}/api/playlist/all`);
   }
 
 }

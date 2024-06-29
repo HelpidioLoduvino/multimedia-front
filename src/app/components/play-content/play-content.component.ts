@@ -11,13 +11,14 @@ import {LucideAngularModule} from "lucide-angular";
 import {FooterComponent} from "../footer/footer.component";
 import {DownloadService} from "../../services/download.service";
 import {IpcRendererService} from "../../services/ipc-renderer.service";
+import {AdminNavbarComponent} from "../admin-navbar/admin-navbar.component";
 
 
 @Component({
   selector: 'app-play-content',
   standalone: true,
   providers: [ContentService, DownloadService, IpcRendererService],
-  imports: [HttpClientModule, NgIf, NavbarComponent, NgForOf, RouterLink, SidebarComponent, FormsModule, NgClass, LucideAngularModule, FooterComponent, NgOptimizedImage],
+    imports: [HttpClientModule, NgIf, NavbarComponent, NgForOf, RouterLink, SidebarComponent, FormsModule, NgClass, LucideAngularModule, FooterComponent, NgOptimizedImage, AdminNavbarComponent],
   templateUrl: './play-content.component.html',
   styleUrl: './play-content.component.css'
 })
@@ -33,6 +34,7 @@ export class PlayContentComponent implements OnInit, AfterViewInit{
   seekValue: number = 0;
   mediaDuration: number = 0;
   isPlaying: boolean = true;
+  isAdmin = localStorage.getItem('userRole');
 
   constructor(
     private contentService: ContentService,

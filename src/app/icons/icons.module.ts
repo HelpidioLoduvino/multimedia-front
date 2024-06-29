@@ -20,7 +20,7 @@ import {
   Share,
   UserRound,
   UserRoundPlus,
-  GalleryVerticalEnd, Play, Pause
+  GalleryVerticalEnd, Play, Pause, Trash2
 } from 'lucide-angular';
 
 
@@ -43,7 +43,8 @@ const icons = {
   Share,
   UserRound,
   UserRoundPlus,
-  GalleryVerticalEnd
+  GalleryVerticalEnd,
+  Trash2
 };
 
 @NgModule({

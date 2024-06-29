@@ -1,0 +1,31 @@
+<app-navbar *ngIf="isAdmin !== 'ADMIN'"></app-navbar>
+<app-admin-navbar *ngIf="isAdmin === 'ADMIN'"></app-admin-navbar>
+
+<div class="container mt-3">
+  <div class="row g-3">
+    <div class="col-md-3 mb-3" *ngFor="let radio of radios">
+      <div class="d-flex justify-content-center">
+        <div class="card-color card" style="cursor: pointer; height: 150px;">
+          <div class="card-body">
+            <div class="d-flex justify-content-center">
+              {{radio.name}}
+            </div>
+            <div class="d-flex justify-content-center">
+              {{radio.country}}
+            </div>
+            <div class="d-flex justify-content-center">
+              {{radio.station}}
+            </div>
+            <div class="d-flex justify-content-center">
+              <audio controls>
+                <source [src]="radio.url" type="audio/mpeg">
+              </audio>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

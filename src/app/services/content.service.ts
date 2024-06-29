@@ -58,4 +58,8 @@ export class ContentService {
     return this.http.get<any>(`${this.backendUrl}/api/music/all`);
   }
 
+  adminContents(){
+    return this.http.get<any>(`${this.backendUrl}/api/content/all`);
+  }
+
 }

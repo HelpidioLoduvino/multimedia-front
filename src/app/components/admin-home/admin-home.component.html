@@ -1,0 +1,129 @@
+<app-admin-navbar></app-admin-navbar>
+<div class="container mt-3">
+  <h5>Utilizadores</h5>
+  <div class="white-line"></div>
+  <div class="table-responsive mt-3">
+    <table class="table table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>Nome</th>
+          <th>Sobrenome</th>
+          <th>Email</th>
+          <th>Registo</th>
+          <th>Remover</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{user.name}}</td>
+          <td>{{user.surname}}</td>
+          <td>{{user.email}}</td>
+          <td>{{ getDaysSinceRegistration(user.createdAt) }} dia(s)</td>
+          <td>
+            <button class="btn btn-danger" (click)="delete(user.id)">
+              <lucide-icon name="trash-2" size="16"></lucide-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h5>Conteúdos</h5>
+  <div class="white-line"></div>
+  <div class="row g-3 mt-1">
+    <div class="col-md-3 mb-3" *ngFor="let content of contents">
+      <div class="d-flex justify-content-center">
+        <div class="card-color card">
+          <div class="card-header bg-transparent" (click)="play(content.id)" style="cursor: pointer;">
+            <img *ngIf="isMusic(content.mimetype)" [ngSrc]="imageUrls[content.id]" alt="{{content.title}} cover" width="100%" height="200">
+            <video *ngIf="isVideo(content.mimetype)" controls width="100%" height="194"></video>
+          </div>
+          <div class="card-body bg-transparent" (click)="play(content.id)" style="cursor: pointer;">
+            {{content.author.name}} - {{content.title}}
+          </div>
+          <div class="card-footer bg-transparent border-0">
+            <div class="d-flex justify-content-end">
+              <button class="btn bg-transparent border-0" [matMenuTriggerFor]="contentMenu">
+                <lucide-icon class="icon-color" name="circle-chevron-down"></lucide-icon>
+                <mat-menu #contentMenu="matMenu" [overlapTrigger]="false" yPosition="below" xPosition="before">
+                  <a (click)="contentInfo(content.id)" mat-menu-item>Descrição</a>
+                  <a mat-menu-item>Apagar</a>
+                </mat-menu>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h5>Álbums</h5>
+  <div class="white-line"></div>
+
+  <div class="row g-3 mt-1">
+    <div class="col-md-3 mb-3" *ngFor="let album of albums">
+      <div class="d-flex justify-content-center">
+        <div class="card-color card" style="cursor: pointer;">
+          <div class="card-header bg-transparent" (click)="albumInfo(album.id)">
+            <img [ngSrc]="imageUrls[album.id]" alt="{{album.musicReleaseName}}" width="100%" height="200">
+          </div>
+          <div class="card-body bg-transparent" style="cursor:pointer;" (click)="albumInfo(album.id)">
+            <h5 class="d-flex justify-content-center">{{album.musicReleaseName}}</h5>
+          </div>
+          <div class="card-footer bg-transparent border-0">
+            <div class="d-flex justify-content-end">
+              <lucide-icon class="icon-color" name="circle-chevron-down"></lucide-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h5>Playlists</h5>
+  <div class="white-line"></div>
+
+  <div class="row g-3 mt-1">
+    <div class="col-md-3 mb-3" *ngFor="let playlist of playlists">
+      <div class="d-flex justify-content-center">
+        <div class="card-color card" style="cursor: pointer;" (click)="getPlaylistById(playlist.id)">
+          <div class="card-body">
+            <div class="d-flex justify-content-center">
+              {{playlist.name}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h5>Rádios</h5>
+  <div class="white-line"></div>
+
+  <div class="row g-3 mt-1">
+    <div class="col-md-3 mb-3" *ngFor="let radio of radios">
+      <div class="d-flex justify-content-center">
+        <div class="card-color card" style="cursor: pointer; height: 150px;">
+          <div class="card-body">
+            <div class="d-flex justify-content-center">
+              {{radio.name}}
+            </div>
+            <div class="d-flex justify-content-center">
+              {{radio.country}}
+            </div>
+            <div class="d-flex justify-content-center">
+              {{radio.station}}
+            </div>
+            <div class="d-flex justify-content-center">
+              <audio controls>
+                <source [src]="radio.url" type="audio/mpeg">
+              </audio>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<app-footer></app-footer>

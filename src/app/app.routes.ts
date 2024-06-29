@@ -17,6 +17,8 @@ import {AlbumInfoComponent} from "./components/album-info/album-info.component";
 import {GenreComponent} from "./components/genre/genre.component";
 import {DownloadComponent} from "./components/download/download.component";
 import {PlayDownloadedContentComponent} from "./components/play-downloaded-content/play-downloaded-content.component";
+import {AdminHomeComponent} from "./components/admin-home/admin-home.component";
+import {RadioComponent} from "./components/radio/radio.component";
 
 export const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -36,5 +38,7 @@ export const routes: Routes = [
   {path: 'album/:id', component: AlbumInfoComponent},
   {path: 'genre', component: GenreComponent},
   {path: 'downloads', component: DownloadComponent},
-  {path: 'play-downloaded/:path', component: PlayDownloadedContentComponent}
+  {path: 'play-downloaded/:path', component: PlayDownloadedContentComponent},
+  {path: 'admin-home', component: AdminHomeComponent},
+  {path: 'radio', component: RadioComponent},
 ];
