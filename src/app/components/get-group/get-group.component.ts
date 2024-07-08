@@ -12,6 +12,7 @@ import {ModalComponent} from "../modal/modal.component";
 import {RequestListComponent} from "../modal/request-list/request-list.component";
 import {ListGroupUserComponent} from "../modal/list-group-user/list-group-user.component";
 import {LucideAngularModule} from "lucide-angular";
+import {EditContentComponent} from "../modal/edit-content/edit-content.component";
 
 @Component({
   selector: 'app-get-group',
@@ -37,6 +38,8 @@ export class GetGroupComponent implements OnInit{
   group: any = {};
   groupId!: number;
   images: any[] = [];
+  isOwnerOrEditor!: boolean;
+  isOwner!: boolean
   imageUrls: { [key: number]: string } = {};
 
   constructor(
@@ -54,6 +57,8 @@ export class GetGroupComponent implements OnInit{
       this.groupId = params['id'];
       if(this.groupId){
         this.getGroup(this.groupId);
+        this.isMemberOwnerOrEditor(this.groupId)
+        this.isMemberOwner(this.groupId)
       }
     });
   }
@@ -99,6 +104,22 @@ export class GetGroupComponent implements OnInit{
     });
   }
 
+  updateContent(contentId: number): void {
+    const dialogRef = this.modal.open(ModalComponent, {
+      width: '450px',
+      height: '400px',
+      data: {
+        title: 'Editar Conteúdo',
+        component: EditContentComponent,
+        componentData: {contentId: contentId}
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+
   play(id: number) {
     this.router.navigate(['/play', id]);
   }
@@ -116,12 +137,28 @@ export class GetGroupComponent implements OnInit{
     });
   }
 
+  contentInfo(id:number){
+    this.router.navigate(['/content-info', id]);
+  }
+
   isMusic(mimetype: string): boolean {
     return mimetype.startsWith("audio");
   }
 
   isVideo(mimetype: string): boolean {
     return mimetype.startsWith("video")
+  }
+
+  isMemberOwnerOrEditor(groupId: number){
+    this.groupService.isOwnerOrEditor(groupId).subscribe(response=>{
+      this.isOwnerOrEditor = response;
+    })
+  }
+
+  isMemberOwner(groupId: number){
+    this.groupService.isOwner(groupId).subscribe(response=>{
+      this.isOwner = response;
+    })
   }
 
 }

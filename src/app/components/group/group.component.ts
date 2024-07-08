@@ -4,7 +4,6 @@ import {NavbarComponent} from "../navbar/navbar.component";
 import {FooterComponent} from "../footer/footer.component";
 import {MatDialog} from "@angular/material/dialog";
 import {ModalComponent} from "../modal/modal.component";
-import {AddContentToPlaylistComponent} from "../modal/add-content-to-playlist/add-content-to-playlist.component";
 import {CreateGroupComponent} from "../modal/create-group/create-group.component";
 import {GroupService} from "../../services/group.service";
 import {NgForOf, NgIf} from "@angular/common";
@@ -56,7 +55,6 @@ export class GroupComponent implements OnInit{
     this.groupService.getAllMyGroups().subscribe({
       next: (response) => {
         this.allMyGroups = response.body;
-        console.log(response.body)
       }, error: (error) => {
         console.error("Erro ao recuperar meus grupos", error);
       }

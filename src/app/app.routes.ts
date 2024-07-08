@@ -40,5 +40,5 @@ export const routes: Routes = [
   {path: 'downloads', component: DownloadComponent},
   {path: 'play-downloaded/:path', component: PlayDownloadedContentComponent},
   {path: 'admin-home', component: AdminHomeComponent},
-  {path: 'radio', component: RadioComponent},
+  {path: 'radio', component: RadioComponent}
 ];

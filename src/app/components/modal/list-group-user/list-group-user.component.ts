@@ -23,6 +23,7 @@ export class ListGroupUserComponent implements OnInit{
 
   members: any = {};
   groupId!: number;
+  isOwner!: boolean
 
   constructor(private groupService: GroupService,@Inject(MAT_DIALOG_DATA) public data: any, private toast: MatSnackBar) {
     this.groupId = data.componentData.groupId;
@@ -31,8 +32,11 @@ export class ListGroupUserComponent implements OnInit{
   ngOnInit(): void {
     this.groupService.getAllUsersByGroupId(this.groupId).subscribe(response=>{
       this.members = response;
-      console.log(response)
     });
+
+    this.groupService.isOwner(this.groupId).subscribe(response=>{
+      this.isOwner = response;
+    })
   }
 
   setOwner(userId: number, groupId: number){

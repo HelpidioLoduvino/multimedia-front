@@ -10,7 +10,7 @@
         <tr *ngFor="let member of members.members">
           <td>
             <span style="position: relative; top: 15px;">{{member.user.name}} {{member.user.surname}} <br> <small class="text-muted">(owner: {{member.owner}}, editor: {{member.editor}})</small></span>
-            <div class="d-flex justify-content-end" style="position: relative; top: -25px;">
+            <div class="d-flex justify-content-end" style="position: relative; top: -25px;" *ngIf="isOwner">
               <div>
                 <button class="btn btn-dark" [matMenuTriggerFor]="userMenu"><i class="fa fa-ellipsis-h"></i></button>
                 <mat-menu #userMenu="matMenu" [overlapTrigger]="false" yPosition="below" xPosition="before">

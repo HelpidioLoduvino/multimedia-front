@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {NavbarComponent} from "../navbar/navbar.component";
 import {FooterComponent} from "../footer/footer.component";
 import {AlbumService} from "../../services/album.service";
@@ -10,7 +10,6 @@ import {AdminNavbarComponent} from "../admin-navbar/admin-navbar.component";
 @Component({
   selector: 'app-album-info',
   standalone: true,
-  providers: [AlbumService],
   imports: [
     NavbarComponent,
     FooterComponent,
@@ -22,7 +21,7 @@ import {AdminNavbarComponent} from "../admin-navbar/admin-navbar.component";
   templateUrl: './album-info.component.html',
   styleUrl: './album-info.component.css'
 })
-export class AlbumInfoComponent implements OnInit{
+export class AlbumInfoComponent implements AfterViewInit{
 
   album: any = {};
   albumReviews: any[] = [];
@@ -38,17 +37,15 @@ export class AlbumInfoComponent implements OnInit{
               ) {
   }
 
-  ngOnInit(): void {
-    this.router.params.subscribe(params=>{
-      this.albumId = params['id'];
-      if(this.albumId){
-        this.getAlbum(this.albumId);
-        this.displayCover(this.albumId);
-        this.getAlbumReviews(this.albumId);
-        this.getAlbumReviewOverall(this.albumId);
-        this.getAlbumMusic(this.albumId);
-      }
-    })
+  ngAfterViewInit(): void {
+    this.albumId = this.router.snapshot.params['id'];
+    if(this.albumId){
+      this.getAlbum(this.albumId);
+      this.displayCover(this.albumId);
+      this.getAlbumReviews(this.albumId);
+      this.getAlbumReviewOverall(this.albumId);
+      this.getAlbumMusic(this.albumId);
+    }
   }
 
   getAlbum(id: number){

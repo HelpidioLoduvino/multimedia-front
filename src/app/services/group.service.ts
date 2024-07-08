@@ -95,4 +95,13 @@ export class GroupService {
     return this.http.put<any>(`${this.backendUrl}/api/group/update-user-to-editor`, null, {params});
   }
 
+  isOwnerOrEditor(groupId: number){
+    return this.http.get<any>(`${this.backendUrl}/api/group/is-owner-or-editor/${groupId}`);
+  }
+
+
+  isOwner(groupId: number){
+    return this.http.get<any>(`${this.backendUrl}/api/group/is-owner/${groupId}`);
+  }
+
 }

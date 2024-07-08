@@ -6,9 +6,9 @@
       <lucide-icon class="icon-color" name="circle-plus"></lucide-icon>
     </button>
     <mat-menu #userMenu="matMenu" [overlapTrigger]="false" yPosition="below" xPosition="before">
-      <a (click)="addMember(group.id)" mat-menu-item>Adicionar Membro</a>
+      <a *ngIf="isOwner" (click)="addMember(group.id)" mat-menu-item>Adicionar Membro</a>
       <a (click)="listMembers(group.id)" mat-menu-item>Listar Membros</a>
-      <a mat-menu-item>Apagar Grupo</a>
+      <a *ngIf="isOwner" mat-menu-item>Apagar Grupo</a>
     </mat-menu>
   </div>
   <div class="white-line mt-2"></div>
@@ -22,6 +22,15 @@
           </div>
           <div class="card-body bg-transparent" (click)="play(content.id)" style="cursor: pointer">
             <a class="nav-link">{{content.author.name}} - {{content.title}}</a>
+          </div>
+          <div class="card-footer bg-transparent border-0 d-flex justify-content-end">
+            <button class="btn bg-transparent border-0" [matMenuTriggerFor]="contentMenu">
+              <lucide-icon class="icon-color" name="circle-chevron-down"></lucide-icon>
+            </button>
+            <mat-menu #contentMenu="matMenu" [overlapTrigger]="false" yPosition="below" xPosition="before">
+              <a (click)="contentInfo(content.id)" mat-menu-item>Descrição</a>
+              <a *ngIf="isOwnerOrEditor" (click)="updateContent(content.id)" mat-menu-item>Editar</a>
+            </mat-menu>
           </div>
         </div>
     </div>
