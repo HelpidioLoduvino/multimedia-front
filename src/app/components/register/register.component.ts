@@ -8,7 +8,6 @@ import {FooterComponent} from "../footer/footer.component";
 @Component({
   selector: 'app-register',
   standalone: true,
-    providers: [UserService],
   imports: [
     ReactiveFormsModule,
     FooterComponent,
@@ -42,17 +41,16 @@ export class RegisterComponent implements OnInit{
   register() {
     if(this.registerForm.valid){
       const user = this.registerForm.value;
-      this.userService.register(user).subscribe({
-        next: (response) => {
+      this.userService.register(user).subscribe(response=>{
+        if(response.ok){
           this.snackBar.open('Registo Feito Com Sucesso', 'Fechar', {
             duration: 3000, panelClass: ['snackbar-success']
           });
           this.router.navigate(['']).then(r => {})
-        }, error: (error) => {
+        } else {
           this.snackBar.open('Erro ao Fazer Registo!', 'Fechar', {
             duration: 3000, panelClass: ['snackbar-error']
           });
-          console.error("Erro ao fazer registro", error);
         }
       })
     }else{

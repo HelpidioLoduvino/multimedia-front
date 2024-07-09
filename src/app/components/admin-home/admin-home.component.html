@@ -20,7 +20,7 @@
           <td>{{user.email}}</td>
           <td>{{ getDaysSinceRegistration(user.createdAt) }} dia(s)</td>
           <td>
-            <button class="btn btn-danger" (click)="delete(user.id)">
+            <button class="btn btn-danger" (click)="deleteModal(user.id)">
               <lucide-icon name="trash-2" size="16"></lucide-icon>
             </button>
           </td>
@@ -71,9 +71,14 @@
             <h5 class="d-flex justify-content-center">{{album.musicReleaseName}}</h5>
           </div>
           <div class="card-footer bg-transparent border-0">
-            <div class="d-flex justify-content-end">
-              <lucide-icon class="icon-color" name="circle-chevron-down"></lucide-icon>
+            <div class="d-flex justify-content-end" [matMenuTriggerFor]="infoMenu">
+              <button class="btn bg-transparent border-0">
+                <lucide-icon class="icon-color" name="circle-chevron-down"></lucide-icon>
+              </button>
             </div>
+            <mat-menu #infoMenu="matMenu" [overlapTrigger]="false" yPosition="below" xPosition="before">
+              <a (click)="criticiseAlbum(album.id)" mat-menu-item>Criticar</a>
+            </mat-menu>
           </div>
         </div>
       </div>

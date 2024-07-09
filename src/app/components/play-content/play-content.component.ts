@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ContentService} from "../../services/content.service";
-import {ActivatedRoute, RouterLink} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {HttpClientModule} from "@angular/common/http";
 import {NgClass, NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {NavbarComponent} from "../navbar/navbar.component";
@@ -12,13 +12,13 @@ import {FooterComponent} from "../footer/footer.component";
 import {DownloadService} from "../../services/download.service";
 import {IpcRendererService} from "../../services/ipc-renderer.service";
 import {AdminNavbarComponent} from "../admin-navbar/admin-navbar.component";
+import {GroupService} from "../../services/group.service";
 
 
 @Component({
   selector: 'app-play-content',
   standalone: true,
-  providers: [ContentService, DownloadService, IpcRendererService],
-    imports: [HttpClientModule, NgIf, NavbarComponent, NgForOf, RouterLink, SidebarComponent, FormsModule, NgClass, LucideAngularModule, FooterComponent, NgOptimizedImage, AdminNavbarComponent],
+  imports: [HttpClientModule, NgIf, NavbarComponent, NgForOf, RouterLink, SidebarComponent, FormsModule, NgClass, LucideAngularModule, FooterComponent, NgOptimizedImage, AdminNavbarComponent, RouterLinkActive],
   templateUrl: './play-content.component.html',
   styleUrl: './play-content.component.css'
 })
@@ -35,12 +35,16 @@ export class PlayContentComponent implements OnInit, AfterViewInit{
   mediaDuration: number = 0;
   isPlaying: boolean = true;
   isAdmin = localStorage.getItem('userRole');
+  playNextContents: any[] = [];
+  activeContentId: number | null = null;
 
   constructor(
     private contentService: ContentService,
     private route: ActivatedRoute,
     private downloadService: DownloadService,
     private ipcRenderService: IpcRendererService,
+    private groupService: GroupService,
+    private router: Router,
     private sanitize: DomSanitizer) {}
 
   ngOnInit(): void {
@@ -52,6 +56,7 @@ export class PlayContentComponent implements OnInit, AfterViewInit{
         this.getContent(this.contendId);
       }
     });
+    this.getMoreContents();
   }
 
 
@@ -82,11 +87,25 @@ export class PlayContentComponent implements OnInit, AfterViewInit{
     this.contentService.getContentById(id).subscribe({
       next: (response) =>{
         this.content = response;
-        console.log(this.content)
       }, error: (error) => {
         console.error("Erro ao carregar conteúdo", error);
       }
     })
+  }
+
+  getMoreContents(){
+    this.groupService.getAllMyGroupsOrPublicGroups().subscribe(response=>{
+      this.playNextContents = response;
+      console.log(this.playNextContents)
+    })
+  }
+
+  play(id: number) {
+    this.router.navigate(['/play', id]);
+  }
+
+  setActiveContent(id: number) {
+    this.activeContentId = id;
   }
 
   streamContent(id: number){

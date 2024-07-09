@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {Observable, tap} from "rxjs";
 import {environment} from "../../environment";
@@ -16,7 +16,7 @@ export class UserService {
   constructor(private http: HttpClient, private router: Router) { }
 
   register(user: any) {
-    return this.http.post<any>(`${this.backendUrl}/api/user/register`, user);
+    return this.http.post<any>(`${this.backendUrl}/api/user/register`, user, {observe: "response"});
   }
 
   login(credentials: any) {
@@ -49,6 +49,11 @@ export class UserService {
 
   allClients(){
     return this.http.get<any>(`${this.backendUrl}/api/user/get-all-clients`);
+  }
+
+  delete(id: number){
+    const params = new HttpParams().set('id', id.toString())
+    return this.http.delete(`${this.backendUrl}/api/user/delete`, {params, observe: "response"})
   }
 
 }

@@ -12,6 +12,11 @@ import {PlaylistService} from "../../services/playlist.service";
 import {Router} from "@angular/router";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {RadioService} from "../../services/radio.service";
+import {ModalComponent} from "../modal/modal.component";
+import {AddContentToGroupComponent} from "../modal/add-content-to-group/add-content-to-group.component";
+import {MatDialog} from "@angular/material/dialog";
+import {DeleteComponent} from "../modal/delete/delete.component";
+import {CriticiseComponent} from "../modal/criticise/criticise.component";
 
 @Component({
   selector: 'app-admin-home',
@@ -47,6 +52,7 @@ export class AdminHomeComponent implements OnInit{
               private playlistService: PlaylistService,
               private radioService: RadioService,
               private router: Router,
+              private modal: MatDialog,
               private sanitizer: DomSanitizer,
               ) {
   }
@@ -82,8 +88,38 @@ export class AdminHomeComponent implements OnInit{
     return Math.floor(timeDifference / (1000 * 3600 * 24));
   }
 
-  delete(id: number){
+  deleteModal(id: number){
+    const dialogRef = this.modal.open(ModalComponent, {
+      width: '400px',
+      height: '220px',
+      data: {
+        title: 'Confirmar',
+        component: DeleteComponent,
+        componentData: { id: id}
+      }
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+  albumInfo(id: number){
+    this.router.navigate(['/album', id]);
+  }
+
+  criticiseAlbum(albumId: number): void {
+    const dialogRef = this.modal.open(ModalComponent, {
+      width: '350px',
+      height: '350px',
+      data: {
+        title: 'Crítica',
+        component: CriticiseComponent,
+        componentData: { albumId: albumId}
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 
   play(id: number) {
@@ -92,10 +128,6 @@ export class AdminHomeComponent implements OnInit{
 
   contentInfo(id:number){
     this.router.navigate(['/content-info', id]);
-  }
-
-  albumInfo(id: number){
-    this.router.navigate(['/album', id]);
   }
 
   getPlaylistById(id: number) {

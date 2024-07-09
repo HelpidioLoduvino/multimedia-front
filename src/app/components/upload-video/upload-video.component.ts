@@ -5,10 +5,11 @@ import {NavbarComponent} from "../navbar/navbar.component";
 import {SidebarComponent} from "../sidebar/sidebar.component";
 import {ContentService} from "../../services/content.service";
 import {FooterComponent} from "../footer/footer.component";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {GroupService} from "../../services/group.service";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {AdminNavbarComponent} from "../admin-navbar/admin-navbar.component";
 
 
 @Component({
@@ -23,7 +24,9 @@ import {MatSnackBar} from "@angular/material/snack-bar";
     NavbarComponent,
     SidebarComponent,
     FooterComponent,
-    NgForOf
+    NgForOf,
+    AdminNavbarComponent,
+    NgIf
   ],
   templateUrl: './upload-video.component.html',
   styleUrl: './upload-video.component.css'
@@ -52,6 +55,7 @@ export class UploadVideoComponent implements OnInit{
   features: string = '';
   currentYear: number;
   groups: any[] = [];
+  isAdmin = localStorage.getItem('userRole');
 
   constructor(private contentService: ContentService,
               private groupService: GroupService,

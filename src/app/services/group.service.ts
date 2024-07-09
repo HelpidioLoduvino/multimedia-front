@@ -34,6 +34,10 @@ export class GroupService {
     return this.http.get<any>(`${this.backendUrl}/api/group/all-except-my-and-public-groups`);
   }
 
+  getAllMyGroupsOrPublicGroups(){
+    return this.http.get<any>(`${this.backendUrl}/api/group/all-my-groups-or-public-groups`);
+  }
+
   getAllMyGroups(){
     return this.http.get<any>(`${this.backendUrl}/api/group/all-my-groups`);
   }

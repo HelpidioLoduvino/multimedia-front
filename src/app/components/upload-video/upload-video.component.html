@@ -1,5 +1,5 @@
-
-<app-navbar></app-navbar>
+<app-navbar *ngIf="isAdmin !== 'ADMIN'"></app-navbar>
+<app-admin-navbar *ngIf="isAdmin === 'ADMIN'"></app-admin-navbar>
 <div class="container mt-3">
   <h5>Carregar Vídeo</h5>
   <div class="title-separator mb-3"></div>

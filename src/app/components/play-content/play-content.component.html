@@ -6,8 +6,6 @@
       <div class="card card-body" style="height: 350px; background: black; position: relative; border-radius: 0">
         <div class="d-flex justify-content-center">
           <img class="music-image" [ngSrc]="imageUrl[content.id]" alt="music cover" fill>
-          <video class="video-content" >
-          </video>
         </div>
         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
           <audio *ngIf="isMusic(content.mimetype)" #audioPlayer [src]="contentSrc" autoplay></audio>
@@ -42,14 +40,23 @@
           </li>
         </ul>
         <div class="card card-body mt-2" style="background: black; color: white">
-          <label><u>Letra da Música</u></label>
+          <label><u>Letra</u></label>
           {{content.lyric}}
         </div>
       </div>
     </div>
     <div class="col">
-      <div class="card card-body" style="background-color: black;">
-
+      <div class="card card-body" style="background-color: black; height: 100%">
+        <h5 class="d-flex justify-content-center mb-3" style="color: white;">Todos</h5>
+        <ul class="navbar-nav" *ngFor="let nextContents of playNextContents">
+          <li class="nav-item content"
+              *ngFor="let moreContents of nextContents.contents"
+              (click)="play(moreContents.id); setActiveContent(moreContents.id)"
+              [class.active]="moreContents.id === activeContentId"
+              style="cursor: pointer;">
+            {{moreContents.author.name}} - {{moreContents.title}}
+          </li>
+        </ul>
       </div>
     </div>
   </div>

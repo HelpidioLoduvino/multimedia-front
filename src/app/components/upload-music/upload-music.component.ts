@@ -10,31 +10,34 @@ import {ContentService} from "../../services/content.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {FooterComponent} from "../footer/footer.component";
 import {MatDialog} from "@angular/material/dialog";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {GroupService} from "../../services/group.service";
 import {Router} from "@angular/router";
+import {AdminNavbarComponent} from "../admin-navbar/admin-navbar.component";
 
 
 @Component({
   selector: 'app-upload-music',
   standalone: true,
   providers: [ContentService],
-  imports: [
-    NavbarComponent,
-    SidebarComponent,
-    ReactiveFormsModule,
-    MatStep,
-    MatFormField,
-    MatInput,
-    MatStepLabel,
-    MatButton,
-    MatStepperPrevious,
-    MatStepperNext,
-    MatStepper,
-    FormsModule,
-    FooterComponent,
-    NgForOf
-  ],
+    imports: [
+        NavbarComponent,
+        SidebarComponent,
+        ReactiveFormsModule,
+        MatStep,
+        MatFormField,
+        MatInput,
+        MatStepLabel,
+        MatButton,
+        MatStepperPrevious,
+        MatStepperNext,
+        MatStepper,
+        FormsModule,
+        FooterComponent,
+        NgForOf,
+        AdminNavbarComponent,
+        NgIf
+    ],
   templateUrl: './upload-music.component.html',
   styleUrl: './upload-music.component.css'
 })
@@ -77,6 +80,7 @@ export class UploadMusicComponent implements OnInit{
   songwriters: string = '';
   currentYear: number;
   groups: any[] = [];
+  isAdmin = localStorage.getItem('userRole');
 
   constructor(
     private contentService: ContentService,

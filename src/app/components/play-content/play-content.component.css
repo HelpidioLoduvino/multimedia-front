@@ -51,5 +51,15 @@
   background: #ffffff;
 }
 
+.content{
+  color: white;
+}
 
+.content:hover{
+  color: #979797;
+}
 
+.nav-item.content.active {
+  background-color: #555555;
+  color: white;
+}

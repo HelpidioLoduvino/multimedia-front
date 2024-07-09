@@ -19,6 +19,7 @@ import {FooterComponent} from "../footer/footer.component";
 export class ArtistComponent implements OnInit{
 
   artists: any[] = [];
+
   constructor(private artistService: ArtistService) {
   }
 
