@@ -13,7 +13,7 @@ export class NotificationService {
   constructor(private http: HttpClient) { }
 
   pollNotifications(){
-    return this.http.get<any>(`${this.backendUrl}/api/notification/notifications`).pipe(
+    return this.http.get<any>(`${this.backendUrl}/api/notifications`).pipe(
       catchError(error => {
         console.error('Polling error:', error);
         return of(null);

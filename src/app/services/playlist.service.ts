@@ -13,34 +13,34 @@ export class PlaylistService {
 
   addPlaylist(playlist: any, contentIds: number[]){
     const params = new HttpParams().set('contentIds', contentIds.toString())
-    return this.http.post(`${this.backendUrl}/api/playlist/add`, playlist, {params, observe: "response"});
+    return this.http.post(`${this.backendUrl}/api/playlists`, playlist, {params, observe: "response"});
   }
 
   getAllPlaylistsByUserId(){
-    return this.http.get<any>(`${this.backendUrl}/api/playlist/user-playlists`);
+    return this.http.get<any>(`${this.backendUrl}/api/playlists/user`);
   }
 
   getAllPublicPlaylists(){
-    return this.http.get<any>(`${this.backendUrl}/api/playlist/public-playlists`)
+    return this.http.get<any>(`${this.backendUrl}/api/playlists/public`)
   }
 
   getPlaylistById(id: number){
-    return this.http.get<any>(`${this.backendUrl}/api/playlist/playlist/${id}`);
+    return this.http.get<any>(`${this.backendUrl}/api/playlists/${id}`);
   }
 
   deletePlaylist(id: number){
-    return this.http.delete(`${this.backendUrl}/api/playlist/delete/${id}`);
+    return this.http.delete(`${this.backendUrl}/api/playlists/${id}`);
   }
 
   addContentToPlaylist(contentId: number, playlistIds: number[]){
     const params = new HttpParams()
       .set('contentId', contentId.toString())
       .set('playlistIds', playlistIds.toString());
-    return this.http.post<any>(`${this.backendUrl}/api/playlist/add-content-to-playlist`, null, {params, observe: 'response'});
+    return this.http.post<any>(`${this.backendUrl}/api/playlists/content`, null, {params, observe: 'response'});
   }
 
   allPlaylist(){
-    return this.http.get<any>(`${this.backendUrl}/api/playlist/all`);
+    return this.http.get<any>(`${this.backendUrl}/api/playlists`);
   }
 
 }

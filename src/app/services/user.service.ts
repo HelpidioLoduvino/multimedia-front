@@ -16,15 +16,15 @@ export class UserService {
   constructor(private http: HttpClient, private router: Router) { }
 
   register(user: any) {
-    return this.http.post<any>(`${this.backendUrl}/api/user/register`, user, {observe: "response"});
+    return this.http.post<any>(`${this.backendUrl}/api/users`, user, {observe: "response"});
   }
 
   login(credentials: any) {
-    return this.http.post<any>(`${this.backendUrl}/api/user/login`, credentials);
+    return this.http.post<any>(`${this.backendUrl}/api/users/login`, credentials);
   }
 
   refreshTokenRequest(): Observable<any> {
-    return this.http.post<any>(`${this.backendUrl}/api/user/refresh`, { refreshToken: this.refreshToken }).pipe(
+    return this.http.post<any>(`${this.backendUrl}/api/users/refresh`, { refreshToken: this.refreshToken }).pipe(
       tap(tokens => {
         this.token = tokens.token;
         this.refreshToken = tokens.refreshToken;
@@ -48,12 +48,12 @@ export class UserService {
   }
 
   allClients(){
-    return this.http.get<any>(`${this.backendUrl}/api/user/get-all-clients`);
+    return this.http.get<any>(`${this.backendUrl}/api/users/clients`);
   }
 
   delete(id: number){
     const params = new HttpParams().set('id', id.toString())
-    return this.http.delete(`${this.backendUrl}/api/user/delete`, {params, observe: "response"})
+    return this.http.delete(`${this.backendUrl}/api/users`, {params, observe: "response"})
   }
 
 }

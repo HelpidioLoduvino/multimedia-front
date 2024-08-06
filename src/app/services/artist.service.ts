@@ -11,7 +11,7 @@ export class ArtistService {
   constructor(private http: HttpClient) { }
 
   getAllArtists(){
-    return this.http.get<any>(`${this.backendUrl}/api/artist/all`);
+    return this.http.get<any>(`${this.backendUrl}/api/artists`);
   }
 
 }

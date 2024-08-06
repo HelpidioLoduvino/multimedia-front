@@ -21,7 +21,7 @@ export class ContentService {
     const params = new HttpParams()
       .set('group', group.toString());
 
-    return this.http.post<any>(`${this.backendUrl}/api/music/upload`, formData, {params})
+    return this.http.post<any>(`${this.backendUrl}/api/musics`, formData, {params})
   }
 
   uploadVideo(video: any, group: string, videoFile: File): Observable<any>{
@@ -30,36 +30,36 @@ export class ContentService {
     formData.append('videoFile', videoFile);
     const params = new HttpParams()
       .set('group', group.toString());
-    return this.http.post<any>(`${this.backendUrl}/api/video/upload`, formData, {params});
+    return this.http.post<any>(`${this.backendUrl}/api/videos`, formData, {params});
   }
 
   getAllContent() {
-    return this.http.get<any>(`${this.backendUrl}/api/content/all-contents-by-user-id`);
+    return this.http.get<any>(`${this.backendUrl}/api/contents/user`);
   }
 
   getContentById(id: number) {
-    return this.http.get<any>(`${this.backendUrl}/api/content/${id}`);
+    return this.http.get<any>(`${this.backendUrl}/api/contents/${id}`);
   }
 
   streamContent(contentId: number): string{
-    return `${this.backendUrl}/api/content/stream-content/${contentId}`;
+    return `${this.backendUrl}/api/contents/stream/${contentId}`;
   }
 
   displayCover(id: number): Observable<Blob> {
-    return this.http.get(`${this.backendUrl}/api/music/cover/${id}`, { responseType: 'blob' });
+    return this.http.get(`${this.backendUrl}/api/musics/cover/${id}`, { responseType: 'blob' });
   }
 
   search(query: string){
     const params = new HttpParams().set('query', query.toString());
-    return this.http.get<any>(`${this.backendUrl}/api/content/search`, {params});
+    return this.http.get<any>(`${this.backendUrl}/api/contents/search`, {params});
   }
 
   allContents(){
-    return this.http.get<any>(`${this.backendUrl}/api/music/all`);
+    return this.http.get<any>(`${this.backendUrl}/api/musics`);
   }
 
   adminContents(){
-    return this.http.get<any>(`${this.backendUrl}/api/content/all`);
+    return this.http.get<any>(`${this.backendUrl}/api/contents`);
   }
 
 }

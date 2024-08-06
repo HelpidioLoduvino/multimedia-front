@@ -12,100 +12,88 @@ export class GroupService {
   constructor(private http: HttpClient) { }
 
   createGroup(createGroup: any){
-    return this.http.post(`${this.backendUrl}/api/group/create`, createGroup);
+    return this.http.post(`${this.backendUrl}/api/groups`, createGroup);
   }
 
   getGroup(id: number){
-    return this.http.get<any>(`${this.backendUrl}/api/group/get-group/${id}`);
+    return this.http.get<any>(`${this.backendUrl}/api/groups/${id}`);
   }
 
   getPublicGroup(){
-    return this.http.get<any>(`${this.backendUrl}/api/group/get-public-group`, {observe: 'response'});
+    return this.http.get<any>(`${this.backendUrl}/api/groups/public`, {observe: 'response'});
   }
 
   addContentToGroup(contentId: number, groupId: number[]){
     const params = new HttpParams()
       .set('contentId', contentId.toString())
       .set('groupId', groupId.toString());
-    return this.http.post(`${this.backendUrl}/api/group/add-content-to-group`, null, {params, observe: "response"});
+    return this.http.post(`${this.backendUrl}/api/groups/content`, null, {params, observe: "response"});
   }
 
   getAllExceptMyAndPublicGroups(){
-    return this.http.get<any>(`${this.backendUrl}/api/group/all-except-my-and-public-groups`);
+    return this.http.get<any>(`${this.backendUrl}/api/groups/others`);
   }
 
   getAllMyGroupsOrPublicGroups(){
-    return this.http.get<any>(`${this.backendUrl}/api/group/all-my-groups-or-public-groups`);
+    return this.http.get<any>(`${this.backendUrl}/api/groups/mine`);
   }
 
   getAllMyGroups(){
-    return this.http.get<any>(`${this.backendUrl}/api/group/all-my-groups`);
+    return this.http.get<any>(`${this.backendUrl}/api/groups/user`);
   }
 
   getAllMyFriends(){
-    return this.http.get<any>(`${this.backendUrl}/api/group/get-all-my-friends`);
-  }
-
-  getAllContentsByGroupId(groupId: number){
-    return this.http.get<any>(`${this.backendUrl}/api/group/all-contents-by-group-id/${groupId}`);
+    return this.http.get<any>(`${this.backendUrl}/api/groups/friends`);
   }
 
   getAllUsersByGroupId(groupId: number){
-    return this.http.get<any>(`${this.backendUrl}/api/group/all-users-by-group-id/${groupId}`);
-  }
-
-  getMusicsFromPublicGroup(){
-    return this.http.get<any>(`${this.backendUrl}/api/group/all-musics-from-public-group`);
-  }
-
-  getVideosFromPublicGroup(){
-    return this.http.get<any>(`${this.backendUrl}/api/group/all-videos-from-public-group`);
+    return this.http.get<any>(`${this.backendUrl}/api/groups/users/${groupId}`);
   }
 
   requestToJoinGroup(groupId: number){
     const params = new HttpParams()
       .set('groupId', groupId.toString());
 
-    return this.http.post(`${this.backendUrl}/api/group/request-to-join-group`, null, {params});
+    return this.http.post(`${this.backendUrl}/api/groups/request`, null, {params});
   }
 
   getAllRequestsByGroupId(id: number){
-    return this.http.get<any>(`${this.backendUrl}/api/group/get-all-requests/${id}`)
+    return this.http.get<any>(`${this.backendUrl}/api/groups/requests/${id}`)
   }
 
   acceptRequestToJoinGroup(id: number){
     const params = new HttpParams().set('id', id.toString());
 
-    return this.http.put<any>(`${this.backendUrl}/api/group/accept-request-to-join-group`, null, {params});
+    return this.http.put<any>(`${this.backendUrl}/api/groups/accept-request`, null, {params});
   }
 
   rejectRequestToJoinGroup(id: number){
     const params = new HttpParams().set('id', id.toString());
 
-    return this.http.put<any>(`${this.backendUrl}/api/group/reject-request-to-join-group`, null, {params});
+    return this.http.put<any>(`${this.backendUrl}/api/groups/reject-request`, null, {params});
   }
 
   updateUserToOwner(userId: number, groupId: number){
     const params = new HttpParams()
       .set('userId', userId.toString())
       .set('groupId', groupId.toString());
-    return this.http.put<any>(`${this.backendUrl}/api/group/update-user-to-owner`, null, {params});
+    return this.http.put<any>(`${this.backendUrl}/api/groups/owner`, null, {params});
   }
 
   updateUserToEditor(userId: number, groupId: number){
     const params = new HttpParams()
       .set('userId', userId.toString())
       .set('groupId', groupId.toString());
-    return this.http.put<any>(`${this.backendUrl}/api/group/update-user-to-editor`, null, {params});
+    return this.http.put<any>(`${this.backendUrl}/api/groups/editor`, null, {params});
   }
 
   isOwnerOrEditor(groupId: number){
-    return this.http.get<any>(`${this.backendUrl}/api/group/is-owner-or-editor/${groupId}`);
+    return this.http.get<any>(`${this.backendUrl}/api/groups/owner-or-editor/${groupId}`);
   }
 
 
   isOwner(groupId: number){
-    return this.http.get<any>(`${this.backendUrl}/api/group/is-owner/${groupId}`);
+    return this.http.get<any>(`${this.backendUrl}/api/groups/owner/${groupId}`);
   }
 
 }

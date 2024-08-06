@@ -9,38 +9,37 @@ import {environment} from "../../environment";
 export class AlbumService {
 
   private backendUrl = environment.backendUrl;
-  private baseAlbumUrl = 'http://localhost:8080/api/album';
 
   constructor(private http: HttpClient) { }
 
   getAllAlbums(){
-    return this.http.get<any>(`${this.backendUrl}/api/album/all`);
+    return this.http.get<any>(`${this.backendUrl}/api/albums`);
   }
 
 
   displayCover(id: number): Observable<Blob> {
-    return this.http.get(`${this.backendUrl}/api/album/cover/${id}`, { responseType: 'blob' });
+    return this.http.get(`${this.backendUrl}/api/albums/cover/${id}`, { responseType: 'blob' });
   }
 
   criticiseAlbum(criticiseForm: any, albumId: number){
     const params = new HttpParams()
       .set('albumId', albumId.toString());
-    return this.http.post(`${this.backendUrl}/api/album/criticise-album`, criticiseForm, {params})
+    return this.http.post(`${this.backendUrl}/api/albums/criticise`, criticiseForm, {params})
   }
 
   getAlbum(id: number){
-    return this.http.get<any>(`${this.backendUrl}/api/album/album/${id}`);
+    return this.http.get<any>(`${this.backendUrl}/api/albums/${id}`);
   }
 
   getAlbumReviews(id:number){
-    return this.http.get<any>(`${this.backendUrl}/api/album/album-review/${id}`);
+    return this.http.get<any>(`${this.backendUrl}/api/albums/review/${id}`);
   }
 
   getAlbumReviewOverall(id: number){
-    return this.http.get<any>(`${this.backendUrl}/api/album/album-review-overall/${id}`);
+    return this.http.get<any>(`${this.backendUrl}/api/albums/overall/${id}`);
   }
 
   getAlbumMusic(id: number){
-    return this.http.get<any>(`${this.backendUrl}/api/album/album-music/${id}`);
+    return this.http.get<any>(`${this.backendUrl}/api/albums/music/${id}`);
   }
 }
